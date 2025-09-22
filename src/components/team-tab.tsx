@@ -115,13 +115,13 @@ export function TeamTab() {
                 </DialogHeader>
                 <div className="py-4">
                   {fullImageUrl && (
-                     <div className="mb-4 rounded-lg overflow-hidden">
+                     <div className="mb-4 rounded-lg overflow-hidden aspect-square">
                         <Image
                             src={fullImageUrl}
                             alt={`Portrait of ${member.name}`}
                             width={400}
                             height={400}
-                            className="w-full h-auto object-cover object-top"
+                            className="w-full h-full object-cover object-top"
                             data-ai-hint={imageHint}
                         />
                      </div>
