@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <div className={cn(
-        "bg-cover bg-center bg-fixed min-h-screen transition-background-image",
+        "min-h-screen transition-background-image",
         backgroundClass()
       )}>
       <div className="bg-overlay relative min-h-screen">

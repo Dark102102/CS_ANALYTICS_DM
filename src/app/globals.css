@@ -72,15 +72,15 @@
   }
 
   .bg-image-default {
-    background-image: url('https://i.postimg.cc/cC7L9pKj/counter-strike-2-7680x4480-11129.png');
+    background: url('https://i.postimg.cc/cC7L9pKj/counter-strike-2-7680x4480-11129.png') center center / cover no-repeat fixed;
   }
   
   .bg-image-proposal {
-    background-image: url('https://i.postimg.cc/hjcDJCZ1/Gemini-Generated-Image-8cvkr08cvkr08cvk.png');
+    background: url('https://i.postimg.cc/hjcDJCZ1/Gemini-Generated-Image-8cvkr08cvkr08cvk.png') center center / cover no-repeat fixed;
   }
 
   .bg-image-team {
-    background-image: url('https://i.postimg.cc/kMknKXH5/Gemini-Generated-Image-c8s05xc8s05xc8s0.png');
+    background: url('https://i.postimg.cc/kMknKXH5/Gemini-Generated-Image-c8s05xc8s05xc8s0.png') center center / cover no-repeat fixed;
   }
 
   .bg-overlay::before {
