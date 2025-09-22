@@ -10,13 +10,21 @@ import { cn } from '@/lib/utils';
 export default function Home() {
   const [activeTab, setActiveTab] = useState('introduction');
 
+  const backgroundClass = () => {
+    switch (activeTab) {
+      case 'proposal':
+        return 'bg-image-proposal';
+      case 'team':
+        return 'bg-image-team';
+      default:
+        return 'bg-image-default';
+    }
+  };
+
   return (
     <div className={cn(
         "bg-cover bg-center bg-fixed min-h-screen transition-background-image",
-        {
-          'bg-image-default': activeTab !== 'proposal',
-          'bg-image-proposal': activeTab === 'proposal'
-        }
+        backgroundClass()
       )}>
       <div className="bg-overlay relative min-h-screen">
         <div className="relative z-10">
