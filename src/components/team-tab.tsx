@@ -90,13 +90,13 @@ export function TeamTab() {
                           </Avatar>
                         )}
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="pb-2">
                         <CardTitle className="text-xl font-semibold">{member.name}</CardTitle>
                         <p className="text-primary">{member.role}</p>
                       </CardContent>
                     </div>
                   </DialogTrigger>
-                  <CardContent className="pb-8 pt-2">
+                  <CardContent className="pb-8 pt-0">
                      <div className="mt-2 flex items-center justify-center space-x-4">
                         <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-primary transition-colors">
                           <Mail className="h-6 w-6" />
