@@ -40,13 +40,13 @@
     {
       "id": "pratham-shah",
       "description": "A portrait of Pratham Shah, AI Engineer.",
-      "imageUrl": "https://picsum.photos/seed/pratham-avatar/200/200",
+      "imageUrl": "https://i.postimg.cc/Sxmx04ny/pratham.jpg",
       "imageHint": "man portrait"
     },
     {
       "id": "pratham-shah-full",
       "description": "A full portrait of Pratham Shah, AI Engineer.",
-      "imageUrl": "https://picsum.photos/seed/pratham/400/400",
+      "imageUrl": "https://i.postimg.cc/Sxmx04ny/pratham.jpg",
       "imageHint": "man portrait"
     }
   ]

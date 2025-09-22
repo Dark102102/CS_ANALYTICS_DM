@@ -60,8 +60,8 @@ const teamMembers = [
     fullImageId: 'pratham-shah-full',
     email: 'pratham.shah@example.com',
     linkedin: '#',
-    avatarUrl: 'https://picsum.photos/seed/pratham-avatar/200/200',
-    fullImageUrl: 'https://picsum.photos/seed/pratham/400/400',
+    avatarUrl: 'https://i.postimg.cc/Sxmx04ny/pratham.jpg',
+    fullImageUrl: 'https://i.postimg.cc/Sxmx04ny/pratham.jpg',
   },
 ];
 
