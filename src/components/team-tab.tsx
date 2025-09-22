@@ -63,26 +63,40 @@ export function TeamTab() {
 
           return (
             <Dialog key={member.name}>
-              <DialogTrigger asChild>
-                <Card className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg cursor-pointer">
-                  <CardHeader className="items-center pt-8">
-                    {placeholder && (
-                      <Avatar className="w-24 h-24 border-4 border-primary/20">
-                        <AvatarImage
-                          src={placeholder.imageUrl}
-                          alt={`Portrait of ${member.name}`}
-                          data-ai-hint={placeholder.imageHint}
-                        />
-                        <AvatarFallback>{member.fallback}</AvatarFallback>
-                      </Avatar>
-                    )}
-                  </CardHeader>
-                  <CardContent className="pb-8">
-                    <CardTitle className="text-xl font-semibold">{member.name}</CardTitle>
-                    <p className="text-primary">{member.role}</p>
+                <Card className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg flex flex-col">
+                  <DialogTrigger asChild>
+                    <div className='cursor-pointer flex-grow'>
+                      <CardHeader className="items-center pt-8">
+                        {placeholder && (
+                          <Avatar className="w-24 h-24 border-4 border-primary/20">
+                            <AvatarImage
+                              src={placeholder.imageUrl}
+                              alt={`Portrait of ${member.name}`}
+                              data-ai-hint={placeholder.imageHint}
+                            />
+                            <AvatarFallback>{member.fallback}</AvatarFallback>
+                          </Avatar>
+                        )}
+                      </CardHeader>
+                      <CardContent>
+                        <CardTitle className="text-xl font-semibold">{member.name}</CardTitle>
+                        <p className="text-primary">{member.role}</p>
+                      </CardContent>
+                    </div>
+                  </DialogTrigger>
+                  <CardContent className="pb-8 pt-2">
+                     <div className="mt-2 flex items-center justify-center space-x-4">
+                        <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                          <Mail className="h-6 w-6" />
+                          <span className="sr-only">Email</span>
+                        </a>
+                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                          <Linkedin className="h-6 w-6" />
+                          <span className="sr-only">LinkedIn</span>
+                        </a>
+                      </div>
                   </CardContent>
                 </Card>
-              </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle className="text-2xl">{member.name}</DialogTitle>
@@ -102,16 +116,6 @@ export function TeamTab() {
                   )}
                   <h3 className="text-lg font-semibold text-primary">{member.role}</h3>
                   <p className="mt-2 text-muted-foreground">{member.bio}</p>
-                  <div className="mt-4 flex items-center space-x-4">
-                    <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-primary transition-colors">
-                      <Mail className="h-6 w-6" />
-                      <span className="sr-only">Email</span>
-                    </a>
-                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                      <Linkedin className="h-6 w-6" />
-                      <span className="sr-only">LinkedIn</span>
-                    </a>
-                  </div>
                 </div>
               </DialogContent>
             </Dialog>
