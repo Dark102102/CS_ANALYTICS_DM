@@ -28,16 +28,16 @@ const teamMembers = [
     fullImageUrl: 'https://i.postimg.cc/x88zWT27/Chetan-Mohnot-1.jpg'
   },
   {
-    name: 'Alex Johnson',
+    name: 'Luke Robinson',
     role: 'Research Analyst',
-    imageId: 'teammate-2',
-    fallback: 'AJ',
-    bio: 'Alex is an expert in data collection and research methodologies for competitive gaming analysis. She has a keen eye for detail and a deep understanding of the esports landscape.',
-    fullImageId: 'teammate-2-full',
-    email: 'alex.johnson@example.com',
+    imageId: 'luke-robinson',
+    fallback: 'LR',
+    bio: 'Luke is an expert in data collection and research methodologies for competitive gaming analysis. He has a keen eye for detail and a deep understanding of the esports landscape.',
+    fullImageId: 'luke-robinson-full',
+    email: 'luke.robinson@example.com',
     linkedin: '#',
-    avatarUrl: 'https://picsum.photos/seed/2/300/300',
-    fullImageUrl: 'https://picsum.photos/seed/5/400/400'
+    avatarUrl: 'https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg',
+    fullImageUrl: 'https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg'
   },
   {
     name: 'Adwait Bapat',

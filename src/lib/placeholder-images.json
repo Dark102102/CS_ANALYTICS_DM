@@ -8,10 +8,10 @@
       "imageHint": "man portrait"
     },
     {
-      "id": "teammate-2",
+      "id": "luke-robinson",
       "description": "A portrait of a research analyst.",
-      "imageUrl": "https://picsum.photos/seed/2/300/300",
-      "imageHint": "woman portrait"
+      "imageUrl": "https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg",
+      "imageHint": "man portrait"
     },
     {
       "id": "adwait-bapat",
@@ -26,10 +26,10 @@
         "imageHint": "man portrait"
     },
     {
-        "id": "teammate-2-full",
+        "id": "luke-robinson-full",
         "description": "A full portrait of a research analyst.",
-        "imageUrl": "https://picsum.photos/seed/5/400/400",
-        "imageHint": "woman portrait"
+        "imageUrl": "https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg",
+        "imageHint": "man portrait"
     },
     {
         "id": "adwait-bapat-full",
