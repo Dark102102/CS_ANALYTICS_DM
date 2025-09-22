@@ -11,12 +11,14 @@ export default function Home() {
       <Header />
       <main className="container mx-auto p-4 md:p-8">
         <Tabs defaultValue="introduction" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 md:w-auto mb-8">
-            <TabsTrigger value="introduction">Introduction</TabsTrigger>
-            <TabsTrigger value="team">Team</TabsTrigger>
-            <TabsTrigger value="proposal">Proposal</TabsTrigger>
-            <TabsTrigger value="insights">AI Insights</TabsTrigger>
-          </TabsList>
+          <div className="flex justify-center">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 md:w-auto mb-8">
+                <TabsTrigger value="introduction">Introduction</TabsTrigger>
+                <TabsTrigger value="team">Team</TabsTrigger>
+                <TabsTrigger value="proposal">Proposal Overview</TabsTrigger>
+                <TabsTrigger value="insights">AI Insights</TabsTrigger>
+            </TabsList>
+          </div>
           <TabsContent value="introduction">
             <IntroductionTab />
           </TabsContent>
