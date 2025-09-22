@@ -36,6 +36,18 @@
         "description": "A full portrait of Adwait Bapat, a developer.",
         "imageUrl": "https://i.postimg.cc/W1Bwgrv4/Adwait-Bapat.jpg",
         "imageHint": "man portrait"
+    },
+    {
+      "id": "pratham-shah",
+      "description": "A portrait of Pratham Shah, AI Engineer.",
+      "imageUrl": "https://picsum.photos/seed/pratham-avatar/200/200",
+      "imageHint": "man portrait"
+    },
+    {
+      "id": "pratham-shah-full",
+      "description": "A full portrait of Pratham Shah, AI Engineer.",
+      "imageUrl": "https://picsum.photos/seed/pratham/400/400",
+      "imageHint": "man portrait"
     }
   ]
 }

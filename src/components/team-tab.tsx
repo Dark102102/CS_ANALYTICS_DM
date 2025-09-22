@@ -51,6 +51,18 @@ const teamMembers = [
     avatarUrl: 'https://i.postimg.cc/W1Bwgrv4/Adwait-Bapat.jpg',
     fullImageUrl: 'https://i.postimg.cc/W1Bwgrv4/Adwait-Bapat.jpg',
   },
+  {
+    name: 'Pratham Shah',
+    role: 'AI Engineer',
+    imageId: 'pratham-shah',
+    fallback: 'PS',
+    bio: 'Pratham is a skilled AI Engineer with a focus on building intelligent systems. He brings expertise in model development and deployment to the team.',
+    fullImageId: 'pratham-shah-full',
+    email: 'pratham.shah@example.com',
+    linkedin: '#',
+    avatarUrl: 'https://picsum.photos/seed/pratham-avatar/200/200',
+    fullImageUrl: 'https://picsum.photos/seed/pratham/400/400',
+  },
 ];
 
 export function TeamTab() {
@@ -62,7 +74,7 @@ export function TeamTab() {
           Meet the dedicated team behind the Counter-Strike match prediction project, bringing together expertise in data science, research, and development.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {teamMembers.map(member => {
           const imageHint = 'person portrait';
 
@@ -77,7 +89,7 @@ export function TeamTab() {
                             src={member.avatarUrl}
                             alt={`Portrait of ${member.name}`}
                             data-ai-hint={imageHint}
-                            className="object-cover object-top w-full h-full"
+                            className="object-cover object-top"
                           />
                           <AvatarFallback>{member.fallback}</AvatarFallback>
                         </Avatar>
@@ -112,7 +124,7 @@ export function TeamTab() {
                           alt={`Portrait of ${member.name}`}
                           width={400}
                           height={400}
-                          className="w-full h-[400px] object-cover object-top"
+                          className="w-full h-full object-cover object-top"
                           data-ai-hint={imageHint}
                       />
                    </div>
