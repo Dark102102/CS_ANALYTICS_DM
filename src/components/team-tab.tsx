@@ -22,7 +22,7 @@ const teamMembers = [
     fallback: 'CM',
     bio: 'Chetan is a data scientist specializing in machine learning and statistical analysis for sports analytics. He is passionate about uncovering insights from data to predict match outcomes and enhance team strategies.',
     fullImageId: 'chetan-mohnot-full',
-    email: 'chomo4618@colorado.edu',
+    email: 'chmo4618@colorado.edu',
     linkedin: 'https://www.linkedin.com/in/chetan-mohnot/',
     avatarUrl: 'https://i.postimg.cc/x88zWT27/Chetan-Mohnot-1.jpg',
     fullImageUrl: 'https://i.postimg.cc/x88zWT27/Chetan-Mohnot-1.jpg'
