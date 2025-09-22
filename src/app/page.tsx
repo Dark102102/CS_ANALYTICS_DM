@@ -10,7 +10,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto p-4 md:p-8">
-        <Tabs defaultValue="introduction" className="w-full">
+        <Tabs defaultValue="team" className="w-full">
           <div className="flex justify-center">
             <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 md:w-auto mb-8">
                 <TabsTrigger value="introduction">Introduction</TabsTrigger>

@@ -1,3 +1,4 @@
+
 {
   "placeholderImages": [
     {
@@ -17,6 +18,24 @@
       "description": "A portrait of a developer.",
       "imageUrl": "https://picsum.photos/seed/3/300/300",
       "imageHint": "person portrait"
+    },
+    {
+        "id": "chetan-mohnot-full",
+        "description": "A full portrait of Chetan Mohnot, Data Scientist.",
+        "imageUrl": "https://picsum.photos/seed/4/400/400",
+        "imageHint": "man portrait"
+    },
+    {
+        "id": "teammate-2-full",
+        "description": "A full portrait of a research analyst.",
+        "imageUrl": "https://picsum.photos/seed/5/400/400",
+        "imageHint": "woman portrait"
+    },
+    {
+        "id": "teammate-3-full",
+        "description": "A full portrait of a developer.",
+        "imageUrl": "https://picsum.photos/seed/6/400/400",
+        "imageHint": "person portrait"
     }
   ]
 }
