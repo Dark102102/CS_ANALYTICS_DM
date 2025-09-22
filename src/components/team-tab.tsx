@@ -82,6 +82,7 @@ export function TeamTab() {
                               src={avatarUrl}
                               alt={`Portrait of ${member.name}`}
                               data-ai-hint={imageHint}
+                              className="object-cover"
                             />
                             <AvatarFallback>{member.fallback}</AvatarFallback>
                           </Avatar>
