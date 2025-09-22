@@ -6,17 +6,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="container mx-auto p-4 md:p-8">
-        <Tabs defaultValue="team" className="w-full">
-          <div className="flex justify-center">
-            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 md:w-auto mb-8">
-                <TabsTrigger value="introduction">Introduction</TabsTrigger>
-                <TabsTrigger value="team">Team</TabsTrigger>
-                <TabsTrigger value="proposal">Proposal Overview</TabsTrigger>
-            </TabsList>
-          </div>
+    <div className="min-h-screen">
+      <Tabs defaultValue="introduction" className="w-full">
+        <Header>
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 md:w-auto bg-transparent border-0 p-0">
+            <TabsTrigger value="introduction" className="text-lg">Introduction</TabsTrigger>
+            <TabsTrigger value="team" className="text-lg">Team</TabsTrigger>
+            <TabsTrigger value="proposal" className="text-lg">Proposal Overview</TabsTrigger>
+          </TabsList>
+        </Header>
+        <main className="container mx-auto p-4 md:p-8">
           <TabsContent value="introduction">
             <IntroductionTab />
           </TabsContent>
@@ -26,8 +25,8 @@ export default function Home() {
           <TabsContent value="proposal">
             <ProposalOverviewTab />
           </TabsContent>
-        </Tabs>
-      </main>
+        </main>
+      </Tabs>
     </div>
   );
 }
