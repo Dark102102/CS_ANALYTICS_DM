@@ -17,7 +17,7 @@ import { Mail, Linkedin } from 'lucide-react';
 const teamMembers = [
   {
     name: 'Chetan Mohnot',
-    role: 'Data lead and Website Lead',
+    role: 'Data/Website Lead',
     imageId: 'chetan-mohnot',
     fallback: 'CM',
     bio: 'As the Data and Website Lead, Chetan spearheads our data science initiatives and oversees the project\'s web presence. He specializes in machine learning for sports analytics and is passionate about turning data into actionable insights and intuitive web experiences.',
