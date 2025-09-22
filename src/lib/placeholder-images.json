@@ -4,7 +4,7 @@
     {
       "id": "chetan-mohnot",
       "description": "A portrait of Chetan Mohnot, Data Scientist.",
-      "imageUrl": "https://picsum.photos/seed/1/300/300",
+      "imageUrl": "https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/Chetan%20Mohnot_1723558831969.jpeg",
       "imageHint": "man portrait"
     },
     {
@@ -16,13 +16,13 @@
     {
       "id": "adwait-bapat",
       "description": "A portrait of Adwait Bapat, a developer.",
-      "imageUrl": "",
+      "imageUrl": "https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/i_dont_know_what_i_am_doing_1723558110901.jpeg",
       "imageHint": "man portrait"
     },
     {
         "id": "chetan-mohnot-full",
         "description": "A full portrait of Chetan Mohnot, Data Scientist.",
-        "imageUrl": "https://picsum.photos/seed/4/400/400",
+        "imageUrl": "https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/Chetan%20Mohnot_1723558831969.jpeg",
         "imageHint": "man portrait"
     },
     {
@@ -34,7 +34,7 @@
     {
         "id": "adwait-bapat-full",
         "description": "A full portrait of Adwait Bapat, a developer.",
-        "imageUrl": "",
+        "imageUrl": "https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/i_dont_know_what_i_am_doing_1723558110901.jpeg",
         "imageHint": "man portrait"
     }
   ]

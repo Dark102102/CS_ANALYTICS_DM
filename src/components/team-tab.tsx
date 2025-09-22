@@ -24,6 +24,8 @@ const teamMembers = [
     fullImageId: 'chetan-mohnot-full',
     email: 'chetan.mohnot@example.com',
     linkedin: '#',
+    avatarUrl: 'https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/Chetan%20Mohnot_1723558831969.jpeg',
+    fullImageUrl: 'https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/Chetan%20Mohnot_1723558831969.jpeg'
   },
   {
     name: 'Alex Johnson',
@@ -60,12 +62,13 @@ export function TeamTab() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map(member => {
-          const placeholder = member.name !== 'Adwait Bapat' ? PlaceHolderImages.find(p => p.id === member.imageId) : null;
-          const fullPlaceholder = member.name !== 'Adwait Bapat' ? PlaceHolderImages.find(p => p.id === member.fullImageId) : null;
+          const isHardcoded = member.name === 'Adwait Bapat' || member.name === 'Chetan Mohnot';
+          const placeholder = !isHardcoded ? PlaceHolderImages.find(p => p.id === member.imageId) : null;
+          const fullPlaceholder = !isHardcoded ? PlaceHolderImages.find(p => p.id === member.fullImageId) : null;
 
-          const avatarUrl = member.name === 'Adwait Bapat' ? member.avatarUrl : placeholder?.imageUrl;
-          const fullImageUrl = member.name === 'Adwait Bapat' ? member.fullImageUrl : fullPlaceholder?.imageUrl;
-          const imageHint = placeholder?.imageHint || 'man portrait';
+          const avatarUrl = isHardcoded ? member.avatarUrl : placeholder?.imageUrl;
+          const fullImageUrl = isHardcoded ? member.fullImageUrl : fullPlaceholder?.imageUrl;
+          const imageHint = placeholder?.imageHint || 'person portrait';
 
 
           return (
