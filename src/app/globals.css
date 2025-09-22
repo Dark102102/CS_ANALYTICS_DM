@@ -67,12 +67,12 @@
     @apply bg-background text-foreground;
   }
   
-  .bg-image-wrapper {
-    background-image: url('https://i.postimg.cc/cC7L9pKj/counter-strike-2-7680x4480-11129.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+  .transition-background-image {
     transition: background-image 0.5s ease-in-out;
+  }
+
+  .bg-image-default {
+    background-image: url('https://i.postimg.cc/cC7L9pKj/counter-strike-2-7680x4480-11129.png');
   }
   
   .bg-image-proposal {

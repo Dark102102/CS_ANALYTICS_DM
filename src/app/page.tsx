@@ -12,8 +12,11 @@ export default function Home() {
 
   return (
     <div className={cn(
-        "bg-image-wrapper min-h-screen",
-        activeTab === 'proposal' && 'bg-image-proposal'
+        "bg-cover bg-center bg-fixed min-h-screen transition-background-image",
+        {
+          'bg-image-default': activeTab !== 'proposal',
+          'bg-image-proposal': activeTab === 'proposal'
+        }
       )}>
       <div className="bg-overlay relative min-h-screen">
         <div className="relative z-10">
