@@ -44,6 +44,8 @@ const teamMembers = [
     fullImageId: 'adwait-bapat-full',
     email: 'adwait.bapat@example.com',
     linkedin: '#',
+    avatarUrl: 'https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/i_dont_know_what_i_am_doing_1723558110901.jpeg',
+    fullImageUrl: 'https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/i_dont_know_what_i_am_doing_1723558110901.jpeg'
   },
 ];
 
@@ -58,8 +60,13 @@ export function TeamTab() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map(member => {
-          const placeholder = PlaceHolderImages.find(p => p.id === member.imageId);
-          const fullPlaceholder = PlaceHolderImages.find(p => p.id === member.fullImageId);
+          const placeholder = member.name !== 'Adwait Bapat' ? PlaceHolderImages.find(p => p.id === member.imageId) : null;
+          const fullPlaceholder = member.name !== 'Adwait Bapat' ? PlaceHolderImages.find(p => p.id === member.fullImageId) : null;
+
+          const avatarUrl = member.name === 'Adwait Bapat' ? member.avatarUrl : placeholder?.imageUrl;
+          const fullImageUrl = member.name === 'Adwait Bapat' ? member.fullImageUrl : fullPlaceholder?.imageUrl;
+          const imageHint = placeholder?.imageHint || 'man portrait';
+
 
           return (
             <Dialog key={member.name}>
@@ -67,12 +74,12 @@ export function TeamTab() {
                   <DialogTrigger asChild>
                     <div className='cursor-pointer flex-grow'>
                       <CardHeader className="items-center pt-8">
-                        {placeholder && (
+                        {avatarUrl && (
                           <Avatar className="w-24 h-24 border-4 border-primary/20">
                             <AvatarImage
-                              src={placeholder.imageUrl}
+                              src={avatarUrl}
                               alt={`Portrait of ${member.name}`}
-                              data-ai-hint={placeholder.imageHint}
+                              data-ai-hint={imageHint}
                             />
                             <AvatarFallback>{member.fallback}</AvatarFallback>
                           </Avatar>
@@ -102,15 +109,15 @@ export function TeamTab() {
                   <DialogTitle className="text-2xl">{member.name}</DialogTitle>
                 </DialogHeader>
                 <div className="py-4">
-                  {fullPlaceholder && (
+                  {fullImageUrl && (
                      <div className="mb-4 rounded-lg overflow-hidden">
                         <Image
-                            src={fullPlaceholder.imageUrl}
+                            src={fullImageUrl}
                             alt={`Portrait of ${member.name}`}
                             width={400}
                             height={400}
                             className="w-full h-auto object-cover"
-                            data-ai-hint={fullPlaceholder.imageHint}
+                            data-ai-hint={imageHint}
                         />
                      </div>
                   )}
