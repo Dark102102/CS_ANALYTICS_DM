@@ -72,6 +72,11 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    transition: background-image 0.5s ease-in-out;
+  }
+  
+  .bg-image-proposal {
+    background-image: url('https://i.postimg.cc/hjcDJCZ1/Gemini-Generated-Image-8cvkr08cvkr08cvk.png');
   }
 
   .bg-overlay::before {
