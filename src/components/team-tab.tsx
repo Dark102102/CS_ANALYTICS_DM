@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import Image from 'next/image';
+import { Mail, Linkedin } from 'lucide-react';
 
 const teamMembers = [
   {
@@ -21,6 +22,8 @@ const teamMembers = [
     fallback: 'CM',
     bio: 'Chetan is a data scientist specializing in machine learning and statistical analysis for sports analytics. He is passionate about uncovering insights from data to predict match outcomes and enhance team strategies.',
     fullImageId: 'chetan-mohnot-full',
+    email: 'chetan.mohnot@example.com',
+    linkedin: '#',
   },
   {
     name: 'Alex Johnson',
@@ -29,6 +32,8 @@ const teamMembers = [
     fallback: 'AJ',
     bio: 'Alex is an expert in data collection and research methodologies for competitive gaming analysis. She has a keen eye for detail and a deep understanding of the esports landscape.',
     fullImageId: 'teammate-2-full',
+    email: 'alex.johnson@example.com',
+    linkedin: '#',
   },
   {
     name: 'Samantha Lee',
@@ -37,6 +42,8 @@ const teamMembers = [
     fallback: 'SL',
     bio: 'Samantha is a full-stack developer focused on building scalable data processing and visualization tools. Her expertise in software engineering brings our analytical models to life.',
     fullImageId: 'teammate-3-full',
+    email: 'samantha.lee@example.com',
+    linkedin: '#',
   },
 ];
 
@@ -95,6 +102,16 @@ export function TeamTab() {
                   )}
                   <h3 className="text-lg font-semibold text-primary">{member.role}</h3>
                   <p className="mt-2 text-muted-foreground">{member.bio}</p>
+                  <div className="mt-4 flex items-center space-x-4">
+                    <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                      <Mail className="h-6 w-6" />
+                      <span className="sr-only">Email</span>
+                    </a>
+                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <Linkedin className="h-6 w-6" />
+                      <span className="sr-only">LinkedIn</span>
+                    </a>
+                  </div>
                 </div>
               </DialogContent>
             </Dialog>
