@@ -62,12 +62,11 @@ export function TeamTab() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map(member => {
-          const isHardcoded = member.name === 'Adwait Bapat' || member.name === 'Chetan Mohnot';
-          const placeholder = !isHardcoded ? PlaceHolderImages.find(p => p.id === member.imageId) : null;
-          const fullPlaceholder = !isHardcoded ? PlaceHolderImages.find(p => p.id === member.fullImageId) : null;
+          const placeholder = PlaceHolderImages.find(p => p.id === member.imageId);
+          const fullPlaceholder = PlaceHolderImages.find(p => p.id === member.fullImageId);
 
-          const avatarUrl = isHardcoded ? member.avatarUrl : placeholder?.imageUrl;
-          const fullImageUrl = isHardcoded ? member.fullImageUrl : fullPlaceholder?.imageUrl;
+          let avatarUrl = member.avatarUrl || placeholder?.imageUrl;
+          let fullImageUrl = member.fullImageUrl || fullPlaceholder?.imageUrl;
           const imageHint = placeholder?.imageHint || 'person portrait';
 
 
