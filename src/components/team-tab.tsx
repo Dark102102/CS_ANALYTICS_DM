@@ -24,8 +24,8 @@ const teamMembers = [
     fullImageId: 'chetan-mohnot-full',
     email: 'chetan.mohnot@example.com',
     linkedin: '#',
-    avatarUrl: 'https://i.postimg.cc/m2qYWMhS/Chetan-Mohnot.jpg',
-    fullImageUrl: 'https://i.postimg.cc/m2qYWMhS/Chetan-Mohnot.jpg'
+    avatarUrl: 'https://i.postimg.cc/x88zWT27/Chetan-Mohnot-1.jpg',
+    fullImageUrl: 'https://i.postimg.cc/x88zWT27/Chetan-Mohnot-1.jpg'
   },
   {
     name: 'Alex Johnson',
