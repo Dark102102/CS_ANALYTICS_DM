@@ -14,10 +14,10 @@
       "imageHint": "woman portrait"
     },
     {
-      "id": "teammate-3",
-      "description": "A portrait of a developer.",
-      "imageUrl": "https://picsum.photos/seed/3/300/300",
-      "imageHint": "person portrait"
+      "id": "adwait-bapat",
+      "description": "A portrait of Adwait Bapat, a developer.",
+      "imageUrl": "https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/i_dont_know_what_i_am_doing_1723558110901.jpeg",
+      "imageHint": "man portrait"
     },
     {
         "id": "chetan-mohnot-full",
@@ -32,10 +32,10 @@
         "imageHint": "woman portrait"
     },
     {
-        "id": "teammate-3-full",
-        "description": "A full portrait of a developer.",
-        "imageUrl": "https://picsum.photos/seed/6/400/400",
-        "imageHint": "person portrait"
+        "id": "adwait-bapat-full",
+        "description": "A full portrait of Adwait Bapat, a developer.",
+        "imageUrl": "https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/i_dont_know_what_i_am_doing_1723558110901.jpeg",
+        "imageHint": "man portrait"
     }
   ]
 }
