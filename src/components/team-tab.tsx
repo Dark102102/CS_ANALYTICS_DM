@@ -46,6 +46,8 @@ const teamMembers = [
     fullImageId: 'adwait-bapat-full',
     email: 'adwait.bapat@example.com',
     linkedin: '#',
+    avatarUrl: 'https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/Sample1_1723561633535.jpeg',
+    fullImageUrl: 'https://storage.googleapis.com/aifirebase-799a7.appspot.com/user_images/Sample1_1723561633535.jpeg',
   },
 ];
 
