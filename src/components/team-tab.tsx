@@ -36,6 +36,8 @@ const teamMembers = [
     fullImageId: 'teammate-2-full',
     email: 'alex.johnson@example.com',
     linkedin: '#',
+    avatarUrl: 'https://picsum.photos/seed/2/300/300',
+    fullImageUrl: 'https://picsum.photos/seed/5/400/400'
   },
   {
     name: 'Adwait Bapat',
@@ -65,8 +67,8 @@ export function TeamTab() {
           const placeholder = PlaceHolderImages.find(p => p.id === member.imageId);
           const fullPlaceholder = PlaceHolderImages.find(p => p.id === member.fullImageId);
 
-          let avatarUrl = member.avatarUrl || placeholder?.imageUrl;
-          let fullImageUrl = member.fullImageUrl || fullPlaceholder?.imageUrl;
+          let avatarUrl = member.avatarUrl;
+          let fullImageUrl = member.fullImageUrl;
           const imageHint = placeholder?.imageHint || 'person portrait';
 
 
@@ -82,7 +84,7 @@ export function TeamTab() {
                               src={avatarUrl}
                               alt={`Portrait of ${member.name}`}
                               data-ai-hint={imageHint}
-                              className="object-cover"
+                              className="object-cover w-full h-full"
                             />
                             <AvatarFallback>{member.fallback}</AvatarFallback>
                           </Avatar>
