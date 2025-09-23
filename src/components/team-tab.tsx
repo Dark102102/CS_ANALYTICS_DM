@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import Image from 'next/image';
-import { Mail, Linkedin } from 'lucide-react';
+import { Mail, Linkedin, Github } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const teamMembers = [
@@ -66,6 +66,8 @@ const teamMembers = [
   },
 ];
 
+const githubRepoUrl = 'https://github.com/Dark102102/CS_ANALYTICS_DM';
+
 export function TeamTab() {
   return (
     <div className="space-y-8">
@@ -111,6 +113,10 @@ export function TeamTab() {
                         <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary transition-colors">
                           <Linkedin className="h-6 w-6" />
                           <span className="sr-only">LinkedIn</span>
+                        </a>
+                        <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary transition-colors">
+                          <Github className="h-6 w-6" />
+                          <span className="sr-only">GitHub</span>
                         </a>
                       </div>
                   </CardContent>
