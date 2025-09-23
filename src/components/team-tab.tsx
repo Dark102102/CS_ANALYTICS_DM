@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import Image from 'next/image';
 import { Mail, Linkedin } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const teamMembers = [
   {
@@ -77,6 +78,7 @@ export function TeamTab() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {teamMembers.map(member => {
           const imageHint = 'person portrait';
+          const isPratham = member.name === 'Pratham Shah';
 
           return (
             <Dialog key={member.name}>
@@ -89,7 +91,7 @@ export function TeamTab() {
                             src={member.avatarUrl}
                             alt={`Portrait of ${member.name}`}
                             data-ai-hint={imageHint}
-                            className="object-cover object-top"
+                            className={cn("object-cover", isPratham ? "object-center" : "object-top")}
                           />
                           <AvatarFallback>{member.fallback}</AvatarFallback>
                         </Avatar>
@@ -124,7 +126,7 @@ export function TeamTab() {
                           alt={`Portrait of ${member.name}`}
                           width={400}
                           height={400}
-                          className="w-full h-full object-cover object-top"
+                          className={cn("w-full h-full object-cover", isPratham ? "object-center" : "object-top")}
                           data-ai-hint={imageHint}
                       />
                    </div>
@@ -139,3 +141,5 @@ export function TeamTab() {
     </div>
   );
 }
+
+    
