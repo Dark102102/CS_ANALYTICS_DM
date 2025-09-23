@@ -1,5 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, Rocket, HelpCircle, Lightbulb, CheckCircle2 } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const researchTopic = {
   title: 'Research Topic',
@@ -20,15 +27,50 @@ const projectScope = {
 };
 
 const researchQuestions = {
-  title: 'Research Questions',
+  title: 'Proposed Research Questions (10)',
   icon: <HelpCircle className="h-8 w-8 text-purple-400" />,
   questions: [
-    'Can we predict match winners with high accuracy using historical data?',
-    'Which player and team statistics have the biggest impact on match outcomes?',
-    'How can our predictions support esports analytics and strategic decision-making?',
-    'What patterns emerge from analyzing different map types and game modes?',
-    'How do external factors (tournament pressure, team dynamics) affect prediction accuracy?',
-  ],
+      {
+        title: '1. Pre-match Feature Correlation',
+        text: 'What pre-match features (team Elo/ranking, recent form, map win rates, average player ratings) correlate most strongly with match winners in best-of-three professional CS2 matches?'
+      },
+      {
+        title: '2. Player Statistics Impact',
+        text: 'Which combination of player-level statistics (headshot %, entry kills, clutch success) maximizes predictive power for match outcome classification, as measured by feature importance in machine learning models?'
+      },
+      {
+        title: '3. Round Winner Prediction',
+        text: 'Can we predict round winners using only HLTV-derived per-round features (e.g., starting side, economy balances, weapons purchased) and recent team patterns? What is the best achievable accuracy with publicly-available features?'
+      },
+      {
+        title: '4. 1v1 Duel Outcomes',
+        text: 'How well can we predict 1v1 duel outcomes (player vs player) using player historical duel stats, weapon, and round context? Which features (weapon type, player KD, clutch history) are most predictive?'
+      },
+      {
+        title: '5. Team Coordination Analysis',
+        text: 'Do teams with higher measured coordination (proxied via multi-kill sequences, utility usage patterns, or consistent opening frag patterns) win more rounds on average than teams with higher raw frag counts but weaker coordination?'
+      },
+      {
+        title: '6. Map Predictability',
+        text: 'Are certain maps significantly more “predictable” than others (i.e., do models reach higher accuracy on some maps), and which map-specific features (T/CT side advantage, common bombsite control metrics) explain those differences?'
+      },
+      {
+        title: '7. Market Information Integration',
+        text: 'How quickly do pre-match betting markets incorporate new information (roster swaps, last-minute lineup changes), and can model-generated probabilities identify value bets that odds markets miss?'
+      },
+      {
+        title: '8. Real-time Prediction Performance',
+        text: 'Using only features that are plausibly available in near-real-time from public streams or HLTV updates, how well can a “lightweight” model predict round outcomes during a match, and what is its latency/throughput profile?'
+      },
+      {
+        title: '9. Player Marginal Value',
+        text: 'Which players provide the largest marginal increase in win probability when included in a team (measured via counterfactual / leave-one-out analyses), and how stable are those estimates across different time windows?'
+      },
+      {
+        title: '10. Dataset Bias and Generalization',
+        text: 'How sensitive are model predictions to dataset biases for example, when the dataset contains many matches from certain regions or event tiers and what de-biasing strategies (resampling, covariate adjustment) most improve generalization to unseen teams or regions?'
+      },
+  ]
 };
 
 const expectedOutcomes = {
@@ -55,6 +97,8 @@ const expectedOutcomes = {
 
 export function ProposalOverviewTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl";
+  const firstFiveQuestions = researchQuestions.questions.slice(0, 5);
+  const nextFiveQuestions = researchQuestions.questions.slice(5, 10);
   return (
     <div className="space-y-8">
       <div className="text-center">
@@ -111,72 +155,36 @@ export function ProposalOverviewTab() {
               {researchQuestions.icon}
             </div>
             <div>
-              <CardTitle className="text-2xl text-white">Proposed Research Questions (10)</CardTitle>
+              <CardTitle className="text-2xl text-white">{researchQuestions.title}</CardTitle>
             </div>
           </CardHeader>
           <CardContent className="ml-16">
-            <div className="space-y-6">
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">1. Pre-match Feature Correlation</h3>
-                <p className="text-white/80 leading-relaxed">
-                  What pre-match features (team Elo/ranking, recent form, map win rates, average player ratings) correlate most strongly with match winners in best-of-three professional CS2 matches?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">2. Player Statistics Impact</h3>
-                <p className="text-white/80 leading-relaxed">
-                  Which combination of player-level statistics (headshot %, entry kills, clutch success) maximizes predictive power for match outcome classification, as measured by feature importance in machine learning models?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">3. Round Winner Prediction</h3>
-                <p className="text-white/80 leading-relaxed">
-                  Can we predict round winners using only HLTV-derived per-round features (e.g., starting side, economy balances, weapons purchased) and recent team patterns? What is the best achievable accuracy with publicly-available features?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">4. 1v1 Duel Outcomes</h3>
-                <p className="text-white/80 leading-relaxed">
-                  How well can we predict 1v1 duel outcomes (player vs player) using player historical duel stats, weapon, and round context? Which features (weapon type, player KD, clutch history) are most predictive?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">5. Team Coordination Analysis</h3>
-                <p className="text-white/80 leading-relaxed">
-                  Do teams with higher measured coordination (proxied via multi-kill sequences, utility usage patterns, or consistent opening frag patterns) win more rounds on average than teams with higher raw frag counts but weaker coordination?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">6. Map Predictability</h3>
-                <p className="text-white/80 leading-relaxed">
-                  Are certain maps significantly more “predictable” than others (i.e., do models reach higher accuracy on some maps), and which map-specific features (T/CT side advantage, common bombsite control metrics) explain those differences?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">7. Market Information Integration</h3>
-                <p className="text-white/80 leading-relaxed">
-                  How quickly do pre-match betting markets incorporate new information (roster swaps, last-minute lineup changes), and can model-generated probabilities identify value bets that odds markets miss?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">8. Real-time Prediction Performance</h3>
-                <p className="text-white/80 leading-relaxed">
-                  Using only features that are plausibly available in near-real-time from public streams or HLTV updates, how well can a “lightweight” model predict round outcomes during a match, and what is its latency/throughput profile?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">9. Player Marginal Value</h3>
-                <p className="text-white/80 leading-relaxed">
-                  Which players provide the largest marginal increase in win probability when included in a team (measured via counterfactual / leave-one-out analyses), and how stable are those estimates across different time windows?
-                </p>
-              </div>
-              <div className="border-l-4 border-primary/50 pl-4">
-                <h3 className="text-lg font-semibold text-white mb-2">10. Dataset Bias and Generalization</h3>
-                <p className="text-white/80 leading-relaxed">
-                  How sensitive are model predictions to dataset biases for example, when the dataset contains many matches from certain regions or event tiers and what de-biasing strategies (resampling, covariate adjustment) most improve generalization to unseen teams or regions?
-                </p>
-              </div>
-            </div>
+            <Carousel className="w-full">
+              <CarouselContent>
+                <CarouselItem>
+                  <div className="space-y-6">
+                    {firstFiveQuestions.map(q => (
+                       <div className="border-l-4 border-primary/50 pl-4" key={q.title}>
+                        <h3 className="text-lg font-semibold text-white mb-2">{q.title}</h3>
+                        <p className="text-white/80 leading-relaxed">{q.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CarouselItem>
+                 <CarouselItem>
+                  <div className="space-y-6">
+                    {nextFiveQuestions.map(q => (
+                       <div className="border-l-4 border-primary/50 pl-4" key={q.title}>
+                        <h3 className="text-lg font-semibold text-white mb-2">{q.title}</h3>
+                        <p className="text-white/80 leading-relaxed">{q.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious className="ml-4" />
+              <CarouselNext className="mr-4" />
+            </Carousel>
           </CardContent>
         </Card>
 
