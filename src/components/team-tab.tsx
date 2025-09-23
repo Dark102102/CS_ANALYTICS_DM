@@ -14,6 +14,7 @@ import {
 import Image from 'next/image';
 import { Mail, Linkedin, Github } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const teamMembers = [
   {
@@ -70,15 +71,9 @@ const githubRepoUrl = 'https://github.com/Dark102102/CS_ANALYTICS_DM';
 
 export function TeamTab() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
        <div className="text-center">
-        <div className="flex items-center justify-center gap-4">
-          <h2 className="text-3xl font-bold tracking-tight text-white">Our <span className="text-primary">Team</span></h2>
-          <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary transition-colors">
-            <Github className="h-8 w-8" />
-            <span className="sr-only">GitHub Repository</span>
-          </a>
-        </div>
+        <h2 className="text-3xl font-bold tracking-tight text-white">Our <span className="text-primary">Team</span></h2>
         <p className="mt-2 text-lg text-white/80 max-w-2xl mx-auto">
           Meet the dedicated team behind the Counter-Strike match prediction project, bringing together expertise in data science, research, and development.
         </p>
@@ -145,6 +140,14 @@ export function TeamTab() {
             </Dialog>
           );
         })}
+      </div>
+      <div className="text-center">
+        <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" className="bg-transparent text-white/80 hover:bg-white/10 hover:text-white">
+            <Github className="mr-2 h-5 w-5" />
+            View on GitHub
+          </Button>
+        </a>
       </div>
     </div>
   );
