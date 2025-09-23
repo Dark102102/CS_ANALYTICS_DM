@@ -72,7 +72,13 @@ export function TeamTab() {
   return (
     <div className="space-y-8">
        <div className="text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-white">Our <span className="text-primary">Team</span></h2>
+        <div className="flex items-center justify-center gap-4">
+          <h2 className="text-3xl font-bold tracking-tight text-white">Our <span className="text-primary">Team</span></h2>
+          <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary transition-colors">
+            <Github className="h-8 w-8" />
+            <span className="sr-only">GitHub Repository</span>
+          </a>
+        </div>
         <p className="mt-2 text-lg text-white/80 max-w-2xl mx-auto">
           Meet the dedicated team behind the Counter-Strike match prediction project, bringing together expertise in data science, research, and development.
         </p>
@@ -113,10 +119,6 @@ export function TeamTab() {
                         <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary transition-colors">
                           <Linkedin className="h-6 w-6" />
                           <span className="sr-only">LinkedIn</span>
-                        </a>
-                        <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary transition-colors">
-                          <Github className="h-6 w-6" />
-                          <span className="sr-only">GitHub</span>
                         </a>
                       </div>
                   </CardContent>
