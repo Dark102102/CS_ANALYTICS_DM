@@ -143,7 +143,7 @@ export function TeamTab() {
       </div>
       <div className="text-center">
         <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" className="bg-transparent text-white/80 hover:bg-white/10 hover:text-white">
+          <Button variant="outline" className="bg-transparent border-white/20 text-white/80 hover:bg-transparent hover:text-primary hover:border-primary transition-colors">
             <Github className="mr-2 h-5 w-5" />
             View on GitHub
           </Button>
