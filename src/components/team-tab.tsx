@@ -35,7 +35,7 @@ const teamMembers = [
     fallback: 'LR',
     bio: 'As the Visualization Lead, Luke transforms complex data into compelling visual stories. He is an expert in data collection and research, with a keen eye for creating intuitive and insightful visualizations for esports analytics.',
     fullImageId: 'luke-robinson-full',
-    email: 'luke.robinson@example.com',
+    email: 'lukerob20042@gmail.com',
     linkedin: '#',
     avatarUrl: 'https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg',
     fullImageUrl: 'https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg'
@@ -47,7 +47,7 @@ const teamMembers = [
     fallback: 'AB',
     bio: 'As the Modelling Lead, Adwait is responsible for developing and implementing the predictive models at the core of our project. His expertise in software engineering and data processing brings our analytical models to life.',
     fullImageId: 'adwait-bapat-full',
-    email: 'adwait.bapat@example.com',
+    email: 'adwaitbapat444@gmail.com',
     linkedin: 'https://www.linkedin.com/in/adwait-bapat01/',
     avatarUrl: 'https://i.postimg.cc/W1Bwgrv4/Adwait-Bapat.jpg',
     fullImageUrl: 'https://i.postimg.cc/W1Bwgrv4/Adwait-Bapat.jpg',
@@ -59,7 +59,7 @@ const teamMembers = [
     fallback: 'PS',
     bio: 'As the AI Lead, Pratham architects the intelligent systems that power our analytics. He brings a wealth of expertise in model development, deployment, and cutting-edge AI techniques to the team.',
     fullImageId: 'pratham-shah-full',
-    email: 'pratham.shah@example.com',
+    email: 'prathamshah1006@gmail.com',
     linkedin: 'https://www.linkedin.com/in/pratham-shah-9b186322a/',
     avatarUrl: 'https://i.postimg.cc/hG7NPbgb/pratham.jpg',
     fullImageUrl: 'https://i.postimg.cc/hG7NPbgb/pratham.jpg',
@@ -141,5 +141,3 @@ export function TeamTab() {
     </div>
   );
 }
-
-    
