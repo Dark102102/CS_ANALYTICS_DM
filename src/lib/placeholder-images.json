@@ -1,4 +1,3 @@
-
 {
   "placeholderImages": [
     {
@@ -20,33 +19,33 @@
       "imageHint": "man portrait"
     },
     {
-        "id": "chetan-mohnot-full",
-        "description": "A full portrait of Chetan Mohnot, Data Scientist.",
-        "imageUrl": "https://i.postimg.cc/x88zWT27/Chetan-Mohnot-1.jpg",
-        "imageHint": "man portrait"
+      "id": "chetan-mohnot-full",
+      "description": "A full portrait of Chetan Mohnot, Data Scientist.",
+      "imageUrl": "https://i.postimg.cc/x88zWT27/Chetan-Mohnot-1.jpg",
+      "imageHint": "man portrait"
     },
     {
-        "id": "luke-robinson-full",
-        "description": "A full portrait of a research analyst.",
-        "imageUrl": "https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg",
-        "imageHint": "man portrait"
+      "id": "luke-robinson-full",
+      "description": "A full portrait of a research analyst.",
+      "imageUrl": "https://i.postimg.cc/NjBHc4Bm/Luke-Robinson.jpg",
+      "imageHint": "man portrait"
     },
     {
-        "id": "adwait-bapat-full",
-        "description": "A full portrait of Adwait Bapat, a developer.",
-        "imageUrl": "https://i.postimg.cc/W1Bwgrv4/Adwait-Bapat.jpg",
-        "imageHint": "man portrait"
+      "id": "adwait-bapat-full",
+      "description": "A full portrait of Adwait Bapat, a developer.",
+      "imageUrl": "https://i.postimg.cc/W1Bwgrv4/Adwait-Bapat.jpg",
+      "imageHint": "man portrait"
     },
     {
       "id": "pratham-shah",
       "description": "A portrait of Pratham Shah, AI Engineer.",
-      "imageUrl": "https://i.postimg.cc/Sxmx04ny/pratham.jpg",
+      "imageUrl": "https://i.postimg.cc/hG7NPbgb/pratham.jpg",
       "imageHint": "man portrait"
     },
     {
       "id": "pratham-shah-full",
       "description": "A full portrait of Pratham Shah, AI Engineer.",
-      "imageUrl": "https://i.postimg.cc/Sxmx04ny/pratham.jpg",
+      "imageUrl": "https://i.postimg.cc/hG7NPbgb/pratham.jpg",
       "imageHint": "man portrait"
     }
   ]

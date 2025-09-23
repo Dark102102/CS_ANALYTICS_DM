@@ -61,8 +61,8 @@ const teamMembers = [
     fullImageId: 'pratham-shah-full',
     email: 'pratham.shah@example.com',
     linkedin: 'https://www.linkedin.com/in/pratham-shah-9b186322a/',
-    avatarUrl: 'https://i.postimg.cc/Sxmx04ny/pratham.jpg',
-    fullImageUrl: 'https://i.postimg.cc/Sxmx04ny/pratham.jpg',
+    avatarUrl: 'https://i.postimg.cc/hG7NPbgb/pratham.jpg',
+    fullImageUrl: 'https://i.postimg.cc/hG7NPbgb/pratham.jpg',
   },
 ];
 
