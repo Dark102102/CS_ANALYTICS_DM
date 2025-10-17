@@ -366,15 +366,88 @@ def scrape_and_save(pages=3, outfile="hltv_matches.csv", download_demos=False, d
 
 
 if __name__ == "__main__":
-    # Hardcoded run settings
-    DEBUG = False  # Disable debug to reduce output and avoid issues
-    PAGES = 5  # Fewer pages but should still find 10+ ESL Pro League matches
+    """
+    REPRODUCIBLE SCRAPING CONFIGURATION
+    ====================================
+    
+    To reproduce the data collection:
+    1. Ensure you have installed: pip install -r requirements.txt
+    2. Run: python scraping.py
+    3. Data will be saved to: hltv_matches.csv
+    4. Demos will be saved to: demos/
+    
+    Configuration (modify these to customize):
+    """
+    
+    # ===== CONFIGURATION =====
+    DEBUG = False                # Set to True for verbose debug output
+    PAGES = 5                    # Number of result pages to scrape (100 matches per page)
+    NUM_MATCHES = 10             # Limit number of matches to collect
+    EVENT_FILTER = "ESL Pro League"  # Filter for specific event (None for all events)
+    DOWNLOAD_DEMOS = True        # Download demo files (requires ~1GB per demo)
+    
+    # Output paths
     OUTFILE = os.path.join(os.path.dirname(__file__), "hltv_matches.csv")
-    DOWNLOAD_DEMOS = True  # Enable demo download
     DEMOS_DIR = os.path.join(os.path.dirname(__file__), "demos")
-    EVENT_FILTER = "ESL Pro League"  # Filter for ESL Pro League matches only
-
-    print(f"Filtering for event: {EVENT_FILTER}")
-    print(f"Demo download: {DOWNLOAD_DEMOS}")
-    print(f"Demos directory: {DEMOS_DIR}")
-    scrape_and_save(pages=PAGES, outfile=OUTFILE, download_demos=DOWNLOAD_DEMOS, demos_dir=DEMOS_DIR, event_filter=EVENT_FILTER)
+    
+    # Rate limiting (adjust if getting blocked)
+    DELAY_BETWEEN_MATCHES = 3    # Seconds between match requests
+    DELAY_BETWEEN_PAGES = 2      # Seconds between page requests
+    # ===== END CONFIGURATION =====
+    
+    # Print configuration
+    print("="*80)
+    print("HLTV.ORG DATA SCRAPER - ESL PRO LEAGUE CS2")
+    print("="*80)
+    print(f"\nConfiguration:")
+    print(f"  Event Filter: {EVENT_FILTER if EVENT_FILTER else 'All events'}")
+    print(f"  Pages to scrape: {PAGES}")
+    print(f"  Max matches: {NUM_MATCHES}")
+    print(f"  Download demos: {DOWNLOAD_DEMOS}")
+    print(f"  Output file: {OUTFILE}")
+    print(f"  Demos directory: {DEMOS_DIR}")
+    print(f"  Debug mode: {DEBUG}")
+    print(f"  Rate limiting: {DELAY_BETWEEN_MATCHES}s between matches, {DELAY_BETWEEN_PAGES}s between pages")
+    print("\n" + "="*80)
+    
+    # Confirm before starting
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == '--dry-run':
+        print("\n[DRY RUN MODE] - Would scrape with above configuration")
+        print("Run without --dry-run flag to actually scrape data")
+        sys.exit(0)
+    
+    # Update global DEBUG setting
+    if DEBUG:
+        print("\n[DEBUG MODE ENABLED]")
+        globals()['DEBUG'] = True
+    
+    # Run scraping
+    try:
+        scrape_and_save(
+            pages=PAGES,
+            outfile=OUTFILE,
+            download_demos=DOWNLOAD_DEMOS,
+            demos_dir=DEMOS_DIR,
+            event_filter=EVENT_FILTER
+        )
+        
+        print("\n" + "="*80)
+        print("SCRAPING COMPLETE")
+        print("="*80)
+        print(f"\nData saved to: {OUTFILE}")
+        if DOWNLOAD_DEMOS:
+            print(f"Demos saved to: {DEMOS_DIR}")
+        print("\nNext steps:")
+        print("  1. Extract demos: Check demos/ folder")
+        print("  2. Parse demos: python parse_demo_demoparser2.py")
+        print("  3. Analyze data: python data_exploration.py")
+        
+    except KeyboardInterrupt:
+        print("\n\n[INTERRUPTED] Scraping cancelled by user")
+        print(f"Partial data may be saved to: {OUTFILE}")
+    except Exception as e:
+        print(f"\n[ERROR] Scraping failed: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
