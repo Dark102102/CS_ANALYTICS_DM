@@ -1,6 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Database, Filter, BarChartHorizontal } from 'lucide-react';
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+
+const sampleData = [
+  { map: 'Dust 2', teamA: 13, teamB: 8 },
+  { map: 'Mirage', teamA: 16, teamB: 12 },
+  { map: 'Inferno', teamA: 10, teamB: 13 },
+  { map: 'Nuke', teamA: 7, teamB: 13 },
+  { map: 'Overpass', teamA: 13, teamB: 5 },
+  { map: 'Vertigo', teamA: 9, teamB: 13 },
+];
+
 
 export function DataExplorationTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl min-h-[300px]";
@@ -62,10 +73,26 @@ export function DataExplorationTab() {
               <CardHeader>
                 <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-white/80 leading-relaxed">
-                  Placeholder for Visualizations. This area will showcase a variety of interactive charts and graphs to explore the dataset. Visualizations will include distributions of key statistics, correlations between different features, and geographical representations of team performance. These visual tools will help in identifying patterns and communicating insights derived from the data.
+              <CardContent className="h-[400px]">
+                <p className="text-white/80 leading-relaxed mb-4">
+                  This area will showcase a variety of interactive charts and graphs to explore the dataset. Below is an example of an interactive chart built with Recharts, which can be powered by data exported from Python.
                 </p>
+                <ResponsiveContainer width="100%" height="90%">
+                  <BarChart data={sampleData} layout="vertical" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <XAxis type="number" stroke="hsl(var(--foreground))" opacity={0.8} />
+                    <YAxis dataKey="map" type="category" stroke="hsl(var(--foreground))" opacity={0.8} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: 'hsl(var(--background))',
+                        borderColor: 'hsl(var(--border))',
+                      }}
+                      labelStyle={{ color: 'hsl(var(--primary))' }}
+                    />
+                    <Legend wrapperStyle={{ color: 'hsl(var(--foreground))', opacity: 0.8 }} />
+                    <Bar dataKey="teamA" fill="hsl(var(--chart-1))" name="Team A Wins" />
+                    <Bar dataKey="teamB" fill="hsl(var(--chart-2))" name="Team B Wins" />
+                  </BarChart>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
           </TabsContent>
