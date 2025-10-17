@@ -43,3 +43,6 @@ next-env.d.ts
 # firebase
 firebase-debug.log
 firestore-debug.log
+
+/machine_learning/demos
+/machine_learning/demos_extracted

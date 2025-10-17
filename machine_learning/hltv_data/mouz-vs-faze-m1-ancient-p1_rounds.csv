@@ -1,0 +1,2 @@
+round_num,winning_team,round_end_reason,bomb_planted,demo_type,map_name,parsing_status
+,,,,cs2,unknown,"error: ERROR: DemoEndsEarly(""demo ends early. Expected le"
