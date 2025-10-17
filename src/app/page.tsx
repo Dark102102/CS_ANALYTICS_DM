@@ -4,6 +4,7 @@ import { Header } from '@/components/header';
 import { IntroductionTab } from '@/components/introduction-tab';
 import { TeamTab } from '@/components/team-tab';
 import { ProposalOverviewTab } from '@/components/proposal-overview-tab';
+import { DataExplorationTab } from '@/components/data-exploration-tab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 
@@ -16,6 +17,8 @@ export default function Home() {
         return 'bg-image-proposal';
       case 'team':
         return 'bg-image-team';
+      case 'data-exploration':
+        return 'bg-image-data-exploration';
       default:
         return 'bg-image-default';
     }
@@ -30,10 +33,11 @@ export default function Home() {
         <div className="relative z-10">
           <Tabs defaultValue="introduction" className="w-full" onValueChange={setActiveTab}>
             <Header>
-              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 md:w-auto bg-transparent border-0 p-0">
+              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-4 md:w-auto bg-transparent border-0 p-0">
                 <TabsTrigger value="introduction" className="text-lg">Introduction</TabsTrigger>
                 <TabsTrigger value="team" className="text-lg">Team</TabsTrigger>
                 <TabsTrigger value="proposal" className="text-lg">Proposal Overview</TabsTrigger>
+                <TabsTrigger value="data-exploration" className="text-lg">Data Exploration</TabsTrigger>
               </TabsList>
             </Header>
             <main className="container mx-auto p-4 md:p-8">
@@ -45,6 +49,9 @@ export default function Home() {
               </TabsContent>
               <TabsContent value="proposal">
                 <ProposalOverviewTab />
+              </TabsContent>
+              <TabsContent value="data-exploration">
+                <DataExplorationTab />
               </TabsContent>
             </main>
           </Tabs>

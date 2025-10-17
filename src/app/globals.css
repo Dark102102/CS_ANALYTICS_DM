@@ -82,6 +82,10 @@
   .bg-image-team {
     background: url('https://i.postimg.cc/kMknKXH5/Gemini-Generated-Image-c8s05xc8s05xc8s0.png') center center / cover no-repeat fixed;
   }
+  
+  .bg-image-data-exploration {
+    background: url('https://i.postimg.cc/tJq0fL17/Gemini-Generated-Image-2bpj9m2bpj9m2bpj.png') center center / cover no-repeat fixed;
+  }
 
   .bg-overlay::before {
     content: '';
