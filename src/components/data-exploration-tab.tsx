@@ -14,6 +14,14 @@ import {
 import Image from 'next/image';
 
 const visualizations = Array.from({ length: 13 }).map((_, i) => {
+  if (i === 0) {
+    return {
+      id: `viz-1`,
+      title: `Round Wins by Side`,
+      imageUrl: `https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png`,
+      description: `A bar chart showing the distribution of round wins for the Terrorist (T) and Counter-Terrorist (CT) sides.`,
+    };
+  }
   if (i === 2) {
     return {
       id: `viz-3`,
