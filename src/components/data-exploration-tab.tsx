@@ -74,7 +74,7 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
     return {
       id: `viz-8`,
       title: `Q-Q Plots for Normality`,
-      imageUrl: `https://i.postimg.cc/gnwXq3rB/08-qq-plots-normality.png`,
+      imageUrl: `https://i.postimg.cc/dt62FBFv/08-qq-plots-normality.png`,
       description: `Q-Q plots assessing the normality of key statistical distributions, such as kill/death ratios.`,
     };
   }
