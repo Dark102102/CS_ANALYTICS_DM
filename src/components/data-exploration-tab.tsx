@@ -22,12 +22,68 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
       description: `A bar chart showing the distribution of round wins for the Terrorist (T) and Counter-Terrorist (CT) sides.`,
     };
   }
+   if (i === 1) {
+    return {
+      id: `viz-2`,
+      title: `Distribution of Round End Reasons`,
+      imageUrl: `https://i.postimg.cc/T3Pr3D2R/02-round-end-reasons.png`,
+      description: `A pie chart illustrating the most common reasons a round ends, such as bomb defusal, bomb explosion, or team elimination.`,
+    };
+  }
   if (i === 2) {
     return {
       id: `viz-3`,
       title: `T-Side Win Rate by Headshot Rate`,
       imageUrl: `https://i.postimg.cc/bwvQwtYq/03-headshot-rate-vs-wins.png`,
       description: `A scatter plot showing the correlation between T-side headshot percentage and win rate, with a regression line indicating the positive trend.`,
+    };
+  }
+   if (i === 3) {
+    return {
+      id: `viz-4`,
+      title: `Weapon Usage by Winner`,
+      imageUrl: `https://i.postimg.cc/QHRB6VWS/04-weapon-usage-by-winner.png`,
+      description: `A stacked bar chart comparing the most frequently used weapons by winning and losing teams.`,
+    };
+  }
+  if (i === 4) {
+    return {
+      id: `viz-5`,
+      title: `Kill Distance Distribution`,
+      imageUrl: `https://i.postimg.cc/TpZykhW9/05-kill-distance-distribution.png`,
+      description: `A histogram showing the frequency of kills at various distances, revealing engagement patterns.`,
+    };
+  }
+  if (i === 5) {
+    return {
+      id: `viz-6`,
+      title: `Correlation Heatmap`,
+      imageUrl: `https://i.postimg.cc/2VqbFn3K/06-correlation-heatmap.png`,
+      description: `A heatmap visualizing the correlation between different match statistics, highlighting relationships between variables.`,
+    };
+  }
+  if (i === 6) {
+    return {
+      id: `viz-7`,
+      title: `Average Kills by Match Outcome`,
+      imageUrl: `https://i.postimg.cc/zVLbST3F/07-kills-by-outcome.png`,
+      description: `A box plot comparing the distribution of average kills for winning and losing teams.`,
+    };
+  }
+  if (i === 7) {
+    return {
+      id: `viz-8`,
+      title: `Q-Q Plots for Normality`,
+      imageUrl: `https://i.postimg.cc/gnwXq3rB/08-qq-plots-normality.png`,
+      description: `Q-Q plots assessing the normality of key statistical distributions, such as kill/death ratios.`,
+    };
+  }
+  if (i === 8) {
+    return {
+      id: `viz-9`,
+      title: `PCA Explained Variance`,
+      imageUrl: `https://i.postimg.cc/9r4Rtyz4/09-pca-variance.png`,
+      description: `A line chart showing the cumulative explained variance by principal components in a PCA analysis.`,
     };
   }
   if (i === 9) {
