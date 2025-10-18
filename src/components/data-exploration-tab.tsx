@@ -66,7 +66,7 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
     return {
       id: `viz-7`,
       title: `Average Kills by Match Outcome`,
-      imageUrl: `https://i.postimg.cc/zVLbST3F/07-kills-by-outcome.png`,
+      imageUrl: `https://i.postimg.cc/7Y934Vkd/07-kills-by-outcome.png`,
       description: `A box plot comparing the distribution of average kills for winning and losing teams.`,
     };
   }
