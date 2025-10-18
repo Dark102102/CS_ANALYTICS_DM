@@ -1,12 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Database, Filter, BarChartHorizontal } from 'lucide-react';
-import Image from 'next/image';
-
-const visualizationImages = [
-  { src: 'https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png', alt: 'Round Wins Distribution' },
-];
-
+import { Database, Filter } from 'lucide-react';
 
 export function DataExplorationTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl min-h-[300px]";
@@ -23,7 +17,7 @@ export function DataExplorationTab() {
       </div>
 
       <Tabs defaultValue="collection" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 max-w-2xl mx-auto bg-black/30 backdrop-blur-sm">
+        <TabsList className="grid w-full grid-cols-2 max-w-2xl mx-auto bg-black/30 backdrop-blur-sm">
           <TabsTrigger value="collection">
             <Database className="w-4 h-4 mr-2" />
             Data Collection
@@ -31,10 +25,6 @@ export function DataExplorationTab() {
           <TabsTrigger value="preprocessing">
             <Filter className="w-4 h-4 mr-2" />
             Cleaning & Preprocessing
-          </TabsTrigger>
-          <TabsTrigger value="visualizations">
-            <BarChartHorizontal className="w-4 h-4 mr-2" />
-            Visualizations
           </TabsTrigger>
         </TabsList>
 
@@ -60,32 +50,6 @@ export function DataExplorationTab() {
                 <p className="text-white/80 leading-relaxed">
                   Placeholder for Data Cleaning and Preprocessing. Here, we will outline the steps taken to clean the raw data, including handling missing values, correcting inconsistencies, and normalizing data formats. This section will also cover feature engineering, where we create new predictive features from the base data, such as team form, map-specific strengths, and economic advantages.
                 </p>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="visualizations">
-             <Card className={cardClassName}>
-              <CardHeader>
-                <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-white/80 leading-relaxed mb-6">
-                  This section showcases a variety of visualizations generated from our dataset, providing insights into match dynamics, player performance, and map statistics. These plots are exported from our Python analysis scripts.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {visualizationImages.map((image, index) => (
-                    <div key={index} className="rounded-lg overflow-hidden border-2 border-white/10 shadow-lg transition-transform hover:scale-105">
-                       <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={600}
-                        height={400}
-                        className="w-full h-auto object-contain"
-                        data-ai-hint="chart graph"
-                      />
-                    </div>
-                  ))}
-                </div>
               </CardContent>
             </Card>
           </TabsContent>
