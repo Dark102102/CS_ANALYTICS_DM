@@ -14,7 +14,7 @@ const visualizations = [
     { src: "https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png", alt: "Round Wins Distribution" },
     { src: "https://i.postimg.cc/T3Pr3D2R/02-round-end-reasons.png", alt: "Round End Reasons" },
     { src: "https://i.postimg.cc/k40g5S0h/03-ct-vs-t-wins.png", alt: "T-Side Win Rate by Headshot Rate" },
-    { src: "https://i.postimg.cc/VLwzJt3L/04-map-win-percentages.png", alt: "Map Win Percentages" },
+    { src: "https://i.postimg.cc/VLwzJt3L/04-map-win-percentages.png", alt: "Weapon Distribution" },
     { src: "https://i.postimg.cc/7ZpYtKJC/05-bomb-plant-defuse-rates.png", alt: "Bomb Plant & Defuse Rates" },
     { src: "https://i.postimg.cc/VvKgM74G/06-economy-vs-wins.png", alt: "Economy vs Wins" },
     { src: "https://i.postimg.cc/L8Qd1fFj/07-player-impact-distribution.png", alt: "Player Impact Distribution" },
