@@ -63,14 +63,24 @@ export function DataExplorationTab() {
               <CardHeader>
                 <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="relative aspect-video">
-                  <Image
-                    src="https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png"
-                    alt="Round Wins Distribution"
-                    fill
-                    className="object-contain rounded-lg"
-                  />
+              <CardContent className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="relative aspect-video">
+                        <Image
+                            src="https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png"
+                            alt="Round Wins Distribution"
+                            fill
+                            className="object-contain rounded-lg"
+                        />
+                    </div>
+                     <div className="relative aspect-video">
+                        <Image
+                            src="https://i.postimg.cc/T3Pr3D2R/02-round-end-reasons.png"
+                            alt="Round End Reasons"
+                            fill
+                            className="object-contain rounded-lg"
+                        />
+                    </div>
                 </div>
               </CardContent>
             </Card>
