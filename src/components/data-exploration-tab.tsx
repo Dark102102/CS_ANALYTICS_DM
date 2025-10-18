@@ -203,10 +203,36 @@ export function DataExplorationTab() {
               <CardHeader>
                 <CardTitle className="text-2xl text-primary">Data Cleaning and Preprocessing</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <p className="text-white/80 leading-relaxed">
-                  Placeholder for Data Cleaning and Preprocessing. Here, we will outline the steps taken to clean the raw data, including handling missing values, correcting inconsistencies, and normalizing data formats. This section will also cover feature engineering, where we create new predictive features from the base data, such as team form, map-specific strengths, and economic advantages.
+                  The data cleaning and preprocessing phase transformed the raw match data into a structured, reliable, and analysis-ready dataset. Starting with 10 matches and 1,838 death events, the process focused on removing inconsistencies, handling missing data, standardizing features, and ensuring statistical integrity. Missing values were filled or removed based on context, duplicates were verified and eliminated, and outliers were reviewed to preserve genuine gameplay behavior. Numerical features were transformed using log scaling, standardization, and normalization to maintain consistent scales, while categorical and boolean variables were encoded for modeling. Feature engineering aggregated event-level data into 71 complete round-level observations with 24 meaningful attributes. Dimensionality reduction using PCA retained 90% of data variance, ensuring efficient modeling without loss of interpretability. The final cleaned dataset accurately reflects real in-game behavior and is fully documented for reproducibility and transparency.
                 </p>
+                 <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Key Steps:</h3>
+                  <ul className="space-y-3 list-disc list-inside text-white/80">
+                    <li>
+                      <span className="font-semibold text-white/90">Missing Values:</span> Removed incomplete rounds, imputed missing numeric or boolean values with 0 or False, and replaced missing categorical weapon entries with “unknown.”
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Duplicate and Consistency Checks:</span> Verified no duplicate records across deaths and rounds, and standardized column names and formats across merged datasets.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Outlier Treatment:</span> Identified and trimmed extreme kill distances (&gt;50 units) for clarity while retaining valid in-game data to avoid losing meaningful variability.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Data Transformations:</span> Applied log transformations, standardized (Z-score), and normalized (Min-Max) numeric features to ensure consistent scaling for model input.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Feature Engineering:</span> Aggregated 1,838 death events into 71 round-level entries with 24 interpretable features (e.g., headshot rate, bomb events, kill distance).
+                    </li>
+                     <li>
+                      <span className="font-semibold text-white/90">Dimensionality Reduction:</span> Performed PCA to reduce multicollinearity, retaining 10 components that explain 90% of variance.
+                    </li>
+                     <li>
+                      <span className="font-semibold text-white/90">Quality Validation:</span> Confirmed the completeness, consistency, and usability of all datasets through visualizations like QQ plots and correlation heatmaps.
+                    </li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
