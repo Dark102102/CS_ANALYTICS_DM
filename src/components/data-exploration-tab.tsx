@@ -14,6 +14,14 @@ import {
 import Image from 'next/image';
 
 const visualizations = Array.from({ length: 13 }).map((_, i) => {
+  if (i === 2) {
+    return {
+      id: `viz-3`,
+      title: `T-Side Win Rate by Headshot Rate`,
+      imageUrl: `https://i.postimg.cc/bwvQwtYq/03-headshot-rate-vs-wins.png`,
+      description: `A scatter plot showing the correlation between T-side headshot percentage and win rate, with a regression line indicating the positive trend.`,
+    };
+  }
   if (i === 9) {
     return {
       id: `viz-10`,
