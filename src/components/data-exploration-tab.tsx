@@ -179,19 +179,19 @@ export function DataExplorationTab() {
                   <h3 className="text-xl font-semibold text-white mb-2">Key Steps:</h3>
                   <ul className="space-y-3 list-disc list-inside text-white/80">
                     <li>
-                      <span className="font-semibold text-white/90">Automated Web Scraping:</span> Data was collected directly from HLTV.org using custom Python scripts to gather match metadata such as teams, maps, and player statistics.
+                      <span className="font-semibold text-primary">Automated Web Scraping:</span> Data was collected directly from HLTV.org using custom Python scripts to gather match metadata such as teams, maps, and player statistics.
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Demo File Acquisition:</span> 10 demo files (≈9.6 GB) were downloaded, each representing a complete professional CS2 match.
+                      <span className="font-semibold text-primary">Demo File Acquisition:</span> 10 demo files (≈9.6 GB) were downloaded, each representing a complete professional CS2 match.
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Parsing and Extraction:</span> The <code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">demoparser2</code> library was used to parse the .dem files. This extraction produced detailed event-level data, including kills, deaths, bomb events, and round outcomes.
+                      <span className="font-semibold text-primary">Parsing and Extraction:</span> The <code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">demoparser2</code> library was used to parse the .dem files. This extraction produced detailed event-level data, including kills, deaths, bomb events, and round outcomes.
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Feature and Metadata Compilation:</span> Match-level and player-level statistics were merged to create structured datasets suitable for analysis. The combined dataset included 1,838 death events across 71 cleaned rounds.
+                      <span className="font-semibold text-primary">Feature and Metadata Compilation:</span> Match-level and player-level statistics were merged to create structured datasets suitable for analysis. The combined dataset included 1,838 death events across 71 cleaned rounds.
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Documentation and Reproducibility:</span> Every step — from scraping to parsing — was fully documented. The process ensures that the entire dataset can be reproduced using provided scripts (<code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">scraping.py</code>, <code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">parse_demo_demoparser2.py</code>).
+                      <span className="font-semibold text-primary">Documentation and Reproducibility:</span> Every step — from scraping to parsing — was fully documented. The process ensures that the entire dataset can be reproduced using provided scripts (<code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">scraping.py</code>, <code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">parse_demo_demoparser2.py</code>).
                     </li>
                   </ul>
                 </div>
@@ -211,25 +211,25 @@ export function DataExplorationTab() {
                   <h3 className="text-xl font-semibold text-white mb-2">Key Steps:</h3>
                   <ul className="space-y-3 list-disc list-inside text-white/80">
                     <li>
-                      <span className="font-semibold text-white/90">Missing Values:</span> Removed incomplete rounds, imputed missing numeric or boolean values with 0 or False, and replaced missing categorical weapon entries with “unknown.”
+                      <span className="font-semibold text-primary">Missing Values:</span> Removed incomplete rounds and imputed missing numeric or boolean values with 0 or False. Replaced missing categorical weapon entries with “unknown.”
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Duplicate and Consistency Checks:</span> Verified no duplicate records across deaths and rounds, and standardized column names and formats across merged datasets.
+                      <span className="font-semibold text-primary">Duplicate and Consistency Checks:</span> Verified no duplicate records across deaths and rounds. Standardized column names and formats across merged datasets.
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Outlier Treatment:</span> Identified and trimmed extreme kill distances (&gt;50 units) for clarity while retaining valid in-game data to avoid losing meaningful variability.
+                      <span className="font-semibold text-primary">Outlier Treatment:</span> Identified and trimmed extreme kill distances (&gt;50 units) for clarity. Retained valid in-game data to avoid losing meaningful variability.
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Data Transformations:</span> Applied log transformations, standardized (Z-score), and normalized (Min-Max) numeric features to ensure consistent scaling for model input.
+                      <span className="font-semibold text-primary">Data Transformations:</span> Applied log transformations to reduce skewness. Standardized (Z-score) and normalized (Min-Max) numeric features. Ensured consistent scaling for model input.
                     </li>
                     <li>
-                      <span className="font-semibold text-white/90">Feature Engineering:</span> Aggregated 1,838 death events into 71 round-level entries with 24 interpretable features (e.g., headshot rate, bomb events, kill distance).
+                      <span className="font-semibold text-primary">Feature Engineering:</span> Aggregated 1,838 death events into 71 round-level entries. Created 24 interpretable features (e.g., headshot rate, bomb events, kill distance). Removed deterministic features like “round_winner” to prevent bias.
                     </li>
                      <li>
-                      <span className="font-semibold text-white/90">Dimensionality Reduction:</span> Performed PCA to reduce multicollinearity, retaining 10 components that explain 90% of variance.
+                      <span className="font-semibold text-primary">Dimensionality Reduction:</span> Performed PCA to reduce multicollinearity. Retained 10 components explaining 90% of variance.
                     </li>
                      <li>
-                      <span className="font-semibold text-white/90">Quality Validation:</span> Confirmed the completeness, consistency, and usability of all datasets through visualizations like QQ plots and correlation heatmaps.
+                      <span className="font-semibold text-primary">Quality Validation:</span> Confirmed completeness, consistency, and usability of all datasets. Visualized results with QQ plots, correlation heatmaps, and PCA graphs.
                     </li>
                   </ul>
                 </div>
