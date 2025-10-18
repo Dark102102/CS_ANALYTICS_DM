@@ -13,12 +13,22 @@ import {
 } from "@/components/ui/select"
 import Image from 'next/image';
 
-const visualizations = Array.from({ length: 13 }).map((_, i) => ({
-  id: `viz-${i + 1}`,
-  title: `Visualization ${i + 1}`,
-  imageUrl: `https://picsum.photos/seed/${i + 1}/800/600`,
-  description: `Placeholder for visualization ${i + 1}. This will be replaced with a real chart and description.`,
-}));
+const visualizations = Array.from({ length: 13 }).map((_, i) => {
+  if (i === 12) {
+    return {
+      id: `viz-13`,
+      title: `Win Rate by Match Duration`,
+      imageUrl: `https://i.postimg.cc/kXqQLHkS/13-win-rate-by-match.png`,
+      description: `Analysis of how win rates are influenced by the total duration of a match, highlighting performance over time.`,
+    };
+  }
+  return {
+    id: `viz-${i + 1}`,
+    title: `Visualization ${i + 1}`,
+    imageUrl: `https://picsum.photos/seed/${i + 1}/800/600`,
+    description: `Placeholder for visualization ${i + 1}. This will be replaced with a real chart and description.`,
+  };
+});
 
 
 export function DataExplorationTab() {
