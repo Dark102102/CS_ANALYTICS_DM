@@ -14,6 +14,14 @@ import {
 import Image from 'next/image';
 
 const visualizations = Array.from({ length: 13 }).map((_, i) => {
+  if (i === 11) {
+    return {
+      id: `viz-12`,
+      title: `Feature Importance Analysis`,
+      imageUrl: `https://i.postimg.cc/sDmYzcrY/12-feature-importance.png`,
+      description: `An analysis of feature importance, highlighting the key factors that contribute to match outcomes.`,
+    };
+  }
   if (i === 12) {
     return {
       id: `viz-13`,
