@@ -1,15 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Database, Filter, BarChartHorizontal } from 'lucide-react';
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import Image from 'next/image';
 
-const sampleData = [
-  { map: 'Dust 2', teamA: 13, teamB: 8 },
-  { map: 'Mirage', teamA: 16, teamB: 12 },
-  { map: 'Inferno', teamA: 10, teamB: 13 },
-  { map: 'Nuke', teamA: 7, teamB: 13 },
-  { map: 'Overpass', teamA: 13, teamB: 5 },
-  { map: 'Vertigo', teamA: 9, teamB: 13 },
+const visualizationImages = [
+  { src: 'https://i.ibb.co/k1h49QT/figure.png', alt: 'Feature Importance for Match Winner' },
+  { src: 'https://i.ibb.co/sK0W1Pq/figure-1.png', alt: 'Feature Importance for Round Winner' },
+  { src: 'https://i.ibb.co/z5pBJWg/figure-2.png', alt: 'Player Rating Distribution' },
+  { src: 'https://i.ibb.co/L5T88P0/figure-3.png', alt: 'Headshot Percentage Distribution' },
+  { src: 'https://i.ibb.co/HhCg834/figure-4.png', alt: 'Map Play Frequency' },
+  { src: 'https://i.ibb.co/PggH4w1/figure-5.png', alt: 'T-side Win Percentage by Map' },
+  { src: 'https://i.ibb.co/VMyLhMB/figure-6.png', alt: 'CT-side Win Percentage by Map' },
+  { src: 'https://i.ibb.co/pwnsR8r/figure-7.png', alt: 'Average Rounds per Match' },
+  { src: 'https://i.ibb.co/sVq1TfT/figure-8.png', alt: 'Elo vs. Average Player Rating' },
+  { src: 'https://i.ibb.co/f8L1Lg2/figure-9.png', alt: 'Opening Kill Success Rate by Team' },
+  { src: 'https://i.ibb.co/Jj6g0V6/figure-10.png', alt: 'Clutch Success Rate by Player' },
+  { src: 'https://i.ibb.co/q1zYJb2/figure-11.png', alt: 'Correlation Matrix of Player Stats' },
+  { src: 'https://i.ibb.co/0Vfc2K1/figure-12.png', alt: 'Team Economy Management' },
 ];
 
 
@@ -69,30 +76,28 @@ export function DataExplorationTab() {
             </Card>
           </TabsContent>
           <TabsContent value="visualizations">
-            <Card className={cardClassName}>
+             <Card className={cardClassName}>
               <CardHeader>
                 <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
               </CardHeader>
-              <CardContent className="h-[400px]">
-                <p className="text-white/80 leading-relaxed mb-4">
-                  This area will showcase a variety of interactive charts and graphs to explore the dataset. Below is an example of an interactive chart built with Recharts, which can be powered by data exported from Python.
+              <CardContent>
+                <p className="text-white/80 leading-relaxed mb-6">
+                  This section showcases a variety of visualizations generated from our dataset, providing insights into match dynamics, player performance, and map statistics. These plots are exported from our Python analysis scripts.
                 </p>
-                <ResponsiveContainer width="100%" height="90%">
-                  <BarChart data={sampleData} layout="vertical" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                    <XAxis type="number" stroke="hsl(var(--foreground))" opacity={0.8} />
-                    <YAxis dataKey="map" type="category" stroke="hsl(var(--foreground))" opacity={0.8} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'hsl(var(--background))',
-                        borderColor: 'hsl(var(--border))',
-                      }}
-                      labelStyle={{ color: 'hsl(var(--primary))' }}
-                    />
-                    <Legend wrapperStyle={{ color: 'hsl(var(--foreground))', opacity: 0.8 }} />
-                    <Bar dataKey="teamA" fill="hsl(var(--chart-1))" name="Team A Wins" />
-                    <Bar dataKey="teamB" fill="hsl(var(--chart-2))" name="Team B Wins" />
-                  </BarChart>
-                </ResponsiveContainer>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {visualizationImages.map((image, index) => (
+                    <div key={index} className="rounded-lg overflow-hidden border-2 border-white/10 shadow-lg transition-transform hover:scale-105">
+                       <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={600}
+                        height={400}
+                        className="w-full h-auto object-contain"
+                        data-ai-hint="chart graph"
+                      />
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
