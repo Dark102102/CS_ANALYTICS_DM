@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Database, Filter } from 'lucide-react';
+import { Database, Filter, BarChart } from 'lucide-react';
 
 export function DataExplorationTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl min-h-[300px]";
@@ -17,7 +17,7 @@ export function DataExplorationTab() {
       </div>
 
       <Tabs defaultValue="collection" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 max-w-2xl mx-auto bg-black/30 backdrop-blur-sm">
+        <TabsList className="grid w-full grid-cols-3 max-w-2xl mx-auto bg-black/30 backdrop-blur-sm">
           <TabsTrigger value="collection">
             <Database className="w-4 h-4 mr-2" />
             Data Collection
@@ -25,6 +25,10 @@ export function DataExplorationTab() {
           <TabsTrigger value="preprocessing">
             <Filter className="w-4 h-4 mr-2" />
             Cleaning & Preprocessing
+          </TabsTrigger>
+          <TabsTrigger value="visualizations">
+            <BarChart className="w-4 h-4 mr-2" />
+            Visualizations
           </TabsTrigger>
         </TabsList>
 
@@ -49,6 +53,18 @@ export function DataExplorationTab() {
               <CardContent>
                 <p className="text-white/80 leading-relaxed">
                   Placeholder for Data Cleaning and Preprocessing. Here, we will outline the steps taken to clean the raw data, including handling missing values, correcting inconsistencies, and normalizing data formats. This section will also cover feature engineering, where we create new predictive features from the base data, such as team form, map-specific strengths, and economic advantages.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="visualizations">
+            <Card className={cardClassName}>
+              <CardHeader>
+                <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80 leading-relaxed">
+                  Placeholder for Visualizations. In this section, we will display various charts, graphs, and heatmaps generated from our analysis. These visualizations will help to illustrate key findings, such as player performance trends, team strategy effectiveness on different maps, and the impact of economic factors on round outcomes.
                 </p>
               </CardContent>
             </Card>
