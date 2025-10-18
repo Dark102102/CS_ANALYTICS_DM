@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Database, Filter, BarChart } from 'lucide-react';
+import Image from 'next/image';
 
 export function DataExplorationTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl min-h-[300px]";
@@ -63,9 +64,14 @@ export function DataExplorationTab() {
                 <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-white/80 leading-relaxed">
-                  Placeholder for Visualizations. In this section, we will display various charts, graphs, and heatmaps generated from our analysis. These visualizations will help to illustrate key findings, such as player performance trends, team strategy effectiveness on different maps, and the impact of economic factors on round outcomes.
-                </p>
+                <div className="relative aspect-video w-full max-w-4xl mx-auto">
+                    <Image
+                      src="https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png"
+                      alt="Round Wins Distribution Visualization"
+                      fill
+                      className="object-contain rounded-lg"
+                    />
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
