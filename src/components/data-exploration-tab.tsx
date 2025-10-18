@@ -42,7 +42,7 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
     return {
       id: `viz-4`,
       title: `Weapon Usage by Winner`,
-      imageUrl: `https://i.postimg.cc/QHRB6VWS/04-weapon-usage-by-winner.png`,
+      imageUrl: `https://i.postimg.cc/fRbxR9W4/04-weapon-usage-by-winner.png`,
       description: `A stacked bar chart comparing the most frequently used weapons by winning and losing teams.`,
     };
   }
