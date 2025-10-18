@@ -16,10 +16,15 @@ const visualizations = [
     imageUrl: 'https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png',
     description: 'A bar chart showing that the T-Side wins 63.4% of rounds compared to the CT-Side\'s 36.6%.',
   },
-  ...Array.from({ length: 12 }).map((_, i) => ({
-    title: `Visualization ${i + 2}`,
-    imageUrl: `https://picsum.photos/seed/${i + 2}/800/600`,
-    description: `Placeholder for visualization ${i + 2}. This will be replaced with a real chart and description.`,
+  {
+    title: 'Distribution of Round End Reasons',
+    imageUrl: 'https://i.postimg.cc/T3Pr3D2R/02-round-end-reasons.png',
+    description: 'A bar chart showing the most common reasons for a round ending, with "ct_killed" being the most frequent.',
+  },
+  ...Array.from({ length: 11 }).map((_, i) => ({
+    title: `Visualization ${i + 3}`,
+    imageUrl: `https://picsum.photos/seed/${i + 3}/800/600`,
+    description: `Placeholder for visualization ${i + 3}. This will be replaced with a real chart and description.`,
   }))
 ];
 
