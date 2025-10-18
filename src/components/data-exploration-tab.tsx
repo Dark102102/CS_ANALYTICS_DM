@@ -10,11 +10,19 @@ import {
 } from "@/components/ui/carousel";
 import Image from 'next/image';
 
-const visualizations = Array.from({ length: 13 }).map((_, i) => ({
-  title: `Visualization ${i + 1}`,
-  imageUrl: `https://picsum.photos/seed/${i + 1}/800/600`,
-  description: `Placeholder for visualization ${i + 1}. This will be replaced with a real chart and description.`,
-}));
+const visualizations = [
+  {
+    title: 'Round Wins by Side (T-Side vs CT-Side)',
+    imageUrl: 'https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png',
+    description: 'A bar chart showing that the T-Side wins 63.4% of rounds compared to the CT-Side\'s 36.6%.',
+  },
+  ...Array.from({ length: 12 }).map((_, i) => ({
+    title: `Visualization ${i + 2}`,
+    imageUrl: `https://picsum.photos/seed/${i + 2}/800/600`,
+    description: `Placeholder for visualization ${i + 2}. This will be replaced with a real chart and description.`,
+  }))
+];
+
 
 export function DataExplorationTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl min-h-[300px]";
