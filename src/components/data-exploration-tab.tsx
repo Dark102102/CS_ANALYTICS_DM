@@ -1,41 +1,36 @@
+
+'use client';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Database, Filter, BarChart } from 'lucide-react';
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import Image from 'next/image';
 
-const visualizations = [
-  {
-    title: 'Round Wins by Side (T-Side vs CT-Side)',
-    imageUrl: 'https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png',
-    description: 'A bar chart showing that the T-Side wins 63.4% of rounds compared to the CT-Side\'s 36.6%.',
-  },
-  {
-    title: 'Distribution of Round End Reasons',
-    imageUrl: 'https://i.postimg.cc/T3Pr3D2R/02-round-end-reasons.png',
-    description: 'A bar chart showing the most common reasons for a round ending, with "ct_killed" being the most frequent.',
-  },
-  {
-    title: 'T-Side Win Rate by Headshot Rate',
-    imageUrl: 'https://i.ibb.co/3cH0G0G/03-headshot-rate-vs-wins.png',
-    description: 'A bar chart showing the T-Side win rate based on headshot percentages, peaking in the 20-40% range.',
-  },
-  ...Array.from({ length: 10 }).map((_, i) => ({
-    title: `Visualization ${i + 4}`,
-    imageUrl: `https://picsum.photos/seed/${i + 4}/800/600`,
-    description: `Placeholder for visualization ${i + 4}. This will be replaced with a real chart and description.`,
-  }))
-];
+const visualizations = Array.from({ length: 13 }).map((_, i) => ({
+  id: `viz-${i + 1}`,
+  title: `Visualization ${i + 1}`,
+  imageUrl: `https://picsum.photos/seed/${i + 1}/800/600`,
+  description: `Placeholder for visualization ${i + 1}. This will be replaced with a real chart and description.`,
+}));
 
 
 export function DataExplorationTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl min-h-[300px]";
+  const [selectedViz, setSelectedViz] = useState(visualizations[0]);
+
+  const handleValueChange = (value: string) => {
+    const viz = visualizations.find(v => v.id === value);
+    if (viz) {
+      setSelectedViz(viz);
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -94,36 +89,41 @@ export function DataExplorationTab() {
               <CardHeader>
                 <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
               </CardHeader>
-              <CardContent>
-                <Carousel className="w-full max-w-3xl mx-auto">
-                  <CarouselContent>
-                    {visualizations.map((viz, index) => (
-                      <CarouselItem key={index}>
-                        <div className="p-1">
-                           <Card className="bg-black/20 border-white/10">
-                            <CardContent className="flex flex-col items-center justify-center p-6 gap-4">
-                               <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-                                <Image
-                                  src={viz.imageUrl}
-                                  alt={viz.title}
-                                  fill
-                                  className="object-contain"
-                                  data-ai-hint="chart data"
-                                />
-                               </div>
-                              <div className="text-center">
-                                <h3 className="text-lg font-semibold text-white">{viz.title}</h3>
-                                <p className="text-sm text-white/70">{viz.description}</p>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </div>
-                      </CarouselItem>
+              <CardContent className="space-y-6">
+                <Select onValueChange={handleValueChange} defaultValue={selectedViz.id}>
+                  <SelectTrigger className="w-full max-w-md mx-auto bg-black/20 border-white/20">
+                    <SelectValue placeholder="Select a visualization" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {visualizations.map((viz) => (
+                      <SelectItem key={viz.id} value={viz.id}>
+                        {viz.title}
+                      </SelectItem>
                     ))}
-                  </CarouselContent>
-                  <CarouselPrevious className="ml-12" />
-                  <CarouselNext className="mr-12" />
-                </Carousel>
+                  </SelectContent>
+                </Select>
+
+                {selectedViz && (
+                  <div className="p-1">
+                     <Card className="bg-black/20 border-white/10 max-w-3xl mx-auto">
+                      <CardContent className="flex flex-col items-center justify-center p-6 gap-4">
+                         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                          <Image
+                            src={selectedViz.imageUrl}
+                            alt={selectedViz.title}
+                            fill
+                            className="object-contain"
+                            data-ai-hint="chart data"
+                          />
+                         </div>
+                        <div className="text-center">
+                          <h3 className="text-lg font-semibold text-white">{selectedViz.title}</h3>
+                          <p className="text-sm text-white/70">{selectedViz.description}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
