@@ -50,7 +50,7 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
     return {
       id: `viz-5`,
       title: `Kill Distance Distribution`,
-      imageUrl: `https://i.postimg.cc/TpZykhW9/05-kill-distance-distribution.png`,
+      imageUrl: `https://i.postimg.cc/RZ0cZHSj/05-kill-distance-distribution.png`,
       description: `A histogram showing the frequency of kills at various distances, revealing engagement patterns.`,
     };
   }
