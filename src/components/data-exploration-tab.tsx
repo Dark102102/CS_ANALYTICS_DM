@@ -14,6 +14,14 @@ import {
 import Image from 'next/image';
 
 const visualizations = Array.from({ length: 13 }).map((_, i) => {
+  if (i === 9) {
+    return {
+      id: `viz-10`,
+      title: `PCA Biplot of Team Statistics`,
+      imageUrl: `https://i.postimg.cc/15BGSHQp/10-pca-biplot.png`,
+      description: `A PCA biplot visualizing the relationships between various team statistics and their impact on principal components.`,
+    };
+  }
   if (i === 11) {
     return {
       id: `viz-12`,
