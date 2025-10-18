@@ -2,6 +2,30 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Database, Filter, BarChart } from 'lucide-react';
 import Image from 'next/image';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
+const visualizations = [
+    { src: "https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png", alt: "Round Wins Distribution" },
+    { src: "https://i.postimg.cc/pT3YyLgH/02-round-wins-by-side.png", alt: "Round Wins by Side" },
+    { src: "https://i.postimg.cc/k5L27G0p/03-map-distribution.png", alt: "Map Distribution" },
+    { src: "https://i.postimg.cc/Gpd215P1/04-round-wins-by-map-and-side.png", alt: "Round Wins by Map and Side" },
+    { src: "https://i.postimg.cc/k47tXhJt/05-ct-win-rate-vs-t-win-rate.png", alt: "CT Win Rate vs T Win Rate" },
+    { src: "https://i.postimg.cc/tTW2p3J3/06-average-round-duration.png", alt: "Average Round Duration" },
+    { src: "https://i.postimg.cc/hGv5XJgJ/07-pistol-round-win-rate.png", alt: "Pistol Round Win Rate" },
+    { src: "https://i.postimg.cc/sXJ0zYjM/08-first-kill-win-rate.png", alt: "First Kill Win Rate" },
+    { src: "https://i.postimg.cc/vBQLG1hG/09-bomb-plant-win-rate.png", alt: "Bomb Plant Win Rate" },
+    { src: "https://i.postimg.cc/J0c0mN2H/10-clutch-success-rate.png", alt: "Clutch Success Rate" },
+    { src: "https://i.postimg.cc/Kz43xG9c/11-player-rating-distribution.png", alt: "Player Rating Distribution" },
+    { src: "https://i.postimg.cc/pr0vMWhh/12-k-d-ratio-distribution.png", alt: "K/D Ratio Distribution" },
+    { src: "https://i.postimg.cc/HxbYJgV1/13-team-rating-correlation.png", alt: "Team Rating Correlation" },
+];
+
 
 export function DataExplorationTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl min-h-[300px]";
@@ -64,14 +88,25 @@ export function DataExplorationTab() {
                 <CardTitle className="text-2xl text-primary">Visualizations</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="relative aspect-video w-full max-w-4xl mx-auto">
-                    <Image
-                      src="https://i.postimg.cc/9QfGQ7XC/01-round-wins-distribution.png"
-                      alt="Round Wins Distribution Visualization"
-                      fill
-                      className="object-contain rounded-lg"
-                    />
-                </div>
+                 <Carousel className="w-full max-w-4xl mx-auto" opts={{ loop: true }}>
+                  <CarouselContent>
+                    {visualizations.map((vis, index) => (
+                      <CarouselItem key={index}>
+                        <div className="relative aspect-video">
+                          <Image
+                            src={vis.src}
+                            alt={vis.alt}
+                            fill
+                            className="object-contain rounded-lg"
+                          />
+                        </div>
+                         <p className="text-center text-white/70 mt-2">{index + 1}. {vis.alt}</p>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="ml-12" />
+                  <CarouselNext className="mr-12" />
+                </Carousel>
               </CardContent>
             </Card>
           </TabsContent>
