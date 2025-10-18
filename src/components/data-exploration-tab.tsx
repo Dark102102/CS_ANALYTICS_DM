@@ -23,7 +23,7 @@ const visualizations = [
   },
   {
     title: 'T-Side Win Rate by Headshot Rate',
-    imageUrl: 'https://i.postimg.cc/bwvQwtYq/03-headshot-rate-vs-wins.png',
+    imageUrl: 'https://i.ibb.co/3cH0G0G/03-headshot-rate-vs-wins.png',
     description: 'A bar chart showing the T-Side win rate based on headshot percentages, peaking in the 20-40% range.',
   },
   ...Array.from({ length: 10 }).map((_, i) => ({
