@@ -169,12 +169,32 @@ export function DataExplorationTab() {
           <TabsContent value="collection">
             <Card className={cardClassName}>
               <CardHeader>
-                <CardTitle className="text-2xl text-primary">Data Collection</CardTitle>
+                <CardTitle className="text-2xl text-primary">Data Collection Process</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <p className="text-white/80 leading-relaxed">
-                  Placeholder for Data Collection. This section will describe the sources and methods used to gather raw data, such as scraping from HLTV, accessing betting odds APIs, and collecting player statistics. We will detail the scope of the data, including the time period covered, the number of matches, and the specific features collected for teams and players.
+                  The dataset for the ESL Pro League Season 22 CS2 analysis was created through a structured and automated data collection process. A total of 10 professional matches were gathered and analyzed.
                 </p>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Key Steps:</h3>
+                  <ul className="space-y-3 list-disc list-inside text-white/80">
+                    <li>
+                      <span className="font-semibold text-white/90">Automated Web Scraping:</span> Data was collected directly from HLTV.org using custom Python scripts to gather match metadata such as teams, maps, and player statistics.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Demo File Acquisition:</span> 10 demo files (≈9.6 GB) were downloaded, each representing a complete professional CS2 match.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Parsing and Extraction:</span> The <code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">demoparser2</code> library was used to parse the .dem files. This extraction produced detailed event-level data, including kills, deaths, bomb events, and round outcomes.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Feature and Metadata Compilation:</span> Match-level and player-level statistics were merged to create structured datasets suitable for analysis. The combined dataset included 1,838 death events across 71 cleaned rounds.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white/90">Documentation and Reproducibility:</span> Every step — from scraping to parsing — was fully documented. The process ensures that the entire dataset can be reproduced using provided scripts (<code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">scraping.py</code>, <code className="bg-black/50 text-primary/80 rounded px-1 py-0.5 text-sm">parse_demo_demoparser2.py</code>).
+                    </li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
