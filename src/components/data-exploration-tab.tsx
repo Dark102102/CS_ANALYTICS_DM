@@ -82,7 +82,7 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
     return {
       id: `viz-9`,
       title: `PCA Explained Variance`,
-      imageUrl: `https://i.postimg.cc/9r4Rtyz4/09-pca-variance.png`,
+      imageUrl: `https://i.postimg.cc/65crK0Xh/09-pca-variance.png`,
       description: `A line chart showing the cumulative explained variance by principal components in a PCA analysis.`,
     };
   }
