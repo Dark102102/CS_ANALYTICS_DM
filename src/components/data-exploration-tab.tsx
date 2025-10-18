@@ -4,19 +4,19 @@ import { Database, Filter, BarChartHorizontal } from 'lucide-react';
 import Image from 'next/image';
 
 const visualizationImages = [
-  { src: 'https://i.ibb.co/k1h49QT/figure.png', alt: 'Feature Importance for Match Winner' },
-  { src: 'https://i.ibb.co/sK0W1Pq/figure-1.png', alt: 'Feature Importance for Round Winner' },
-  { src: 'https://i.ibb.co/z5pBJWg/figure-2.png', alt: 'Player Rating Distribution' },
-  { src: 'https://i.ibb.co/L5T88P0/figure-3.png', alt: 'Headshot Percentage Distribution' },
-  { src: 'https://i.ibb.co/HhCg834/figure-4.png', alt: 'Map Play Frequency' },
-  { src: 'https://i.ibb.co/PggH4w1/figure-5.png', alt: 'T-side Win Percentage by Map' },
-  { src: 'https://i.ibb.co/VMyLhMB/figure-6.png', alt: 'CT-side Win Percentage by Map' },
-  { src: 'https://i.ibb.co/pwnsR8r/figure-7.png', alt: 'Average Rounds per Match' },
-  { src: 'https://i.ibb.co/sVq1TfT/figure-8.png', alt: 'Elo vs. Average Player Rating' },
-  { src: 'https://i.ibb.co/f8L1Lg2/figure-9.png', alt: 'Opening Kill Success Rate by Team' },
-  { src: 'https://i.ibb.co/Jj6g0V6/figure-10.png', alt: 'Clutch Success Rate by Player' },
-  { src: 'https://i.ibb.co/q1zYJb2/figure-11.png', alt: 'Correlation Matrix of Player Stats' },
-  { src: 'https://i.ibb.co/0Vfc2K1/figure-12.png', alt: 'Team Economy Management' },
+  { src: 'https://i.postimg.cc/k1h49QT/figure.png', alt: 'Feature Importance for Match Winner' },
+  { src: 'https://i.postimg.cc/sK0W1Pq/figure-1.png', alt: 'Feature Importance for Round Winner' },
+  { src: 'https://i.postimg.cc/z5pBJWg/figure-2.png', alt: 'Player Rating Distribution' },
+  { src: 'https://i.postimg.cc/L5T88P0/figure-3.png', alt: 'Headshot Percentage Distribution' },
+  { src: 'https://i.postimg.cc/HhCg834/figure-4.png', alt: 'Map Play Frequency' },
+  { src: 'https://i.postimg.cc/PggH4w1/figure-5.png', alt: 'T-side Win Percentage by Map' },
+  { src: 'https://i.postimg.cc/VMyLhMB/figure-6.png', alt: 'CT-side Win Percentage by Map' },
+  { src: 'https://i.postimg.cc/pwnsR8r/figure-7.png', alt: 'Average Rounds per Match' },
+  { src: 'https://i.postimg.cc/sVq1TfT/figure-8.png', alt: 'Elo vs. Average Player Rating' },
+  { src: 'https://i.postimg.cc/f8L1Lg2/figure-9.png', alt: 'Opening Kill Success Rate by Team' },
+  { src: 'https://i.postimg.cc/Jj6g0V6/figure-10.png', alt: 'Clutch Success Rate by Player' },
+  { src: 'https://i.postimg.cc/q1zYJb2/figure-11.png', alt: 'Correlation Matrix of Player Stats' },
+  { src: 'https://i.postimg.cc/0Vfc2K1/figure-12.png', alt: 'Team Economy Management' },
 ];
 
 
