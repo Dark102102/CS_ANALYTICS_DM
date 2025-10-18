@@ -58,7 +58,7 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
     return {
       id: `viz-6`,
       title: `Correlation Heatmap`,
-      imageUrl: `https://i.postimg.cc/2VqbFn3K/06-correlation-heatmap.png`,
+      imageUrl: `https://i.postimg.cc/yYjmKPKs/06-correlation-heatmap.png`,
       description: `A heatmap visualizing the correlation between different match statistics, highlighting relationships between variables.`,
     };
   }
