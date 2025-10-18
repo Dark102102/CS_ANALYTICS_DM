@@ -22,6 +22,14 @@ const visualizations = Array.from({ length: 13 }).map((_, i) => {
       description: `A PCA biplot visualizing the relationships between various team statistics and their impact on principal components.`,
     };
   }
+   if (i === 10) {
+    return {
+      id: `viz-11`,
+      title: `Model Performance ROC Curve`,
+      imageUrl: `https://i.ibb.co/2kCysxJ/11-model-performance.png`,
+      description: `A Receiver Operating Characteristic (ROC) curve evaluating the performance of the classification model, showing its diagnostic ability.`,
+    };
+  }
   if (i === 11) {
     return {
       id: `viz-12`,
