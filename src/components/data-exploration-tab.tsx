@@ -21,10 +21,15 @@ const visualizations = [
     imageUrl: 'https://i.postimg.cc/T3Pr3D2R/02-round-end-reasons.png',
     description: 'A bar chart showing the most common reasons for a round ending, with "ct_killed" being the most frequent.',
   },
-  ...Array.from({ length: 11 }).map((_, i) => ({
-    title: `Visualization ${i + 3}`,
-    imageUrl: `https://picsum.photos/seed/${i + 3}/800/600`,
-    description: `Placeholder for visualization ${i + 3}. This will be replaced with a real chart and description.`,
+  {
+    title: 'T-Side Win Rate by Headshot Rate',
+    imageUrl: 'https://i.postimg.cc/mDcfv4F8/03-tside-win-rate-headshot.png',
+    description: 'A bar chart showing the T-Side win rate based on headshot percentages, peaking in the 20-40% range.',
+  },
+  ...Array.from({ length: 10 }).map((_, i) => ({
+    title: `Visualization ${i + 4}`,
+    imageUrl: `https://picsum.photos/seed/${i + 4}/800/600`,
+    description: `Placeholder for visualization ${i + 4}. This will be replaced with a real chart and description.`,
   }))
 ];
 
