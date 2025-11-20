@@ -1,0 +1,11 @@
+attacker_steamid,player_name,side,kills,headshot_kills,avg_kill_distance,total_damage,deaths,kd_ratio,headshot_pct,match_id,map_name
+76561198028790343,paz,,18,11,15.83955,1360,20,0.9,61.1,vpprodigy-vs-fire-flux-m2-train,de_train
+76561198141667219,lasfas,,20,6,22.986858,2140,14,1.4285714285714286,30.0,vpprodigy-vs-fire-flux-m2-train,de_train
+76561198186361079,FinigaN,,15,8,18.385973,901,20,0.75,53.3,vpprodigy-vs-fire-flux-m2-train,de_train
+76561198253891911,shield,,22,7,19.173918,2461,18,1.2222222222222223,31.8,vpprodigy-vs-fire-flux-m2-train,de_train
+76561198276486363,Banjo,,23,10,13.511627,1300,19,1.2105263157894737,43.5,vpprodigy-vs-fire-flux-m2-train,de_train
+76561198327068178,soulfly,,13,6,18.29608,795,22,0.5909090909090909,46.2,vpprodigy-vs-fire-flux-m2-train,de_train
+76561198800147622,AquaRS,,22,13,17.177675,1564,23,0.9565217391304348,59.1,vpprodigy-vs-fire-flux-m2-train,de_train
+76561198965249056,TriBorgg1,,22,14,17.153475,1701,20,1.1,63.6,vpprodigy-vs-fire-flux-m2-train,de_train
+76561199012381348,F0R3VER,,21,14,18.35786,1585,16,1.3125,66.7,vpprodigy-vs-fire-flux-m2-train,de_train
+76561199228548850,turbo,,14,12,15.687476,1249,18,0.7777777777777778,85.7,vpprodigy-vs-fire-flux-m2-train,de_train

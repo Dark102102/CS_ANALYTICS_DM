@@ -1,20 +1,20 @@
-assistedflash,assister_name,assister_steamid,attacker_name,attacker_steamid,attackerblind,attackerinair,distance,dmg_armor,dmg_health,dominated,headshot,hitgroup,noreplay,noscope,penetrated,revenge,thrusmoke,tick,user_name,user_steamid,weapon,weapon_fauxitemid,weapon_itemid,weapon_originalowner_xuid,wipe
-False,,,Spinx,76561198063336407,False,False,9.699467,0,24,0,False,right_leg,False,False,0,0,False,3035,MartinezSa,76561198370086461,usp_silencer,17293822569170862141,45393108221,,0
-False,,,Jimpphat,76561198855375325,False,False,10.365738,0,130,0,True,head,False,False,0,0,False,3061,alex ,76561198000984547,usp_silencer,17293822569177546813,39594040383,,0
-False,,,Brollan,76561198138828475,False,False,5.395988,0,135,0,True,head,False,False,0,0,False,3208,mopoz,76561197998197366,usp_silencer,17293822569135734845,37193573977,,0
-False,mopoz,76561197998197366,sausoL,76561197991593267,False,False,18.567886,0,23,0,False,chest,False,False,0,0,False,3255,Brollan,76561198138828475,glock,17293822569102901252,11706235870,,0
-False,,,sausoL,76561197991593267,False,False,15.510134,0,99,0,True,head,False,False,0,0,False,3296,Spinx,76561198063336407,glock,17293822569102901252,11706235870,,0
-False,,,xertioN,76561198193174134,False,False,16.549334,0,112,0,True,head,False,False,0,0,False,3502,sausoL,76561197991593267,elite,17293822569128656898,35652236039,,0
-False,,,xertioN,76561198193174134,False,False,22.627506,0,101,0,True,head,False,False,0,0,False,3705,dav1g,76561198417348056,elite,17293822569128656898,35652236039,,0
-False,,,Jimpphat,76561198855375325,False,False,38.103024,5,28,0,False,stomach,False,False,0,0,True,8088,alex ,76561198000984547,m4a1_silencer,17293822569102704700,0,,0
-False,Brollan,76561198138828475,xertioN,76561198193174134,False,False,10.755702,0,36,0,False,chest,False,False,0,0,False,9398,mopoz,76561197998197366,m4a1_silencer,17293822569131868220,44403712485,,0
-False,,,sausoL,76561197991593267,False,False,14.829411,3,23,0,False,right_arm,False,False,0,0,False,9925,torzsi,76561198355739212,galilar,17293822569121972237,44345225969,,0
-False,,,xertioN,76561198193174134,False,False,14.684633,0,123,0,True,head,False,False,0,0,False,10237,MartinezSa,76561198370086461,m4a1_silencer,17293822569131868220,44403712485,,0
-False,Spinx,76561198063336407,xertioN,76561198193174134,False,False,10.37378,5,25,0,False,chest,False,False,0,0,False,10334,dav1g,76561198417348056,m4a1_silencer,17293822569131868220,44403712485,,0
-False,,,Spinx,76561198063336407,False,False,18.010866,0,86,0,True,head,False,False,0,0,False,10977,sausoL,76561197991593267,mp9,17293822569170665506,24238800001,,0
-False,dav1g,76561198417348056,mopoz,76561197998197366,False,False,1.2803563,27,97,0,True,head,False,False,0,0,False,15375,xertioN,76561198193174134,p250,17293822569102704676,0,,0
-False,,,Brollan,76561198138828475,False,False,14.881807,0,36,0,False,right_arm,False,False,0,0,False,15904,dav1g,76561198417348056,m4a1_silencer,17293822569131868220,44403712485,,0
-False,,,Spinx,76561198063336407,False,False,29.291239,0,29,0,False,left_arm,False,False,0,0,False,16031,mopoz,76561197998197366,galilar,17293822569121972237,44345225969,,0
-False,,,Brollan,76561198138828475,False,False,17.738176,0,44,0,False,stomach,False,False,0,0,False,16045,MartinezSa,76561198370086461,m4a1_silencer,17293822569131868220,44403712485,,0
-False,,,Brollan,76561198138828475,False,False,10.138429,0,110,0,True,head,False,False,0,0,False,16223,alex ,76561198000984547,tec9,17293822569102704670,0,,0
-False,,,Spinx,76561198063336407,False,False,19.055174,0,29,0,False,chest,False,False,0,0,False,16225,sausoL,76561197991593267,galilar,17293822569121972237,44345225969,,0
+round_num,tick,attacker_name,attacker_steamid,attacker_side,victim_name,victim_steamid,victim_side,weapon,headshot,penetrated,thrusmoke,attackerblind,noscope,attackerinair,distance,dmg_health,dmg_armor,hitgroup,assister_name,assister_steamid,assistedflash,match_id,map_name
+2,3035,Spinx,76561198063336407,,MartinezSa,76561198370086461,,usp_silencer,False,0,False,False,False,False,9.699467,24,0,right_leg,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+2,3061,Jimpphat,76561198855375325,,alex ,76561198000984547,,usp_silencer,True,0,False,False,False,False,10.365738,130,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+2,3208,Brollan,76561198138828475,,mopoz,76561197998197366,,usp_silencer,True,0,False,False,False,False,5.395988,135,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+2,3255,sausoL,76561197991593267,,Brollan,76561198138828475,,glock,False,0,False,False,False,False,18.567886,23,0,chest,mopoz,76561197998197366,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+2,3296,sausoL,76561197991593267,,Spinx,76561198063336407,,glock,True,0,False,False,False,False,15.510134,99,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+2,3502,xertioN,76561198193174134,,sausoL,76561197991593267,,elite,True,0,False,False,False,False,16.549334,112,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+2,3705,xertioN,76561198193174134,,dav1g,76561198417348056,,elite,True,0,False,False,False,False,22.627506,101,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+3,8088,Jimpphat,76561198855375325,,alex ,76561198000984547,,m4a1_silencer,False,0,True,False,False,False,38.103024,28,5,stomach,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+3,9398,xertioN,76561198193174134,,mopoz,76561197998197366,,m4a1_silencer,False,0,False,False,False,False,10.755702,36,0,chest,Brollan,76561198138828475,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+3,9925,sausoL,76561197991593267,,torzsi,76561198355739212,,galilar,False,0,False,False,False,False,14.829411,23,3,right_arm,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+3,10237,xertioN,76561198193174134,,MartinezSa,76561198370086461,,m4a1_silencer,True,0,False,False,False,False,14.684633,123,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+3,10334,xertioN,76561198193174134,,dav1g,76561198417348056,,m4a1_silencer,False,0,False,False,False,False,10.37378,25,5,chest,Spinx,76561198063336407,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+3,10977,Spinx,76561198063336407,,sausoL,76561197991593267,,mp9,True,0,False,False,False,False,18.010866,86,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+4,15375,mopoz,76561197998197366,,xertioN,76561198193174134,,p250,True,0,False,False,False,False,1.2803563,97,27,head,dav1g,76561198417348056,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+4,15904,Brollan,76561198138828475,,dav1g,76561198417348056,,m4a1_silencer,False,0,False,False,False,False,14.881807,36,0,right_arm,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+4,16031,Spinx,76561198063336407,,mopoz,76561197998197366,,galilar,False,0,False,False,False,False,29.291239,29,0,left_arm,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+4,16045,Brollan,76561198138828475,,MartinezSa,76561198370086461,,m4a1_silencer,False,0,False,False,False,False,17.738176,44,0,stomach,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+4,16223,Brollan,76561198138828475,,alex ,76561198000984547,,tec9,True,0,False,False,False,False,10.138429,110,0,head,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
+4,16225,Spinx,76561198063336407,,sausoL,76561197991593267,,galilar,False,0,False,False,False,False,19.055174,29,0,chest,,,False,mouz-vs-gentle-mates-m1-inferno-p1,de_inferno
