@@ -13,6 +13,7 @@ seaborn>=0.12.0
 
 # Machine Learning
 scikit-learn>=1.3.0
+mlxtend>=0.22.0  # For frequent pattern mining (Apriori, FP-Growth)
 
 # Web scraping (data collection)
 requests>=2.31.0
@@ -25,5 +26,4 @@ demoparser2>=0.1.0
 
 # Additional utilities
 pathlib>=1.0.1  # Usually built-in, but specified for completeness
-warnings  # Built-in
 

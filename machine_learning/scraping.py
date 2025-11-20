@@ -9,11 +9,17 @@ from urllib.parse import urljoin
 
 BASE = "https://www.hltv.org"
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
     "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
     "Connection": "keep-alive",
-    "Referer": "https://www.hltv.org/",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0",
 }
 
 # Requests session with retries
@@ -54,9 +60,22 @@ def looks_like_block_page(html: str) -> bool:
 
 def get_match_links(pages=5, event_filter=None):
     links = []
+    
+    # First, try to access the main page to establish session
+    print("Establishing session with HLTV...")
+    try:
+        main_page = session.get(f"{BASE}/", headers=HEADERS, timeout=30)
+        if DEBUG:
+            print(f"[debug] Main page GET -> {main_page.status_code}")
+        time.sleep(2)  # Wait a bit after initial request
+    except Exception as e:
+        print(f"Warning: Could not establish session: {e}")
+    
     for offset in range(0, pages * 100, 100):
         url = f"{BASE}/results?offset={offset}"
-        r = session.get(url, headers=HEADERS, timeout=20)
+        if DEBUG:
+            print(f"[debug] Requesting: {url}")
+        r = session.get(url, headers=HEADERS, timeout=30)
         if DEBUG:
             print(f"[debug] GET {url} -> {r.status_code}, {len(r.text)} bytes")
         if r.status_code != 200:
@@ -96,7 +115,7 @@ def get_match_links(pages=5, event_filter=None):
                     print(f"[debug] Including match from event: {event_name}")
             
             links.append(href)
-        time.sleep(2)
+        time.sleep(3)
     # de-dupe preserving order
     seen = set()
     unique_links = []
@@ -350,7 +369,7 @@ def scrape_and_save(pages=3, outfile="hltv_matches.csv", download_demos=False, d
             if result_path:
                 downloaded_count += 1
         # Longer delay to avoid rate limiting
-        time.sleep(3)
+        time.sleep(5)
 
     with open(outfile, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -380,7 +399,7 @@ if __name__ == "__main__":
     """
     
     # ===== CONFIGURATION =====
-    DEBUG = False                # Set to True for verbose debug output
+    DEBUG = True                 # Set to True for verbose debug output
     PAGES = 5                    # Number of result pages to scrape (100 matches per page)
     NUM_MATCHES = 10             # Limit number of matches to collect
     EVENT_FILTER = "ESL Pro League"  # Filter for specific event (None for all events)
@@ -391,8 +410,8 @@ if __name__ == "__main__":
     DEMOS_DIR = os.path.join(os.path.dirname(__file__), "demos")
     
     # Rate limiting (adjust if getting blocked)
-    DELAY_BETWEEN_MATCHES = 3    # Seconds between match requests
-    DELAY_BETWEEN_PAGES = 2      # Seconds between page requests
+    DELAY_BETWEEN_MATCHES = 5    # Seconds between match requests
+    DELAY_BETWEEN_PAGES = 3      # Seconds between page requests
     # ===== END CONFIGURATION =====
     
     # Print configuration
