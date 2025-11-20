@@ -4,12 +4,16 @@ This document explains the feature engineering process and machine learning mode
 
 ## Overview
 
-This project creates specialized feature sets for **four types of machine learning models**:
+This project creates specialized feature sets for **three types of machine learning models**:
 
-1. **Frequent Pattern Mining** (Apriori, FP-Growth)
-2. **Classification** (Decision Trees, SVM, k-NN, Naïve Bayes)
-3. **Clustering** (K-Means, DBSCAN, Hierarchical)
-4. **Regression** (Linear, Ridge, Logistic)
+1. **Classification** (Decision Trees, SVM, k-NN, Naïve Bayes) - Predict round winners
+2. **Clustering** (K-Means, DBSCAN, Hierarchical) - Discover play style patterns
+3. **Regression** (Linear, Ridge, Logistic) - Predict kills, damage, and win probability
+
+Features are organized at **three granularities**:
+- **Player-level**: Individual player performance metrics across all matches
+- **Round-level**: Round-by-round features for classification and regression
+- **Match-level**: Aggregate match statistics
 
 ## Quick Start
 
@@ -19,592 +23,453 @@ This project creates specialized feature sets for **four types of machine learni
 pip install -r requirements.txt
 ```
 
-### 2. Generate Features
+### 2. Parse Demo Files
 
 ```bash
-python feature_engineering_ml.py
+python parse_demos_final.py
+```
+
+This parses `.dem` files from the `demos/` folder and generates:
+- `hltv_data/*_rounds.csv` - Round outcomes with tick boundaries
+- `hltv_data/*_deaths.csv` - Kill events properly mapped to rounds
+- `hltv_data/*_players.csv` - Per-match player statistics
+
+### 3. Generate Features
+
+```bash
+python feature_engineering_redesigned.py
 ```
 
 This creates the `ml_features/` directory with specialized feature sets for each model type.
 
-### 3. Train Models
+### 4. Train Models
 
 ```bash
 python ml_models_examples.py
 ```
 
-This trains all four types of models and saves results to `ml_results/`.
+This trains all three types of models and saves results to `ml_results/`.
 
 ## Data Sources
 
-The feature engineering pipeline processes two types of data:
+The feature engineering pipeline processes three types of parsed data:
 
-- **Rounds data** (`hltv_data/*_rounds.csv`): Round outcomes, reasons, bomb events
-- **Deaths data** (`hltv_data/*_deaths.csv`): Kill events with weapon, distance, damage, etc.
+- **Rounds data** (`hltv_data/*_rounds.csv`): Round outcomes, reasons, bomb events, tick boundaries
+- **Deaths data** (`hltv_data/*_deaths.csv`): Kill events with weapon, distance, damage, properly mapped to rounds via tick ranges
+- **Players data** (`hltv_data/*_players.csv`): Per-match player aggregations
 
-Total dataset: **289 rounds** from **13 matches** with **2,707 death events** from **105 unique players**.
+**Current dataset**: **248 rounds** from **11 matches** with **1,956 death events** from **80 unique players**.
+
+### Key Data Improvements
+
+The parsing pipeline now:
+- Maps deaths to rounds using **tick boundaries** (not percentile guessing)
+- Includes `round_num` in death events for accurate feature engineering
+- Filters corrupt/incomplete demo files (>1MB size check)
+- Extracts player-level statistics per match
 
 ## Feature Engineering Details
 
-### Base Features (38 features)
+The pipeline generates features at three granularities:
 
-Created for all models from round-level aggregations:
+---
 
-#### Kill Statistics
-- `total_kills`: Total kills in round
-- `headshot_kills`: Number of headshot kills
-- `headshot_rate`: Headshot percentage
-- `unique_killers`: Number of different players with kills
-- `unique_victims`: Number of different victims
+## 1. Player-Level Features
 
-#### Weapon Categories
-- `rifle_kills`: AK47, M4A1, M4A4, Famas, Galil, AUG, SG553
-- `awp_kills`: AWP, SSG08 (Scout)
-- `pistol_kills`: Glock, USP, P2000, P250, Deagle, Five-Seven, Tec-9, CZ75
-- `smg_kills`: MP7, MP9, MP5, MAC-10, UMP-45, Bizon, P90
-- `shotgun_kills`: Nova, XM1014, Sawed-Off, MAG-7
-- `knife_kills`: Knife kills
-- `grenade_kills`: HE grenade, Molotov, Incendiary
+**File**: `ml_features/player_features.csv`
 
-#### Situational Kills
-- `smoke_kills`: Kills through smoke
-- `noscope_kills`: AWP no-scope kills
-- `wallbang_kills`: Kills through walls (penetrated > 0)
-- `blind_kills`: Kills while attacker is blind
-- `airborne_kills`: Kills while attacker is airborne
+**Purpose**: Aggregate player performance across all matches for player clustering and skill analysis.
 
-#### Distance Metrics
-- `avg_kill_distance`: Average distance of kills
-- `max_kill_distance`: Maximum kill distance
-- `min_kill_distance`: Minimum kill distance
-- `std_kill_distance`: Standard deviation of kill distances
+### Features (26 features)
+
+#### Core Statistics
+- `attacker_steamid`: Unique Steam ID
+- `player_name`: Player name
+- `matches_played`: Number of matches played
+- `kills`: Total kills across all matches
+- `deaths`: Total deaths across all matches
+- `headshot_kills`: Total headshot kills
+- `overall_kd`: Overall K/D ratio
+- `kills_per_match`: Average kills per match
+
+#### Consistency Metrics
+- `kd_ratio_std`: Standard deviation of K/D ratio (consistency indicator)
+- `kd_ratio_min`: Minimum K/D ratio
+- `kd_ratio_max`: Maximum K/D ratio
+- `headshot_pct_std`: Standard deviation of headshot percentage
+- `kills_std`: Standard deviation of kills per match
+
+#### Weapon Usage
+- `ak47_usage_pct`: Percentage of kills with AK47
+- `m4a1_usage_pct`: Percentage of kills with M4A1
+- `awp_usage_pct`: Percentage of kills with AWP
+- `deagle_usage_pct`: Percentage of kills with Deagle
+- `famas_usage_pct`: Percentage of kills with Famas
+- `glock_usage_pct`: Percentage of kills with Glock
 
 #### Damage Metrics
-- `total_damage`: Total damage dealt in round
+- `total_damage`: Total damage dealt
 - `avg_damage_per_kill`: Average damage per kill
-- `max_damage`: Maximum single damage
-- `armor_damage`: Total armor damage
+- `damage_per_match`: Average damage per match
 
-#### Hitgroup Analysis
-- `head_hits`: Headshots
-- `chest_hits`: Chest hits
-- `limb_hits`: Arm/leg hits
+#### Special Skills
+- `avg_kill_distance`: Average kill distance
+- `headshot_rate`: Overall headshot percentage
+- `preferred_weapon`: Most frequently used weapon
 
-#### Timing Features
-- `first_kill_tick`: Game tick of first kill
-- `last_kill_tick`: Game tick of last kill
-- `kill_spread`: Tick difference between first and last kill
-- `kill_tempo`: Kills per tick interval
+### Usage
 
-#### Metadata
-- `match`: Match identifier
-- `round`: Round number
-- `map`: Map name (inferno, mirage, dust2, etc.)
+```python
+# Load player features
+player_df = pd.read_csv('ml_features/player_features.csv')
+
+# Filter active players (2+ matches for consistency)
+active_players = player_df[player_df['matches_played'] >= 2]
+
+# Top performers by K/D
+top_players = active_players.nlargest(10, 'overall_kd')
+
+# Most consistent players (low K/D std deviation)
+consistent = active_players.nsmallest(10, 'kd_ratio_std')
+
+# AWP specialists
+awpers = active_players[active_players['awp_usage_pct'] > 10]
+```
+
+---
+
+## 2. Round-Level Features
+
+**File**: `ml_features/round_features.csv`
+
+**Purpose**: Round-by-round features for classification and regression models.
+
+### Features (39 features)
+
+#### Core Statistics
+- `match_id`: Match identifier
+- `round_num`: Round number
+- `map_name`: Map name
+- `total_kills`: Total kills in round
+- `headshot_kills`: Headshot kills
+- `headshot_rate`: Headshot percentage
+- `unique_killers`: Number of different players with kills
+
+#### Weapon Usage
+- `rifle_kills`: AK47, M4A1, M4A4, etc.
+- `awp_kills`: AWP kills
+- `pistol_kills`: Pistol kills
+- `smg_kills`: SMG kills
+- `knife_kills`: Knife kills
+- `grenade_kills`: Grenade kills
+
+#### Special Events
+- `smoke_kills`: Kills through smoke
+- `wallbang_kills`: Kills through walls
+- `noscope_kills`: No-scope kills
+- `airborne_kills`: Airborne kills
+- `blind_kills`: Blind kills
+
+#### Distance & Damage
+- `avg_kill_distance`: Average kill distance
+- `total_damage`: Total damage dealt
+- `avg_damage_per_kill`: Average damage per kill
+
+#### Timing & Tempo
+- `round_duration`: Round duration in ticks
+- `kill_tempo`: Kills per second
+- `first_kill_tick`: Tick of first kill
+- `time_to_first_kill`: Time to first kill
+
+#### First Kill Analysis
+- `first_kill_attacker`: First kill attacker side (T/CT)
+- `first_kill_weapon`: Weapon used for first kill
+- `first_blood_headshot`: Was first kill a headshot?
+
+#### Momentum Features
+- `prev_t_win`: Did T win previous round? (binary)
+- `prev_ct_win`: Did CT win previous round? (binary)
+- `t_win_streak`: Current T win streak
+- `ct_win_streak`: Current CT win streak
+- `score_diff`: T rounds won - CT rounds won
+
+#### Bomb Events
+- `bomb_planted`: Was bomb planted? (binary)
+
+#### Round Outcome (targets)
+- `t_win`: Did T win? (binary, classification target)
+- `ct_win`: Did CT win? (binary)
 - `winner`: T or CT
 - `reason`: Round end reason
 
 ---
 
-## 1. Frequent Pattern Mining Features
+## 3. Match-Level Features
 
-**Files**: `fpm_binary_features.csv`, `fpm_transactions.csv`
+**File**: `ml_features/match_features.csv`
 
-**Purpose**: Discover patterns in weapon usage, playstyles, and round outcomes.
+**Purpose**: Aggregate match statistics for match outcome prediction.
 
-### Binary Items (35 items)
+### Features (16 features)
 
-Each round is transformed into a transaction with binary items:
-
-#### Weapon Items
-- `item_rifle_used`: At least 1 rifle kill
-- `item_awp_used`: At least 1 AWP kill
-- `item_pistol_only`: Only pistol kills (no rifles/AWP)
-- `item_smg_used`: At least 1 SMG kill
-- `item_shotgun_used`: At least 1 shotgun kill
-- `item_knife_kill`: At least 1 knife kill
-- `item_grenade_kill`: At least 1 grenade kill
-
-#### Performance Items
-- `item_high_headshot`: Headshot rate > 50%
-- `item_perfect_headshot`: Headshot rate = 100%
-- `item_multi_kill`: 5+ kills in round
-- `item_dominant`: 7+ kills in round
-- `item_quick_round`: Kill spread < 25th percentile
-- `item_long_round`: Kill spread > 75th percentile
-
-#### Situational Items
-- `item_smoke_kill`: At least 1 smoke kill
-- `item_wallbang`: At least 1 wallbang kill
-- `item_noscope`: At least 1 no-scope kill
-- `item_blind_kill`: At least 1 blind kill
-
-#### Range Items
-- `item_long_range`: Avg distance > 75th percentile
-- `item_close_range`: Avg distance < 25th percentile
-- `item_mixed_range`: High distance variance (> 75th percentile)
-
-#### Team Coordination
-- `item_team_spread`: 3+ different killers
-- `item_carry_performance`: ≤2 different killers
-
-#### Outcomes
-- `item_t_win`: T-side won
-- `item_ct_win`: CT-side won
-- `item_elimination`: Round ended by elimination
-- `item_bomb_exploded`: Bomb exploded
-- `item_bomb_defused`: Bomb defused
-- `item_time_out`: Time ran out
-
-#### Map Items
-- `item_map_inferno`, `item_map_mirage`, `item_map_dust2`, etc.
-
-### Transaction Format
-
-`fpm_transactions.csv` contains:
-- `round_id`: Unique identifier (match_round)
-- `items`: Comma-separated list of items
-- `n_items`: Number of items in transaction
-
-### Usage with Apriori/FP-Growth
-
-```python
-from mlxtend.frequent_patterns import apriori, fpgrowth, association_rules
-import pandas as pd
-
-# Load binary features
-fpm_binary = pd.read_csv("ml_features/fpm_binary_features.csv")
-item_cols = [c for c in fpm_binary.columns if c.startswith('item_')]
-items_df = fpm_binary[item_cols].astype(bool)
-
-# Run Apriori
-frequent_itemsets = apriori(items_df, min_support=0.1, use_colnames=True)
-
-# Generate rules
-rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.5)
-
-# Find patterns predicting wins
-win_rules = rules[rules['consequents'].apply(lambda x: 'item_t_win' in str(x))]
-```
-
-### Example Patterns to Discover
-
-- `{awp_used, long_range}` → `{t_win}` (Confidence: 0.75)
-- `{rifle_used, high_headshot}` → `{dominant}` (Lift: 2.5)
-- `{quick_round, team_spread}` → `{ct_win}` (Confidence: 0.68)
-
----
-
-## 2. Classification Features
-
-**Files**: `classification_features.csv`, `classification_features_scaled.csv`, `feature_importance_mi.csv`
-
-**Purpose**: Predict round winners (T vs CT) using discriminative features.
-
-### Additional Features (48 total)
-
-Built on top of base features with:
-
-#### Ratio Features
-- `headshot_efficiency`: Headshot kills / total kills
-- `rifle_ratio`: Rifle kills / total kills
-- `awp_ratio`: AWP kills / total kills
-- `pistol_ratio`: Pistol kills / total kills
-- `special_kills_ratio`: (Smoke + wallbang + noscope) / total kills
-
-#### Interaction Features
-- `awp_long_range`: AWP kills × avg distance
-- `rifle_headshot`: Rifle kills × headshot rate
-- `damage_per_distance`: Total damage / avg distance
-- `kills_per_tick`: Total kills / kill spread × 1000
-
-#### Categorical Discretization
-- `kill_level`: {low, medium, high, dominant} based on total kills
-- `distance_level`: {close, medium, long, sniper} based on avg distance
-- `headshot_level`: {low, medium, high} based on headshot rate
-
-#### Encodings
-- `map_encoded`: Label-encoded map name
-- `reason_encoded`: Label-encoded round end reason
-- One-hot encoded maps: `map_inferno`, `map_mirage`, etc.
-
-#### Polynomial Features
-- `kills_squared`: total_kills²
-- `distance_squared`: avg_kill_distance²
-- `headshot_squared`: headshot_rate²
-
-#### Momentum Features
-- `prev_round_kills`: Kills in previous round
-- `prev_round_won`: Won previous round (binary)
-- `cumulative_kills`: Cumulative kills in match
-- `win_streak`: Current win streak
-
-### Model-Specific Usage
-
-#### Decision Tree / Naïve Bayes
-Use **unscaled** features from `classification_features.csv`:
-
-```python
-from sklearn.tree import DecisionTreeClassifier
-
-# Load data
-clf_features = pd.read_csv("ml_features/classification_features.csv")
-X = clf_features[feature_cols]  # Exclude metadata
-y = clf_features['t_win']
-
-# Train
-dt = DecisionTreeClassifier(max_depth=10, min_samples_split=5)
-dt.fit(X, y)
-```
-
-#### SVM / k-NN
-Use **scaled** features from `classification_features_scaled.csv`:
-
-```python
-from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
-
-clf_scaled = pd.read_csv("ml_features/classification_features_scaled.csv")
-X_scaled = clf_scaled[feature_cols]
-
-# SVM with RBF kernel
-svm = SVC(kernel='rbf', C=1.0, gamma='scale')
-svm.fit(X_scaled, y)
-
-# k-NN
-knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(X_scaled, y)
-```
-
-### Feature Importance
-
-Top 10 features by Mutual Information (see `feature_importance_mi.csv`):
-
-1. `win_streak` (0.694) - Current win streak
-2. `std_kill_distance` (0.117) - Kill distance variance
-3. `rifle_headshot` (0.082) - Rifle × headshot interaction
-4. `headshot_kills` (0.068) - Total headshot kills
-5. `kills_squared` (0.063) - Kills polynomial term
-6. `avg_damage_per_kill` (0.062) - Damage efficiency
-7. `head_hits` (0.057) - Head hitgroup count
-8. `total_damage` (0.056) - Total damage dealt
-9. `awp_long_range` (0.055) - AWP × distance interaction
-10. `damage_per_distance` (0.054) - Damage-distance ratio
-
----
-
-## 3. Clustering Features
-
-**Files**: `clustering_features_normalized.csv`, `clustering_features_standardized.csv`
-
-**Purpose**: Discover play style patterns without predefined labels.
-
-### Additional Features (21 total)
-
-#### Proportional Features
-- `prop_headshot`: Headshot kills / total kills
-- `prop_rifle`: Rifle kills / total kills
-- `prop_awp`: AWP kills / total kills
-- `prop_pistol`: Pistol kills / total kills
-- `prop_smg`: SMG kills / total kills
-- `prop_special`: Special kills / total kills
-
-#### Play Style Indices
-- `aggression_index`: (damage/100) × (kills/5) / (kill_spread/1000 + 1)
-- `precision_index`: Headshot rate × (avg_damage/100)
-- `range_preference`: Normalized avg kill distance (0-1)
-- `team_play_index`: Unique killers / 5
-
-#### Consistency Metrics
-- `kill_consistency`: 1 - (std_distance / avg_distance)
-- `damage_consistency`: Avg damage / max damage
-
-#### Composite Features
-- `economy_tier`: Weighted weapon tier score
-  - Rifles: 3 points
-  - AWP: 4 points
-  - SMG: 2 points
-  - Pistol: 1 point
-- `skill_expression`: 0.4×headshot_rate + 0.3×awp_ratio + 0.3×special_ratio
-
-### Model-Specific Usage
-
-#### K-Means
-Use **MinMax normalized** features from `clustering_features_normalized.csv`:
-
-```python
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-
-clust_norm = pd.read_csv("ml_features/clustering_features_normalized.csv")
-X = clust_norm[feature_cols]
-
-# K-Means
-kmeans = KMeans(n_clusters=5, random_state=42)
-labels = kmeans.fit_predict(X)
-
-# Evaluate
-silhouette = silhouette_score(X, labels)
-```
-
-#### DBSCAN
-Use **StandardScaler normalized** features from `clustering_features_standardized.csv`:
-
-```python
-from sklearn.cluster import DBSCAN
-
-clust_std = pd.read_csv("ml_features/clustering_features_standardized.csv")
-X = clust_std[feature_cols]
-
-# DBSCAN
-dbscan = DBSCAN(eps=0.5, min_samples=5)
-labels = dbscan.fit_predict(X)
-```
-
-#### Hierarchical Clustering
-Works with either normalized version:
-
-```python
-from sklearn.cluster import AgglomerativeClustering
-
-agg = AgglomerativeClustering(n_clusters=5, linkage='ward')
-labels = agg.fit_predict(X)
-```
-
-### Expected Clusters
-
-Potential play style clusters to discover:
-
-1. **AWP Sniper**: High `range_preference`, high `prop_awp`
-2. **Aggressive Rifler**: High `aggression_index`, high `prop_rifle`
-3. **Eco Round**: High `prop_pistol`, low `economy_tier`
-4. **Team Player**: High `team_play_index`, moderate skills
-5. **Carry Player**: Low `team_play_index`, high `skill_expression`
-
----
-
-## 4. Regression Features
-
-**Files**: `regression_features.csv`, `regression_correlations.csv`
-
-**Purpose**: Predict continuous outcomes (kills, damage) and probabilities (win probability).
-
-### Additional Features (51 total)
-
-#### Target Variables
-- `target_kills`: Total kills (continuous)
-- `target_damage`: Total damage (continuous)
-- `target_headshot_rate`: Headshot rate (continuous 0-1)
-- `prob_t_win`: T-win probability (binary→float)
-
-#### Map Statistics
-- `map_avg_total_kills`: Average kills on this map
-- `map_avg_headshot_rate`: Average headshot rate on this map
-- `map_avg_avg_kill_distance`: Average distance on this map
-
-#### Log Transformations
-- `total_kills_log`: log(1 + total_kills)
-- `total_damage_log`: log(1 + total_damage)
-- `avg_kill_distance_log`: log(1 + avg_distance)
-- `kill_spread_log`: log(1 + kill_spread)
-
-#### Interaction Terms
-- `rifle_x_headshot`: Rifle kills × headshot rate
-- `awp_x_distance`: AWP kills × avg distance
-- `kills_x_damage`: Total kills × avg damage
-
-#### Polynomial Terms
-- `kills_poly2`: total_kills²
-- `distance_poly2`: avg_kill_distance²
-- `damage_poly2`: total_damage²
-
-#### Round Context
-- `round_normalized`: Round number / 30
-- `is_early_round`: Round ≤ 5 (binary)
-- `is_late_round`: Round ≥ 25 (binary)
-
-#### Rolling Statistics (lagged to avoid leakage)
-- `rolling_kills_avg`: Rolling 3-round average of kills
-- `rolling_damage_avg`: Rolling 3-round average of damage
-- `rolling_headshot_avg`: Rolling 3-round average of headshot rate
-
-### Model-Specific Usage
-
-#### Linear Regression (Predict Total Kills)
-
-```python
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score, mean_squared_error
-
-reg_features = pd.read_csv("ml_features/regression_features.csv")
-X = reg_features[feature_cols]
-y = reg_features['target_kills']
-
-lr = LinearRegression()
-lr.fit(X, y)
-predictions = lr.predict(X)
-
-print(f"R²: {r2_score(y, predictions):.4f}")
-print(f"MSE: {mean_squared_error(y, predictions):.4f}")
-```
-
-#### Ridge Regression (Predict Total Damage)
-
-```python
-from sklearn.linear_model import Ridge
-
-y_damage = reg_features['target_damage']
-
-ridge = Ridge(alpha=1.0)
-ridge.fit(X, y_damage)
-```
-
-#### Logistic Regression (Predict Win Probability)
-
-```python
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score
-
-y_win = reg_features['t_win']
-
-log_reg = LogisticRegression(max_iter=1000)
-log_reg.fit(X, y_win)
-
-# Predict probabilities
-proba = log_reg.predict_proba(X)[:, 1]
-auc = roc_auc_score(y_win, proba)
-```
-
-### Feature Correlations with Targets
-
-Top correlations with `target_kills` (see `regression_correlations.csv`):
-
-1. `total_kills` (1.000) - Perfect correlation (target leakage, exclude)
-2. `kills_poly2` (0.997)
-3. `total_kills_log` (0.997)
-4. `total_damage` (0.826)
-5. `kills_x_damage` (0.826)
-6. `damage_poly2` (0.780)
-7. `rolling_damage_avg` (0.761)
-8. `rolling_kills_avg` (0.742)
-9. `head_hits` (0.663)
-10. `headshot_kills` (0.620)
-
-**Note**: Exclude `total_kills`, `kills_poly2`, and `total_kills_log` when predicting `target_kills` to avoid data leakage.
-
----
-
-## Player-Level Features
-
-**File**: `player_features.csv`
-
-**Purpose**: Aggregate player performance across all rounds.
-
-### Player Metrics (14 features)
-
-- `steamid`: Unique Steam ID
-- `name`: Player name
-- `total_kills`: Total kills
-- `headshot_kills`: Total headshot kills
+- `match_id`: Match identifier
+- `map_name`: Map name
+- `total_rounds`: Total rounds played
+- `total_kills`: Total kills in match
+- `total_deaths`: Total deaths (should equal kills)
+- `avg_kills_per_round`: Average kills per round
+- `total_headshots`: Total headshot kills
 - `headshot_rate`: Overall headshot percentage
-- `avg_distance`: Average kill distance
-- `std_distance`: Distance standard deviation
-- `max_distance`: Longest kill
+- `total_rifle_kills`: Total rifle kills
+- `total_awp_kills`: Total AWP kills
+- `total_pistol_kills`: Total pistol kills
+- `avg_kill_distance`: Average kill distance
 - `total_damage`: Total damage dealt
-- `avg_damage`: Average damage per kill
-- `smoke_kills`: Smoke kills
-- `noscope_kills`: No-scope kills
-- `wallbang_kills`: Wallbang kills
-- `favorite_weapon`: Most used weapon
-- `kpr`: Kills per round (approximation)
-- `adr`: Average damage per round (approximation)
+- `t_rounds_won`: T-side rounds won
+- `ct_rounds_won`: CT-side rounds won
+- `match_winner`: T or CT (based on rounds won)
+
+---
+
+## 4. Classification Features
+
+**Files**: `ml_features/classification_features.csv`
+
+**Purpose**: Predict round winners (T vs CT) using round-level features with momentum and context.
+
+### Features (238 samples, balanced: T=111, CT=127)
+
+This dataset combines round-level features with momentum indicators to predict round winners.
+
+**Important**: Excludes outcome-based features (bomb_exploded, bomb_defused) to prevent data leakage. Only includes bomb_planted as a contextual feature.
 
 ### Usage
 
 ```python
-player_features = pd.read_csv("ml_features/player_features.csv")
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
-# Top fraggers
-top_players = player_features.sort_values('total_kills', ascending=False).head(10)
+# Load data
+clf_df = pd.read_csv('ml_features/classification_features.csv')
 
-# Best headshot players
-hs_masters = player_features.sort_values('headshot_rate', ascending=False).head(10)
+# Separate features and target
+feature_cols = [c for c in clf_df.columns if c not in
+                ['match_id', 'round_num', 't_win', 'ct_win', 'winner', 'reason']]
+X = clf_df[feature_cols]
+y = clf_df['t_win']
 
-# AWP specialists
-awp_players = player_features[player_features['favorite_weapon'] == 'awp']
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
+
+# Decision Tree (no scaling needed)
+dt = DecisionTreeClassifier(max_depth=10, min_samples_split=5, class_weight='balanced')
+dt.fit(X_train, y_train)
+dt_score = dt.score(X_test, y_test)
+
+# SVM (requires scaling)
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+svm = SVC(kernel='rbf', C=1.0, gamma='scale', class_weight='balanced')
+svm.fit(X_train_scaled, y_train)
+svm_score = svm.score(X_test_scaled, y_test)
+```
+
+---
+
+## 5. Regression Features
+
+**Files**: `ml_features/regression_features.csv`
+
+**Purpose**: Predict continuous outcomes (kills, damage) for each round.
+
+### Features (238 samples)
+
+Same as classification features but structured for regression tasks:
+- **Target 1**: `total_kills` - Predict number of kills in round
+- **Target 2**: `total_damage` - Predict total damage dealt in round
+- **Target 3**: `headshot_rate` - Predict headshot percentage
+
+### Usage
+
+```python
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.metrics import r2_score, mean_squared_error
+
+reg_df = pd.read_csv('ml_features/regression_features.csv')
+
+# Predict total kills
+feature_cols = [c for c in reg_df.columns if c not in
+                ['match_id', 'round_num', 'total_kills', 'total_damage', 'headshot_rate']]
+X = reg_df[feature_cols]
+y_kills = reg_df['total_kills']
+
+# Linear Regression
+lr = LinearRegression()
+lr.fit(X, y_kills)
+predictions = lr.predict(X)
+print(f"R²: {r2_score(y_kills, predictions):.4f}")
+
+# Ridge Regression (with regularization)
+ridge = Ridge(alpha=1.0)
+ridge.fit(X, y_kills)
+```
+
+---
+
+## 6. Clustering Features
+
+**Files**: `ml_features/clustering_players.csv`, `ml_features/clustering_rounds.csv`
+
+**Purpose**: Discover patterns in player performance and round playstyles without predefined labels.
+
+### Player Clustering (26 players, 2+ matches)
+
+Clusters players based on performance metrics and weapon preferences:
+
+```python
+from sklearn.cluster import KMeans, DBSCAN
+from sklearn.preprocessing import StandardScaler
+
+# Load player clustering data
+player_clust = pd.read_csv('ml_features/clustering_players.csv')
+
+# Select features for clustering
+feature_cols = ['overall_kd', 'headshot_rate', 'avg_kill_distance',
+                'ak47_usage_pct', 'awp_usage_pct', 'damage_per_match']
+X = player_clust[feature_cols]
+
+# Normalize
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# K-Means
+kmeans = KMeans(n_clusters=3, random_state=42)
+player_clust['cluster'] = kmeans.fit_predict(X_scaled)
+
+# Expected clusters:
+# Cluster 0: Entry fraggers (high K/D, low AWP usage)
+# Cluster 1: AWP specialists (high AWP usage, long range)
+# Cluster 2: Support players (moderate stats)
+```
+
+### Round Clustering (238 rounds)
+
+Clusters rounds based on playstyle, tempo, and weapon usage:
+
+```python
+# Load round clustering data
+round_clust = pd.read_csv('ml_features/clustering_rounds.csv')
+
+# Select features
+feature_cols = ['total_kills', 'headshot_rate', 'rifle_kills', 'awp_kills',
+                'kill_tempo', 'avg_kill_distance', 'bomb_planted']
+X = round_clust[feature_cols]
+
+# Normalize
+X_scaled = scaler.fit_transform(X)
+
+# Hierarchical Clustering
+from sklearn.cluster import AgglomerativeClustering
+agg = AgglomerativeClustering(n_clusters=4, linkage='ward')
+round_clust['cluster'] = agg.fit_predict(X_scaled)
+
+# Expected clusters:
+# Cluster 0: Eco rounds (low kills, pistols)
+# Cluster 1: Rifle rounds (balanced, medium kills)
+# Cluster 2: AWP-heavy rounds (snipers, long range)
+# Cluster 3: Dominant rounds (high kills, quick tempo)
 ```
 
 ---
 
 ## Complete Workflow Example
 
-### Step 1: Generate Features
+### Step 1: Parse Demo Files
 
 ```bash
-python feature_engineering_ml.py
+cd machine_learning
+python parse_demos_final.py
+```
+
+This processes all `.dem` files in `demos/` and generates properly structured CSVs in `hltv_data/`.
+
+### Step 2: Generate Features
+
+```bash
+python feature_engineering_redesigned.py
 ```
 
 Output:
-- `ml_features/fpm_binary_features.csv` (289 rounds × 35 items)
-- `ml_features/classification_features.csv` (289 rounds × 48 features)
-- `ml_features/clustering_features_normalized.csv` (289 rounds × 21 features)
-- `ml_features/regression_features.csv` (289 rounds × 51 features)
-- `ml_features/player_features.csv` (105 players × 14 features)
+- `ml_features/player_features.csv` (80 players × 26 features)
+- `ml_features/round_features.csv` (248 rounds × 39 features)
+- `ml_features/match_features.csv` (11 matches × 16 features)
+- `ml_features/classification_features.csv` (238 samples)
+- `ml_features/regression_features.csv` (238 samples)
+- `ml_features/clustering_players.csv` (26 players, 2+ matches)
+- `ml_features/clustering_rounds.csv` (238 rounds)
 
-### Step 2: Train All Models
+### Step 3: Train Models
 
 ```bash
 python ml_models_examples.py
 ```
 
-Output:
-- `ml_results/apriori_rules.csv`
-- `ml_results/fpgrowth_win_rules.csv`
+Output (when implemented):
 - `ml_results/classification_results.csv`
 - `ml_results/clustering_results.csv`
 - `ml_results/regression_results.csv`
 
-### Step 3: Analyze Results
+### Step 4: Analyze Results
 
 ```python
 import pandas as pd
 
-# Classification performance
-clf_results = pd.read_csv("ml_results/classification_results.csv")
-print(clf_results.sort_values('f1_score', ascending=False))
+# Load and explore player features
+players = pd.read_csv("ml_features/player_features.csv")
+print(players.nlargest(10, 'overall_kd'))
 
-# Clustering quality
-clust_results = pd.read_csv("ml_results/clustering_results.csv")
-print(clust_results.sort_values('silhouette', ascending=False))
+# Load classification features
+clf_df = pd.read_csv("ml_features/classification_features.csv")
+print(f"Dataset balance: T={clf_df['t_win'].sum()}, CT={(~clf_df['t_win']).sum()}")
 
-# Association rules predicting wins
-win_rules = pd.read_csv("ml_results/fpgrowth_win_rules.csv")
-print(win_rules.sort_values('lift', ascending=False).head(10))
+# Load clustering features
+clust_players = pd.read_csv("ml_features/clustering_players.csv")
+print(f"Players for clustering: {len(clust_players)}")
 ```
 
 ---
 
 ## Dataset Statistics
 
+### Parsed Data (from parse_demos_final.py)
+- **Total rounds**: 248 rounds
+- **Matches**: 11 matches
+- **Death events**: 1,956 kills
+- **Unique players**: 80 players
+- **Players with 2+ matches**: 26 players (for consistent clustering)
+
 ### Round-Level Data
-- **Total rounds**: 289
-- **Matches**: 13
-- **Maps**: 7 (Inferno, Mirage, Dust2, Train, Overpass, Nuke, Ancient)
-- **T-side wins**: ~45%
-- **CT-side wins**: ~55%
+- **Maps**: Inferno, Mirage, Dust2, Train, Overpass, Ancient
+- **T-side wins**: 111 rounds (46.6%)
+- **CT-side wins**: 127 rounds (53.4%)
+- **Average kills per round**: 7.9
+- **Average round duration**: ~8,000 ticks
 
-### Death Events
-- **Total kills**: 2,707
-- **Unique players**: 105
-- **Average kills per round**: 9.4
-- **Headshot rate**: 50.8%
-- **Average kill distance**: 17.5 units
+### Player Performance
+- **Average K/D ratio**: 1.05
+- **Average headshot rate**: 48.3%
+- **Average kill distance**: 14.2 units
+- **Most common weapon**: AK47 (26.4% of kills)
 
-### Weapons Distribution
-- **Rifles**: 44% of kills
-- **AWP**: 8% of kills
-- **Pistols**: 30% of kills
-- **SMGs**: 12% of kills
-- **Other**: 6% of kills
+### Data Quality Improvements
+- Deaths properly mapped to rounds via tick boundaries
+- Corrupt/incomplete demos filtered out
+- No percentile-based guessing for round assignments
+- Consistent player tracking across matches
 
 ---
 
@@ -612,35 +477,40 @@ print(win_rules.sort_values('lift', ascending=False).head(10))
 
 ### Feature Selection
 
-1. **Classification**: Use feature importance from `feature_importance_mi.csv`
-2. **Regression**: Check correlations in `regression_correlations.csv`
-3. **Clustering**: Use domain knowledge to select meaningful features
+1. **Classification**: Focus on momentum features (win_streak, score_diff) and contextual features
+2. **Regression**: Exclude target variables from predictors (e.g., don't use total_kills to predict total_kills)
+3. **Clustering**: Use normalized/standardized features for distance-based algorithms
+4. **Player Analysis**: Filter to players with 2+ matches for consistency metrics
 
 ### Data Leakage Prevention
 
 **Avoid using these features as predictors**:
-- `winner`, `reason` (outcome variables)
-- `target_*` columns (regression targets)
+- `winner`, `reason` (outcome variables for classification)
 - `t_win`, `ct_win` (classification targets)
-- `tick` (metadata)
+- `total_kills`, `total_damage`, `headshot_rate` (when used as regression targets)
+- `bomb_defused`, `bomb_exploded` (outcomes, not predictors)
+- `bomb_planted` is OK (happens before round ends)
 
-### Handling Imbalance
+### Handling Class Imbalance
 
-The dataset is slightly imbalanced (45% T-wins, 55% CT-wins):
-
-```python
-from sklearn.utils import resample
-
-# Oversample minority class
-X_train, y_train = resample(X_train, y_train, stratify=y_train)
-```
-
-Or use class weights:
+The dataset is slightly imbalanced (46.6% T-wins, 53.4% CT-wins):
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
 
-dt = DecisionTreeClassifier(class_weight='balanced')
+# Use class weights to handle imbalance
+dt = DecisionTreeClassifier(class_weight='balanced', max_depth=10)
+dt.fit(X_train, y_train)
+```
+
+Or use stratified sampling:
+
+```python
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=42
+)
 ```
 
 ### Cross-Validation
@@ -677,47 +547,89 @@ print(f"Best params: {grid_search.best_params_}")
 
 ### 1. Match Outcome Prediction
 
-Aggregate round-level predictions:
+Aggregate round-level predictions to predict match winners:
 
 ```python
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+# Load and train on round-level data
+clf_df = pd.read_csv("ml_features/classification_features.csv")
+feature_cols = [c for c in clf_df.columns if c not in
+                ['match_id', 'round_num', 't_win', 'ct_win', 'winner', 'reason']]
+
+X = clf_df[feature_cols]
+y = clf_df['t_win']
+
+# Train model
+dt = DecisionTreeClassifier(class_weight='balanced', max_depth=10)
+dt.fit(X, y)
+
 # Predict each round
-round_predictions = model.predict(X)
+clf_df['predicted_t_win'] = dt.predict(X)
 
 # Aggregate by match
-match_predictions = df.groupby('match')['prediction'].agg(['sum', 'count'])
-match_predictions['win_rate'] = match_predictions['sum'] / match_predictions['count']
+match_predictions = clf_df.groupby('match_id').agg({
+    'predicted_t_win': 'sum',
+    'round_num': 'count'
+})
+match_predictions['t_win_rate'] = (
+    match_predictions['predicted_t_win'] / match_predictions['round_num']
+)
 
-# Predict match winner (team with >50% round win rate)
-match_predictions['predicted_winner'] = match_predictions['win_rate'] > 0.5
+# Predict match winner (>50% rounds won)
+match_predictions['predicted_winner'] = (
+    match_predictions['t_win_rate'] > 0.5
+).map({True: 'T', False: 'CT'})
 ```
 
-### 2. Player Performance Clustering
+### 2. Player Role Identification
+
+Use clustering to automatically identify player roles:
 
 ```python
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 
-player_features = pd.read_csv("ml_features/player_features.csv")
-X = player_features[['headshot_rate', 'avg_distance', 'total_kills']]
+# Load player features
+players = pd.read_csv("ml_features/clustering_players.csv")
 
-kmeans = KMeans(n_clusters=3)
-player_features['cluster'] = kmeans.fit_predict(X)
+# Select relevant features
+feature_cols = ['overall_kd', 'headshot_rate', 'avg_kill_distance',
+                'ak47_usage_pct', 'awp_usage_pct', 'damage_per_match']
+X = players[feature_cols]
 
-# Cluster 0: Entry fraggers (high kills, low distance)
-# Cluster 1: AWPers (low headshot rate, high distance)
-# Cluster 2: Support players (low kills, varied distance)
+# Normalize
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Cluster
+kmeans = KMeans(n_clusters=3, random_state=42)
+players['role'] = kmeans.fit_predict(X_scaled)
+
+# Interpret clusters
+for cluster_id in range(3):
+    cluster_players = players[players['role'] == cluster_id]
+    print(f"\n=== Cluster {cluster_id} ===")
+    print(f"Avg K/D: {cluster_players['overall_kd'].mean():.2f}")
+    print(f"Avg AWP usage: {cluster_players['awp_usage_pct'].mean():.1f}%")
+    print(f"Avg distance: {cluster_players['avg_kill_distance'].mean():.1f}")
 ```
 
-### 3. Economy Prediction
+### 3. Momentum Analysis
 
-Create economy features based on weapon usage:
+Analyze how win streaks affect round outcomes:
 
 ```python
-df['eco_round'] = (df['pistol_kills'] > df['rifle_kills']) & (df['awp_kills'] == 0)
-df['full_buy'] = (df['rifle_kills'] + df['awp_kills']) > 3
-df['force_buy'] = ~df['eco_round'] & ~df['full_buy']
+import pandas as pd
 
-# Predict next round economy
-df['next_round_eco'] = df.groupby('match')['eco_round'].shift(-1)
+rounds = pd.read_csv("ml_features/round_features.csv")
+
+# Analyze win streak impact
+for streak in range(5):
+    t_streak_rounds = rounds[rounds['t_win_streak'] == streak]
+    t_win_pct = (t_streak_rounds['t_win'].sum() / len(t_streak_rounds) * 100)
+    print(f"T win streak {streak}: {t_win_pct:.1f}% T wins")
 ```
 
 ---
@@ -726,57 +638,83 @@ df['next_round_eco'] = df.groupby('match')['eco_round'].shift(-1)
 
 ### Missing Values
 
-All feature files handle missing values:
-- Numeric: Filled with 0
-- Categorical: Preserved for proper encoding
+All feature files handle missing values appropriately:
+- Numeric columns: Filled with 0
+- Categorical columns: Preserved as NaN or empty strings
 
-### Memory Issues
+### Parsing Errors
 
-For large datasets, use chunking:
+If demo parsing fails:
+1. Check demo file size (must be >1MB)
+2. Verify demo file is not corrupt
+3. Check `parse_output.log` for detailed error messages
 
-```python
-chunksize = 1000
-for chunk in pd.read_csv("large_file.csv", chunksize=chunksize):
-    process(chunk)
-```
+Common parsing errors:
+- `DemoEndsEarly`: Demo file is incomplete/truncated
+- `range end index out of range`: Demo file is corrupt
+
+### Small Dataset Warning
+
+Current dataset (248 rounds, 11 matches) is relatively small for ML:
+- **Classification**: Acceptable for basic models, use cross-validation
+- **Regression**: Sufficient for simple linear models
+- **Clustering**: Limited, especially for player clustering (26 players with 2+ matches)
+- **FPM**: Too small for meaningful pattern mining (not included)
+
+To improve results:
+1. Parse more demo files from HLTV
+2. Use cross-validation to reduce overfitting
+3. Use regularization (Ridge, Lasso, class_weight='balanced')
 
 ### Version Compatibility
 
 Tested with:
 - Python 3.9+
 - scikit-learn 1.3+
-- mlxtend 0.22+
 - pandas 2.0+
+- numpy 1.24+
+- demoparser2 (latest)
 
 ---
 
 ## References
 
 ### Academic Papers
-- Agrawal & Srikant (1994) - Apriori Algorithm
-- Han et al. (2000) - FP-Growth Algorithm
 - Breiman (2001) - Random Forests
 - Cortes & Vapnik (1995) - Support Vector Machines
+- Hastie et al. (2009) - The Elements of Statistical Learning
 
 ### CS2 Resources
-- [HLTV.org](https://www.hltv.org) - Professional CS2 statistics
-- [demoparser2](https://github.com/LaihoE/demoparser2) - CS2 demo parser
+- [HLTV.org](https://www.hltv.org) - Professional CS2 statistics and demo files
+- [demoparser2](https://github.com/LaihoE/demoparser2) - CS2 demo parser library
 
 ### Library Documentation
-- [scikit-learn](https://scikit-learn.org)
-- [mlxtend](http://rasbt.github.io/mlxtend/)
-- [pandas](https://pandas.pydata.org)
+- [scikit-learn](https://scikit-learn.org) - Machine learning library
+- [pandas](https://pandas.pydata.org) - Data manipulation library
 
 ---
 
-## License & Citation
-
-If you use this feature engineering pipeline in your research, please cite:
+## Project Structure
 
 ```
-CS2 Machine Learning Feature Engineering Pipeline
-Data Analytics & Data Mining Course Project
-2024
+machine_learning/
+├── demos/                      # .dem demo files (not in repo)
+├── hltv_data/                  # Parsed CSV data
+│   ├── *_rounds.csv           # Round outcomes with tick boundaries
+│   ├── *_deaths.csv           # Kill events mapped to rounds
+│   └── *_players.csv          # Per-match player stats
+├── ml_features/                # Generated feature sets
+│   ├── player_features.csv    # Player-level features
+│   ├── round_features.csv     # Round-level features
+│   ├── match_features.csv     # Match-level features
+│   ├── classification_features.csv
+│   ├── regression_features.csv
+│   ├── clustering_players.csv
+│   └── clustering_rounds.csv
+├── parse_demos_final.py        # Demo parser (tick-based mapping)
+├── feature_engineering_redesigned.py  # Feature generation
+├── scraping.py                 # HLTV data scraper
+└── requirements.txt            # Python dependencies
 ```
 
 ---
@@ -784,11 +722,12 @@ Data Analytics & Data Mining Course Project
 ## Contact & Support
 
 For questions or issues:
-1. Check this README
-2. Review the code comments in `feature_engineering_ml.py`
-3. Examine example usage in `ml_models_examples.py`
+1. Check this README first
+2. Review code comments in [parse_demos_final.py](../machine_learning/parse_demos_final.py)
+3. Review code comments in [feature_engineering_redesigned.py](../machine_learning/feature_engineering_redesigned.py)
+4. Check [REPRODUCIBILITY_CHECKLIST.md](REPRODUCIBILITY_CHECKLIST.md) for data collection
 
 ---
 
-**Last Updated**: 2024-11-19
-**Version**: 1.0.0
+**Last Updated**: 2024-11-20
+**Version**: 2.0.0 (Redesigned with proper tick-based round mapping)
