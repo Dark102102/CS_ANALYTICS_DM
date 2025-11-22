@@ -323,9 +323,6 @@ export function ModelsImplementedTab() {
       <Card className={cardClassName}>
         <CardHeader>
           <CardTitle className="text-2xl text-primary">Model Categories</CardTitle>
-          <CardDescription className="text-white/80">
-            Each team must implement at least four machine-learning models from different categories. Click on a model type to see more details.
-          </CardDescription>
         </CardHeader>
         <CardContent className="grid md:grid-cols-2 gap-6">
           {models.map((model) => (
