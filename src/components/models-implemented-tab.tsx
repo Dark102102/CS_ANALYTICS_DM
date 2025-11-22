@@ -78,7 +78,7 @@ const models = [
             </div>
             <div>
                 <h4 className='font-semibold text-lg text-white'>Conclusion</h4>
-                <p>The results show that T-side victories are consistently associated with rounds where players achieve high headshot accuracy, especially when combined with successful bomb plants. Patterns involving “BOMB_DEFUSED → CT_WIN” highlight that CTs succeed most consistently when they maintain site presence long enough to defuse or completely deny plants.</p>
+                <p>The Frequent Pattern Mining analysis revealed several meaningful and interpretable relationships driving round outcomes in professional CS2 matches. Using Apriori and FP-Growth, we identified strong co-occurring tactical patterns across rounds and quantified their importance using support, confidence, and lift. The results show that T-side victories are consistently associated with rounds where players achieve high headshot accuracy, especially when combined with successful bomb plants. Rules such as “BOMB_PLANTED + HIGH_HEADSHOT_RATE → T_WIN” demonstrated extremely high confidence and lift, indicating that accuracy-driven executes on site are among the strongest predictors of T-side success. Additionally, we found that CT-side wins are heavily tied to objective control rather than mechanical dominance. Patterns involving “BOMB_DEFUSED → CT_WIN” highlight that CTs succeed most consistently when they maintain site presence long enough to defuse or completely deny plants. Unlike the T-side, CT outcomes rarely depended on raw aim metrics, reinforcing the asymmetric nature of CS2 side design. Overall, Frequent Pattern Mining proved effective in uncovering tactical structures of CS2 rounds by identifying not only expected patterns (such as deterministic win conditions) but also deeper insights about how accuracy, timing, and objective control interact to shape round outcomes.</p>
             </div>
           </div>
       ),
@@ -226,7 +226,7 @@ const models = [
             </div>
              <div>
                 <h4 className='font-semibold text-lg text-white'>Conclusion</h4>
-                <p>These findings demonstrate that player roles in CS2 naturally emerge from quantitative behavioral patterns, even without explicit role labels. The clustering results therefore provide actionable insights into role identity and team composition in competitive CS2 play.</p>
+                <p>The clustering analysis successfully segmented players into two clearly distinguishable performance-based roles: Entry Fraggers and Balanced Players. By applying K-Means on normalized player statistics, we observed distinct behavioral archetypes grounded in in-game performance patterns. Entry Fraggers formed a smaller but more aggressive cluster characterized by high opening duel attempts, elevated kill counts, strong KD ratios, and frequent multi-kill rounds. Their statistical profile reflects high-risk, high-reward gameplay that emphasizes creating early space and initiating engagements. In contrast, the Balanced Player cluster consisted of a larger group of individuals exhibiting consistent and supportive gameplay. These players showed higher headshot percentages, more assists, and steadier round-to-round performance metrics, indicating a playstyle focused on maintaining structure, trading kills, and anchoring positions rather than driving aggressive entries. These findings demonstrate that player roles in CS2 naturally emerge from quantitative behavioral patterns, even without explicit role labels. The relatively strong silhouette score and cluster interpretability reinforce that the chosen features and preprocessing pipeline were well suited for capturing meaningful differences in player tendencies. The clustering results therefore provide actionable insights into role identity and team composition in competitive CS2 play.</p>
             </div>
           </div>
       )
@@ -296,7 +296,7 @@ const models = [
           </div>
           <div>
             <h4 className='font-semibold text-lg text-white mb-2'>Conclusion</h4>
-            <p>The baseline Linear Regression model emerged as the strongest performer overall, with the lowest RMSE and highest R². The regression analysis validated that damage is a reliable and quantifiable performance indicator strongly tied to standard combat metrics.</p>
+            <p>The regression models produced strong predictive performance, showing that player damage output is highly explainable using core combat statistics such as kills, deaths, headshot rate, and average kill distance. Among the three regression models—Linear Regression, Ridge Regression, and Bayesian Ridge Regression—performance remained consistently high across all metrics. Each model achieved an R² near or above 0.90, demonstrating that a large portion of the variance in total damage can be captured by straightforward linear relationships. The baseline Linear Regression model emerged as the strongest performer overall, with the lowest RMSE and highest R². The Ridge and Bayesian Ridge models provided nearly identical results, indicating that regularization offered limited improvement, likely due to low multicollinearity and inherent stability in the feature space. In conclusion, regression analysis validated that damage is a reliable and quantifiable performance indicator strongly tied to standard combat metrics. This reinforces the broader theme observed throughout the project: CS2 performance data contains clear, measurable patterns that align with both mechanical skill and tactical decision-making, making it highly suitable for machine learning–based modeling.</p>
           </div>
         </div>
       ),
@@ -359,24 +359,24 @@ export function ModelsImplementedTab() {
         </CardContent>
       </Card>
       
-      <div className="grid grid-cols-1 gap-8">
-        <Card className={cardClassName}>
-            <CardHeader>
-                <CardTitle className="text-2xl text-primary">Data Formatting for Models</CardTitle>
-                <CardDescription className="text-white/80">Details on dataset transformations and feature engineering.</CardDescription>
-            </CardHeader>
-            <CardContent className="flex justify-center">
-               <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="bg-transparent border-white/20 text-white/80 hover:bg-transparent hover:text-primary hover:border-primary transition-colors">
-                    <Github className="mr-2 h-5 w-5" />
-                    View Scripts on GitHub
-                  </Button>
-                </a>
-            </CardContent>
-        </Card>
+      <div className="flex justify-center">
+        <div className="w-full md:w-1/2">
+            <Card className={cardClassName}>
+                <CardHeader>
+                    <CardTitle className="text-2xl text-primary">Data Formatting for Models</CardTitle>
+                    <CardDescription className="text-white/80">Details on dataset transformations and feature engineering.</CardDescription>
+                </CardHeader>
+                <CardContent className="flex justify-center">
+                  <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" className="bg-transparent border-white/20 text-white/80 hover:bg-transparent hover:text-primary hover:border-primary transition-colors">
+                        <Github className="mr-2 h-5 w-5" />
+                        View Scripts on GitHub
+                      </Button>
+                    </a>
+                </CardContent>
+            </Card>
+        </div>
       </div>
     </div>
   );
 }
-
-    
