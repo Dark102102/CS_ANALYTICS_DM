@@ -2,7 +2,8 @@
 'use client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { CheckCircle2 } from 'lucide-react';
+import { Github } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -306,6 +307,7 @@ const models = [
 
 export function ModelsImplementedTab() {
   const cardClassName = "shadow-lg transition-shadow bg-black/30 backdrop-blur-sm border-white/10 rounded-xl";
+  const githubRepoUrl = 'https://github.com/Dark102102/CS_ANALYTICS_DM/tree/luke_ml/machine_learning/ml_features';
 
   return (
     <div className="space-y-8">
@@ -357,34 +359,24 @@ export function ModelsImplementedTab() {
         </CardContent>
       </Card>
       
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8">
         <Card className={cardClassName}>
             <CardHeader>
-                <CardTitle className="text-2xl text-primary">Performance Evaluation</CardTitle>
-                <CardDescription className="text-white/80">Comparing model performances to identify the most effective approaches for our dataset.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 text-white/80">
-                <p>Each team must select appropriate evaluation metrics based on the model type and compare model performances to explain which approach worked best.</p>
-                <ul className="space-y-2">
-                    <li className='flex items-start gap-2'><CheckCircle2 className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" /><span>Justify why one model performs better than another for the specific dataset.</span></li>
-                    <li className='flex items-start gap-2'><CheckCircle2 className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" /><span>Provide a clear comparison of the results.</span></li>
-                </ul>
-            </CardContent>
-        </Card>
-         <Card className={cardClassName}>
-            <CardHeader>
                 <CardTitle className="text-2xl text-primary">Data Formatting for Models</CardTitle>
-                <CardDescription className="text-white/80">Ensuring that dataset transformations align with model requirements.</CardDescription>
+                <CardDescription className="text-white/80">Details on dataset transformations and feature engineering.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4 text-white/80">
-                <p>Data must be formatted correctly for each model. For example, SVMs require numerical data, while Decision Trees can handle categorical variables. Clustering algorithms may require feature scaling.</p>
-                <ul className="space-y-2">
-                    <li className='flex items-start gap-2'><CheckCircle2 className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" /><span>Categorical features must be converted for certain models.</span></li>
-                    <li className='flex items-start gap-2'><CheckCircle2 className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" /><span>Include before-and-after data transformation snapshots to show preprocessing steps.</span></li>
-                </ul>
+            <CardContent className="flex justify-center">
+               <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="bg-transparent border-white/20 text-white/80 hover:bg-transparent hover:text-primary hover:border-primary transition-colors">
+                    <Github className="mr-2 h-5 w-5" />
+                    View Scripts on GitHub
+                  </Button>
+                </a>
             </CardContent>
         </Card>
       </div>
     </div>
   );
 }
+
+    
