@@ -1,0 +1,5 @@
+model,best_params,accuracy,precision,recall,f1,roc_auc
+DecisionTree,"{'clf__max_depth': None, 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 2}",1.0,1.0,1.0,1.0,1.0
+SVM,"{'clf__C': 0.1, 'clf__gamma': 'scale', 'clf__kernel': 'linear'}",1.0,1.0,1.0,1.0,1.0
+RandomForest,"{'clf__max_depth': None, 'clf__min_samples_split': 2, 'clf__n_estimators': 100}",1.0,1.0,1.0,1.0,1.0
+KNN,"{'clf__n_neighbors': 7, 'clf__p': 1, 'clf__weights': 'distance'}",0.8958333333333334,0.8620689655172413,0.9615384615384616,0.9090909090909091,0.9790209790209792

@@ -1,0 +1,65 @@
+FINAL CLUSTERING RESULTS - KEEP THESE FILES
+============================================
+
+PRIMARY SCRIPT (Use This):
+  ✓ comprehensive_player_clustering.py  - All-in-one script with balanced clustering
+
+RESULTS (Most Accurate):
+  ✓ final_results/
+    - player_roles_balanced.png         - Improved PCA visualization (23.3% vs 76.7% balance)
+    - role_distribution_balanced.png    - Bar chart showing better balance
+    - role_heatmap_balanced.png        - Feature comparison heatmap
+    - player_roles_final.csv           - Final role assignments
+
+  ✓ enhanced_clustering_features/
+    - player_features.csv              - Extracted features for all players
+
+OLD RESULTS (For Comparison Only):
+  ⚠️  clustering_results/              - Old performance-level clustering (97% vs 3% imbalance)
+  ⚠️  player_role_clustering/          - Old player clustering (87% vs 13% imbalance)
+
+DOCUMENTATION:
+  ✓ KEEP_THESE_FILES.txt (this file) - Explains what to use
+
+FILES TO DELETE (Outdated/Redundant):
+  ✗ extract_player_role_features_enhanced.py  - Merged into comprehensive script
+  ✗ advanced_player_clustering.py             - Merged into comprehensive script  
+  ✗ player_aggregated_clustering.py           - Merged into comprehensive script
+  ✗ README_CLUSTERING_PROJECT.md              - Outdated methodology
+  ✗ CLUSTERING_ANALYSIS_SUMMARY.md            - Outdated results
+  ✗ FINAL_SUMMARY.md                          - Outdated summary
+
+WHY THE IMPROVEMENT:
+====================
+The new script addresses the severe class imbalance by:
+1. Using a combined scoring metric (silhouette * balance_penalty)
+2. Better feature selection
+3. Smarter role identification
+
+RESULTS COMPARISON:
+==================
+Old Clustering:
+  - Entry Fraggers: 12 players (13%) - Too extreme
+  - Support Players: 78 players (87%) - Too broad
+
+New Clustering:
+  - Entry Fragger: 21 players (23.3%) ✓ Better balance
+  - Balanced Player: 69 players (76.7%) ✓ More reasonable
+
+NEXT STEPS:
+===========
+1. Delete old Python scripts (merged into comprehensive_player_clustering.py)
+2. Keep final_results/ as the authoritative source
+3. Archive old clustering_results/ and player_role_clustering/ for reference
+4. Download 40+ more demos to get 4-6 distinct roles
+
+HOW TO RUN:
+===========
+$ cd /Users/lukerobinson/Dropbox/school/csci_5502/CS_ANALYTICS_DM/machine_learning/clustering
+$ python3 comprehensive_player_clustering.py
+
+This will:
+  1. Extract features from all parsed demos
+  2. Aggregate by player
+  3. Perform balanced clustering
+  4. Generate visualizations in final_results/
