@@ -9,10 +9,10 @@ const models = [
     title: 'Frequent Pattern Mining',
     description: 'Uncovering hidden patterns and associations in player behavior and team strategies (e.g., Apriori, FP-Growth).',
     details: {
-      choice: 'Why the model was chosen (justify selection based on dataset characteristics).',
-      assumptions: 'Model assumptions (e.g., specifics of FP-Growth or Apriori).',
-      tuning: 'Hyperparameter tuning (adjustments to improve model performance).',
-      challenges: 'Challenges faced & solutions (if applicable).',
+      choice: 'Chosen to reveal meaningful and interpretable relationships driving round outcomes. Using Apriori and FP-Growth, we identified strong co-occurring tactical patterns and quantified their importance, uncovering the tactical structures of CS2 rounds.',
+      assumptions: 'The model assumes that transaction data is available and that the support threshold is appropriately set to capture relevant patterns without generating excessive noise.',
+      tuning: 'Hyperparameter tuning involved adjusting the minimum support and confidence thresholds to balance between finding frequent and meaningful patterns.',
+      challenges: 'A key challenge was interpreting the vast number of generated rules. We focused on rules with high confidence and lift to identify the most impactful tactical patterns, such as the link between headshot rates and T-side wins.',
     },
     evaluation: ['Support', 'Confidence', 'Lift']
   },
@@ -31,10 +31,10 @@ const models = [
     title: 'Clustering',
     description: 'Grouping players or teams based on similarities in their playstyle or performance metrics (e.g., K-Means, DBSCAN).',
     details: {
-      choice: 'Why the model was chosen (justify selection based on dataset characteristics).',
-      assumptions: 'Model assumptions (e.g., K-Means assumes spherical clusters).',
-      tuning: 'Hyperparameter tuning (adjustments to improve model performance).',
-      challenges: 'Challenges faced & solutions (if applicable).',
+      choice: 'Chosen to segment players into performance-based roles. K-Means successfully identified two distinct archetypes—Entry Fraggers and Balanced Players—based on quantitative behavioral patterns, providing insights into role identity.',
+      assumptions: 'K-Means assumes that clusters are spherical and of similar size. The relatively strong silhouette score confirmed that the feature space was well-suited for this method, capturing meaningful differences in player tendencies.',
+      tuning: 'The number of clusters (k) was tuned, with k=2 providing the most interpretable and distinct player archetypes (Entry Fraggers vs. Balanced Players).',
+      challenges: 'The main challenge was ensuring the clusters were not just statistically significant but also interpretable in the context of CS2 gameplay. This was validated by analyzing the feature distributions for each cluster.',
     },
     evaluation: ['Silhouette Score', 'Davies-Bouldin Index']
   },
@@ -42,10 +42,10 @@ const models = [
     title: 'Regression',
     description: 'Forecasting continuous values such as player K/D ratio or match duration (e.g., Linear, Logistic).',
     details: {
-      choice: 'Why the model was chosen (justify selection based on dataset characteristics).',
-      assumptions: 'Model assumptions (e.g., Linear Regression assumes a linear relationship).',
-      tuning: 'Hyperparameter tuning (adjustments to improve model performance).',
-      challenges: 'Challenges faced & solutions (if applicable).',
+      choice: 'Chosen to predict player damage output based on combat statistics. Linear, Ridge, and Bayesian Ridge models all achieved high R² values (~0.90), showing that damage is highly explainable by core combat metrics like kills and headshots.',
+      assumptions: 'Linear regression models assume a linear relationship between features and the target variable. The high R² values confirmed that damage output in CS2 is driven by predictable, linear mechanics.',
+      tuning: 'Minimal hyperparameter tuning was needed as the baseline Linear Regression model performed strongest. Ridge and Bayesian Ridge models showed that regularization offered limited improvement, indicating low multicollinearity.',
+      challenges: 'The primary challenge was selecting the right features. The analysis confirmed that standard combat metrics were sufficient, reinforcing that CS2 performance data contains clear, measurable patterns suitable for linear modeling.',
     },
     evaluation: ['RMSE', 'MSE', 'R²-score']
   }
