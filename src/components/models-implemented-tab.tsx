@@ -3,14 +3,23 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { CheckCircle2 } from 'lucide-react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
 
 const models = [
   {
     title: 'Frequent Pattern Mining',
     description: 'Uncovering hidden patterns and associations in player behavior and team strategies (e.g., Apriori, FP-Growth).',
     details: {
-      choice: 'Chosen to reveal meaningful and interpretable relationships driving round outcomes. Using Apriori and FP-Growth, we identified strong co-occurring tactical patterns and quantified their importance, uncovering the tactical structures of CS2 rounds.',
-      assumptions: 'The model assumes that transaction data is available and that the support threshold is appropriately set to capture relevant patterns without generating excessive noise.',
+      choice: 'The Frequent Pattern Mining analysis revealed several meaningful and interpretable relationships driving round outcomes in professional CS2 matches. Using Apriori and FP-Growth, we identified strong co-occurring tactical patterns across rounds and quantified their importance using support, confidence, and lift. The results show that T-side victories are consistently associated with rounds where players achieve high headshot accuracy, especially when combined with successful bomb plants. Rules such as “BOMB_PLANTED + HIGH_HEADSHOT_RATE → T_WIN” demonstrated extremely high confidence and lift, indicating that accuracy-driven executes on site are among the strongest predictors of T-side success.',
+      assumptions: 'The model assumes that transaction data is available and that the support threshold is appropriately set to capture relevant patterns without generating excessive noise. We found that CT-side wins are heavily tied to objective control rather than mechanical dominance. Patterns involving “BOMB_DEFUSED → CT_WIN” highlight that CTs succeed most consistently when they maintain site presence long enough to defuse or completely deny plants.',
       tuning: 'Hyperparameter tuning involved adjusting the minimum support and confidence thresholds to balance between finding frequent and meaningful patterns.',
       challenges: 'A key challenge was interpreting the vast number of generated rules. We focused on rules with high confidence and lift to identify the most impactful tactical patterns, such as the link between headshot rates and T-side wins.',
     },
@@ -20,10 +29,92 @@ const models = [
     title: 'Classification',
     description: 'Predicting discrete outcomes like match winner or round winner (e.g., Decision Trees, SVM, k-NN).',
     details: {
-      choice: 'Why the model was chosen (justify selection based on dataset characteristics).',
-      assumptions: 'Model assumptions (e.g., SVM assumes data is linearly separable).',
-      tuning: 'Hyperparameter tuning (adjustments to improve model performance).',
-      challenges: 'Challenges faced & solutions (if applicable).',
+      content: (
+        <div className="space-y-6">
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Models Implemented</h4>
+            <div className="space-y-4">
+              <div className="border-l-4 border-primary/30 pl-4">
+                <h5 className="font-semibold text-white">Decision Tree Classifier</h5>
+                <p><span className="font-medium text-white/90">Justification:</span> Selected because it performs well on datasets with numerical features and can naturally model nonlinear relationships.</p>
+                <p><span className="font-medium text-white/90">Assumptions:</span> Assumes data can be recursively partitioned into pure subsets; does not assume linearity.</p>
+                <p><span className="font-medium text-white/90">Tuning:</span> Best parameters from GridSearchCV were `max_depth=None`, `min_samples_leaf=1`, `min_samples_split=2`.</p>
+              </div>
+              <div className="border-l-4 border-primary/30 pl-4">
+                <h5 className="font-semibold text-white">Support Vector Machine (Linear)</h5>
+                <p><span className="font-medium text-white/90">Justification:</span> Ideal for fully numeric, scaled datasets to separate CT-win vs. CT-loss classes.</p>
+                <p><span className="font-medium text-white/90">Assumptions:</span> Assumes classes are approximately linearly separable and features are correctly scaled.</p>
+                <p><span className="font-medium text-white/90">Tuning:</span> Best parameters were `C=0.1`, `gamma='scale'`, `kernel='linear'`.</p>
+              </div>
+              <div className="border-l-4 border-primary/30 pl-4">
+                <h5 className="font-semibold text-white">Random Forest Classifier</h5>
+                <p><span className="font-medium text-white/90">Justification:</span> Robust ensemble model that reduces overfitting and captures nonlinear relationships well on smaller datasets.</p>
+                <p><span className="font-medium text-white/90">Assumptions:</span> Assumes combining many decorrelated trees reduces variance and improves generalization.</p>
+                <p><span className="font-medium text-white/90">Tuning:</span> Best parameters were `n_estimators=100`, `max_depth=None`, `min_samples_split=2`.</p>
+              </div>
+              <div className="border-l-4 border-primary/30 pl-4">
+                <h5 className="font-semibold text-white">k-Nearest Neighbors (KNN)</h5>
+                <p><span className="font-medium text-white/90">Justification:</span> Provides a simple baseline for comparison, suitable for scaled numeric datasets.</p>
+                <p><span className="font-medium text-white/90">Assumptions:</span> Assumes similar data points are close in feature space and features are equally scaled.</p>
+                <p><span className="font-medium text-white/90">Tuning:</span> Best parameters were `n_neighbors=7`, `p=1` (Manhattan), `weights='distance'`.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Performance Comparison</h4>
+             <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Model</TableHead>
+                  <TableHead>Accuracy</TableHead>
+                  <TableHead>Precision</TableHead>
+                  <TableHead>Recall</TableHead>
+                  <TableHead>F1-score</TableHead>
+                  <TableHead>ROC-AUC</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Decision Tree</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>SVM (Linear)</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Random Forest</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                  <TableCell>1.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>KNN</TableCell>
+                  <TableCell>0.896</TableCell>
+                  <TableCell>0.862</TableCell>
+                  <TableCell>0.962</TableCell>
+                  <TableCell>0.909</TableCell>
+                  <TableCell>0.979</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Conclusion</h4>
+            <p>Although Decision Tree, SVM, and Random Forest all achieved perfect scores, **Random Forest is the most reliable best model**. It is more robust to noise than a single Decision Tree, carries less risk of overfitting, and offers strong generalization via its tree ensemble. KNN performed well but was weaker due to its sensitivity to noisy boundaries. All models demonstrated high performance, with Random Forest being the best overall due to its stability and robustness.</p>
+          </div>
+        </div>
+      ),
     },
     evaluation: ['Accuracy', 'Precision', 'Recall', 'F1-score', 'ROC-AUC']
   },
@@ -31,10 +122,10 @@ const models = [
     title: 'Clustering',
     description: 'Grouping players or teams based on similarities in their playstyle or performance metrics (e.g., K-Means, DBSCAN).',
     details: {
-      choice: 'Chosen to segment players into performance-based roles. K-Means successfully identified two distinct archetypes—Entry Fraggers and Balanced Players—based on quantitative behavioral patterns, providing insights into role identity.',
-      assumptions: 'K-Means assumes that clusters are spherical and of similar size. The relatively strong silhouette score confirmed that the feature space was well-suited for this method, capturing meaningful differences in player tendencies.',
+      choice: 'The clustering analysis successfully segmented players into two clearly distinguishable performance-based roles: Entry Fraggers and Balanced Players. By applying K-Means on normalized player statistics, we observed distinct behavioral archetypes grounded in in-game performance patterns. Entry Fraggers formed a smaller but more aggressive cluster characterized by high opening duel attempts, elevated kill counts, strong KD ratios, and frequent multi-kill rounds. Their statistical profile reflects high-risk, high-reward gameplay that emphasizes creating early space and initiating engagements.',
+      assumptions: 'K-Means assumes that clusters are spherical and of similar size. The relatively strong silhouette score confirmed that the feature space was well-suited for this method, capturing meaningful differences in player tendencies. The Balanced Player cluster consisted of a larger group of individuals exhibiting consistent and supportive gameplay. These players showed higher headshot percentages, more assists, and steadier round-to-round performance metrics, indicating a playstyle focused on maintaining structure, trading kills, and anchoring positions rather than driving aggressive entries.',
       tuning: 'The number of clusters (k) was tuned, with k=2 providing the most interpretable and distinct player archetypes (Entry Fraggers vs. Balanced Players).',
-      challenges: 'The main challenge was ensuring the clusters were not just statistically significant but also interpretable in the context of CS2 gameplay. This was validated by analyzing the feature distributions for each cluster.',
+      challenges: 'The main challenge was ensuring the clusters were not just statistically significant but also interpretable in the context of CS2 gameplay. This was validated by analyzing the feature distributions for each cluster. The clustering results therefore provide actionable insights into role identity and team composition in competitive CS2 play.',
     },
     evaluation: ['Silhouette Score', 'Davies-Bouldin Index']
   },
@@ -42,8 +133,8 @@ const models = [
     title: 'Regression',
     description: 'Forecasting continuous values such as player K/D ratio or match duration (e.g., Linear, Logistic).',
     details: {
-      choice: 'Chosen to predict player damage output based on combat statistics. Linear, Ridge, and Bayesian Ridge models all achieved high R² values (~0.90), showing that damage is highly explainable by core combat metrics like kills and headshots.',
-      assumptions: 'Linear regression models assume a linear relationship between features and the target variable. The high R² values confirmed that damage output in CS2 is driven by predictable, linear mechanics.',
+      choice: 'The regression models produced strong predictive performance, showing that player damage output is highly explainable using core combat statistics such as kills, deaths, headshot rate, and average kill distance. Among the three regression models—Linear Regression, Ridge Regression, and Bayesian Ridge Regression—performance remained consistently high across all metrics. Each model achieved an R² near or above 0.90, demonstrating that a large portion of the variance in total damage can be captured by straightforward linear relationships.',
+      assumptions: 'Linear regression models assume a linear relationship between features and the target variable. The high R² values confirmed that damage output in CS2 is driven by predictable, linear mechanics. The baseline Linear Regression model emerged as the strongest performer overall, with the lowest RMSE and highest R².',
       tuning: 'Minimal hyperparameter tuning was needed as the baseline Linear Regression model performed strongest. Ridge and Bayesian Ridge models showed that regularization offered limited improvement, indicating low multicollinearity.',
       challenges: 'The primary challenge was selecting the right features. The analysis confirmed that standard combat metrics were sufficient, reinforcing that CS2 performance data contains clear, measurable patterns suitable for linear modeling.',
     },
@@ -85,33 +176,39 @@ export function ModelsImplementedTab() {
                   </CardContent>
                 </Card>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md bg-black/50 backdrop-blur-md border-white/20 text-white">
+              <DialogContent className="sm:max-w-2xl bg-black/50 backdrop-blur-md border-white/20 text-white">
                 <DialogHeader>
                   <DialogTitle className="text-2xl text-primary">{model.title}</DialogTitle>
                 </DialogHeader>
-                <div className="py-4 space-y-4 text-white/80">
-                    <div>
-                        <h4 className='font-semibold text-lg text-white'>Justification</h4>
-                        <p>{model.details.choice}</p>
-                    </div>
-                     <div>
-                        <h4 className='font-semibold text-lg text-white'>Assumptions</h4>
-                        <p>{model.details.assumptions}</p>
-                    </div>
-                     <div>
-                        <h4 className='font-semibold text-lg text-white'>Hyperparameter Tuning</h4>
-                        <p>{model.details.tuning}</p>
-                    </div>
-                     <div>
-                        <h4 className='font-semibold text-lg text-white'>Challenges</h4>
-                        <p>{model.details.challenges}</p>
-                    </div>
-                     <div>
-                        <h4 className='font-semibold text-lg text-white'>Evaluation Metrics</h4>
-                        <ul className='list-disc list-inside'>
-                            {model.evaluation.map(metric => <li key={metric}>{metric}</li>)}
-                        </ul>
-                    </div>
+                <div className="py-4 space-y-4 text-white/80 max-h-[80vh] overflow-y-auto pr-4">
+                  {model.details.content ? (
+                    model.details.content
+                  ) : (
+                    <>
+                      <div>
+                          <h4 className='font-semibold text-lg text-white'>Justification</h4>
+                          <p>{model.details.choice}</p>
+                      </div>
+                      <div>
+                          <h4 className='font-semibold text-lg text-white'>Assumptions</h4>
+                          <p>{model.details.assumptions}</p>
+                      </div>
+                      <div>
+                          <h4 className='font-semibold text-lg text-white'>Hyperparameter Tuning</h4>
+                          <p>{model.details.tuning}</p>
+                      </div>
+                      <div>
+                          <h4 className='font-semibold text-lg text-white'>Challenges</h4>
+                          <p>{model.details.challenges}</p>
+                      </div>
+                    </>
+                  )}
+                   <div>
+                      <h4 className='font-semibold text-lg text-white'>Evaluation Metrics</h4>
+                      <ul className='list-disc list-inside'>
+                          {model.evaluation.map(metric => <li key={metric}>{metric}</li>)}
+                      </ul>
+                  </div>
                 </div>
               </DialogContent>
             </Dialog>
