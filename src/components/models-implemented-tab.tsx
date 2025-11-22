@@ -18,10 +18,69 @@ const models = [
     title: 'Frequent Pattern Mining',
     description: 'Uncovering hidden patterns and associations in player behavior and team strategies (e.g., Apriori, FP-Growth).',
     details: {
-      choice: 'The Frequent Pattern Mining analysis revealed several meaningful and interpretable relationships driving round outcomes in professional CS2 matches. Using Apriori and FP-Growth, we identified strong co-occurring tactical patterns across rounds and quantified their importance using support, confidence, and lift. The results show that T-side victories are consistently associated with rounds where players achieve high headshot accuracy, especially when combined with successful bomb plants. Rules such as “BOMB_PLANTED + HIGH_HEADSHOT_RATE → T_WIN” demonstrated extremely high confidence and lift, indicating that accuracy-driven executes on site are among the strongest predictors of T-side success.',
-      assumptions: 'The model assumes that transaction data is available and that the support threshold is appropriately set to capture relevant patterns without generating excessive noise. We found that CT-side wins are heavily tied to objective control rather than mechanical dominance. Patterns involving “BOMB_DEFUSED → CT_WIN” highlight that CTs succeed most consistently when they maintain site presence long enough to defuse or completely deny plants.',
-      tuning: 'Hyperparameter tuning involved adjusting the minimum support and confidence thresholds to balance between finding frequent and meaningful patterns.',
-      challenges: 'A key challenge was interpreting the vast number of generated rules. We focused on rules with high confidence and lift to identify the most impactful tactical patterns, such as the link between headshot rates and T-side wins.',
+      content: (
+          <div className="space-y-6">
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Justification</h4>
+              <p>The Frequent Pattern Mining analysis revealed several meaningful and interpretable relationships driving round outcomes in professional CS2 matches. Using Apriori and FP-Growth, we identified strong co-occurring tactical patterns across rounds and quantified their importance using support, confidence, and lift.</p>
+            </div>
+             <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Key Insights</h4>
+               <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Rule</TableHead>
+                    <TableHead>Confidence</TableHead>
+                    <TableHead>Lift</TableHead>
+                    <TableHead>Interpretation</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>BOMB_PLANTED + HIGH_HS_RATE → T_WIN</TableCell>
+                    <TableCell>0.943</TableCell>
+                    <TableCell>2.088</TableCell>
+                    <TableCell>Strong aim + plant leads to wins</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>CT_LEADING + HIGH_HS_RATE → T_WIN</TableCell>
+                    <TableCell>0.926</TableCell>
+                    <TableCell>2.050</TableCell>
+                    <TableCell>Ts overcome score deficits via accuracy</TableCell>
+                  </TableRow>
+                   <TableRow>
+                    <TableCell>MID_ROUND + BOMB_PLANTED → T_WIN</TableCell>
+                    <TableCell>0.790</TableCell>
+                    <TableCell>1.750</TableCell>
+                    <TableCell>Mid-round executes highly successful</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>BOMB_DEFUSED → CT_WIN</TableCell>
+                    <TableCell>1.000</TableCell>
+                    <TableCell>1.953</TableCell>
+                    <TableCell>Objective-centric CT victories</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Assumptions</h4>
+              <p>The model assumes that transaction data is available and that the support threshold is appropriately set to capture relevant patterns without generating excessive noise. We found that CT-side wins are heavily tied to objective control rather than mechanical dominance.</p>
+            </div>
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Hyperparameter Tuning</h4>
+              <p>Hyperparameter tuning involved adjusting the minimum support and confidence thresholds to balance between finding frequent and meaningful patterns.</p>
+            </div>
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Challenges</h4>
+              <p>A key challenge was interpreting the vast number of generated rules. We focused on rules with high confidence and lift to identify the most impactful tactical patterns, such as the link between headshot rates and T-side wins.</p>
+            </div>
+            <div>
+                <h4 className='font-semibold text-lg text-white'>Conclusion</h4>
+                <p>The results show that T-side victories are consistently associated with rounds where players achieve high headshot accuracy, especially when combined with successful bomb plants. Patterns involving “BOMB_DEFUSED → CT_WIN” highlight that CTs succeed most consistently when they maintain site presence long enough to defuse or completely deny plants.</p>
+            </div>
+          </div>
+      ),
     },
     evaluation: ['Support', 'Confidence', 'Lift']
   },
@@ -184,7 +243,7 @@ export function ModelsImplementedTab() {
                   {model.details.content ? (
                     model.details.content
                   ) : (
-                    <>
+                    <div className="space-y-6">
                       <div>
                           <h4 className='font-semibold text-lg text-white'>Justification</h4>
                           <p>{model.details.choice}</p>
@@ -201,7 +260,7 @@ export function ModelsImplementedTab() {
                           <h4 className='font-semibold text-lg text-white'>Challenges</h4>
                           <p>{model.details.challenges}</p>
                       </div>
-                    </>
+                    </div>
                   )}
                    <div>
                       <h4 className='font-semibold text-lg text-white'>Evaluation Metrics</h4>
