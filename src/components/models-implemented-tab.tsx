@@ -181,10 +181,54 @@ const models = [
     title: 'Clustering',
     description: 'Grouping players or teams based on similarities in their playstyle or performance metrics (e.g., K-Means, DBSCAN).',
     details: {
-      choice: 'The clustering analysis successfully segmented players into two clearly distinguishable performance-based roles: Entry Fraggers and Balanced Players. By applying K-Means on normalized player statistics, we observed distinct behavioral archetypes grounded in in-game performance patterns. Entry Fraggers formed a smaller but more aggressive cluster characterized by high opening duel attempts, elevated kill counts, strong KD ratios, and frequent multi-kill rounds. Their statistical profile reflects high-risk, high-reward gameplay that emphasizes creating early space and initiating engagements.',
-      assumptions: 'K-Means assumes that clusters are spherical and of similar size. The relatively strong silhouette score confirmed that the feature space was well-suited for this method, capturing meaningful differences in player tendencies. The Balanced Player cluster consisted of a larger group of individuals exhibiting consistent and supportive gameplay. These players showed higher headshot percentages, more assists, and steadier round-to-round performance metrics, indicating a playstyle focused on maintaining structure, trading kills, and anchoring positions rather than driving aggressive entries.',
-      tuning: 'The number of clusters (k) was tuned, with k=2 providing the most interpretable and distinct player archetypes (Entry Fraggers vs. Balanced Players).',
-      challenges: 'The main challenge was ensuring the clusters were not just statistically significant but also interpretable in the context of CS2 gameplay. This was validated by analyzing the feature distributions for each cluster. The clustering results therefore provide actionable insights into role identity and team composition in competitive CS2 play.',
+      content: (
+        <div className="space-y-6">
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Justification</h4>
+              <p>The clustering analysis successfully segmented players into two clearly distinguishable performance-based roles: Entry Fraggers and Balanced Players. By applying K-Means on normalized player statistics, we observed distinct behavioral archetypes grounded in in-game performance patterns.</p>
+            </div>
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Clustering Results</h4>
+               <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Player Role</TableHead>
+                    <TableHead>Count</TableHead>
+                    <TableHead>Characteristics</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Balanced Player</TableCell>
+                    <TableCell>69</TableCell>
+                    <TableCell>High HS%, high assists, lower multi-kill rate</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Entry Fragger</TableCell>
+                    <TableCell>21</TableCell>
+                    <TableCell>High opening kills, high KD, aggressive style</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Assumptions</h4>
+              <p>K-Means assumes that clusters are spherical and of similar size. The relatively strong silhouette score confirmed that the feature space was well-suited for this method, capturing meaningful differences in player tendencies.</p>
+            </div>
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Hyperparameter Tuning</h4>
+              <p>The number of clusters (k) was tuned, with k=2 providing the most interpretable and distinct player archetypes (Entry Fraggers vs. Balanced Players).</p>
+            </div>
+            <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Challenges</h4>
+              <p>The main challenge was ensuring the clusters were not just statistically significant but also interpretable in the context of CS2 gameplay. This was validated by analyzing the feature distributions for each cluster.</p>
+            </div>
+             <div>
+                <h4 className='font-semibold text-lg text-white'>Conclusion</h4>
+                <p>These findings demonstrate that player roles in CS2 naturally emerge from quantitative behavioral patterns, even without explicit role labels. The clustering results therefore provide actionable insights into role identity and team composition in competitive CS2 play.</p>
+            </div>
+          </div>
+      )
     },
     evaluation: ['Silhouette Score', 'Davies-Bouldin Index']
   },
