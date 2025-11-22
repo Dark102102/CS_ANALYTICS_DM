@@ -236,10 +236,69 @@ const models = [
     title: 'Regression',
     description: 'Forecasting continuous values such as player K/D ratio or match duration (e.g., Linear, Logistic).',
     details: {
-      choice: 'The regression models produced strong predictive performance, showing that player damage output is highly explainable using core combat statistics such as kills, deaths, headshot rate, and average kill distance. Among the three regression models—Linear Regression, Ridge Regression, and Bayesian Ridge Regression—performance remained consistently high across all metrics. Each model achieved an R² near or above 0.90, demonstrating that a large portion of the variance in total damage can be captured by straightforward linear relationships.',
-      assumptions: 'Linear regression models assume a linear relationship between features and the target variable. The high R² values confirmed that damage output in CS2 is driven by predictable, linear mechanics. The baseline Linear Regression model emerged as the strongest performer overall, with the lowest RMSE and highest R².',
-      tuning: 'Minimal hyperparameter tuning was needed as the baseline Linear Regression model performed strongest. Ridge and Bayesian Ridge models showed that regularization offered limited improvement, indicating low multicollinearity.',
-      challenges: 'The primary challenge was selecting the right features. The analysis confirmed that standard combat metrics were sufficient, reinforcing that CS2 performance data contains clear, measurable patterns suitable for linear modeling.',
+      content: (
+        <div className="space-y-6">
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Justification</h4>
+            <p>The regression models produced strong predictive performance, showing that player damage output is highly explainable using core combat statistics such as kills, deaths, headshot rate, and average kill distance.</p>
+          </div>
+           <div>
+              <h4 className='font-semibold text-lg text-white mb-2'>Regression Results</h4>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Model</TableHead>
+                    <TableHead>MSE</TableHead>
+                    <TableHead>RMSE</TableHead>
+                    <TableHead>R²</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Linear Regression (Model 1)</TableCell>
+                    <TableCell>317,033</TableCell>
+                    <TableCell>563.06</TableCell>
+                    <TableCell>0.907</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Linear Regression (Model 2)</TableCell>
+                    <TableCell>341,546</TableCell>
+                    <TableCell>584.50</TableCell>
+                    <TableCell>0.890</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Ridge Regression</TableCell>
+                    <TableCell>340,159</TableCell>
+                    <TableCell>583.23</TableCell>
+                    <TableCell>0.900</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Bayesian Ridge</TableCell>
+                    <TableCell>338,436</TableCell>
+                    <TableCell>581.75</TableCell>
+                    <TableCell>0.901</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Assumptions</h4>
+            <p>Linear regression models assume a linear relationship between features and the target variable. The high R² values confirmed that damage output in CS2 is driven by predictable, linear mechanics.</p>
+          </div>
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Hyperparameter Tuning</h4>
+            <p>Minimal hyperparameter tuning was needed as the baseline Linear Regression model performed strongest. Ridge and Bayesian Ridge models showed that regularization offered limited improvement, indicating low multicollinearity.</p>
+          </div>
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Challenges</h4>
+            <p>The primary challenge was selecting the right features. The analysis confirmed that standard combat metrics were sufficient, reinforcing that CS2 performance data contains clear, measurable patterns suitable for linear modeling.</p>
+          </div>
+          <div>
+            <h4 className='font-semibold text-lg text-white mb-2'>Conclusion</h4>
+            <p>The baseline Linear Regression model emerged as the strongest performer overall, with the lowest RMSE and highest R². The regression analysis validated that damage is a reliable and quantifiable performance indicator strongly tied to standard combat metrics.</p>
+          </div>
+        </div>
+      ),
     },
     evaluation: ['RMSE', 'MSE', 'R²-score']
   }
@@ -284,28 +343,7 @@ export function ModelsImplementedTab() {
                   <DialogTitle className="text-2xl text-primary">{model.title}</DialogTitle>
                 </DialogHeader>
                 <div className="py-4 space-y-4 text-white/80 max-h-[80vh] overflow-y-auto pr-4">
-                  {model.details.content ? (
-                    model.details.content
-                  ) : (
-                    <div className="space-y-6">
-                      <div>
-                          <h4 className='font-semibold text-lg text-white'>Justification</h4>
-                          <p>{model.details.choice}</p>
-                      </div>
-                      <div>
-                          <h4 className='font-semibold text-lg text-white'>Assumptions</h4>
-                          <p>{model.details.assumptions}</p>
-                      </div>
-                      <div>
-                          <h4 className='font-semibold text-lg text-white'>Hyperparameter Tuning</h4>
-                          <p>{model.details.tuning}</p>
-                      </div>
-                      <div>
-                          <h4 className='font-semibold text-lg text-white'>Challenges</h4>
-                          <p>{model.details.challenges}</p>
-                      </div>
-                    </div>
-                  )}
+                  {model.details.content}
                    <div>
                       <h4 className='font-semibold text-lg text-white'>Evaluation Metrics</h4>
                       <ul className='list-disc list-inside'>
