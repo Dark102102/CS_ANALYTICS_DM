@@ -136,27 +136,27 @@ const models = [
               <TableBody>
                 <TableRow>
                   <TableCell>Decision Tree</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
+                  <TableCell>0.978</TableCell>
+                  <TableCell>0.965</TableCell>
+                  <TableCell>0.982</TableCell>
+                  <TableCell>0.973</TableCell>
+                  <TableCell>0.978</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>SVM (Linear)</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
+                  <TableCell>0.985</TableCell>
+                  <TableCell>0.980</TableCell>
+                  <TableCell>0.988</TableCell>
+                  <TableCell>0.984</TableCell>
+                  <TableCell>0.991</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Random Forest</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
-                  <TableCell>1.00</TableCell>
+                  <TableCell>0.991</TableCell>
+                  <TableCell>0.987</TableCell>
+                  <TableCell>0.993</TableCell>
+                  <TableCell>0.990</TableCell>
+                  <TableCell>0.995</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>KNN</TableCell>
