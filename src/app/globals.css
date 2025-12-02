@@ -91,6 +91,10 @@
     background: url('https://i.postimg.cc/t4gfCwzc/Gemini-Generated-Image-wjv26jwjv26jwjv2.png') center center / cover no-repeat fixed;
   }
 
+  .bg-image-conclusion {
+    background: url('https://i.ibb.co/3kC6v92/conclusion.png') center center / cover no-repeat fixed;
+  }
+
   .bg-overlay::before {
     content: '';
     position: absolute;
