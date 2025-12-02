@@ -35,14 +35,26 @@ export function ConclusionTab() {
             <div className="flex-shrink-0 bg-purple-400/10 p-3 rounded-full">
               <Search className="h-8 w-8 text-purple-400" />
             </div>
-            <CardTitle className="text-2xl text-white">Key Insights & Discoveries</CardTitle>
+            <CardTitle className="text-2xl text-white">Key Findings</CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 list-disc list-inside text-white/80 ml-16">
-              <li>Terrorist-side wins are strongly linked to high headshot rates combined with successful bomb plants.</li>
-              <li>Counter-Terrorist victories depend more on objective control and defusing the bomb than on sheer mechanical skill.</li>
-              <li>Player performance, measured by damage dealt per round, is highly predictable from core combat stats like kills and deaths.</li>
-              <li>Machine learning models, particularly Random Forests, can achieve near-perfect accuracy in predicting round winners based on our dataset.</li>
+            <ul className="space-y-4 list-disc list-inside text-white/80 ml-16">
+              <li>
+                <span className="font-semibold text-white">CT rounds are won by better shooting.</span>
+                <p className="pl-6 text-white/70">When CTs deal more damage, secure more kills, and land more headshots, they win a much higher share of rounds.</p>
+              </li>
+              <li>
+                <span className="font-semibold text-white">T rounds are won by taking the right fights.</span>
+                <p className="pl-6 text-white/70">Terrorists succeed when they force favorable duels: longer-range engagements, smart wallbangs, and strong positional play all raise their win rate.</p>
+              </li>
+              <li>
+                <span className="font-semibold text-white">Two main player archetypes emerge.</span>
+                <p className="pl-6 text-white/70">Our clustering shows Entry Fraggers (very aggressive, get early kills but also die early) and Closer/Support Players (slower, more stable players who survive longer and often finish rounds).</p>
+              </li>
+              <li>
+                <span className="font-semibold text-white">Economy is the strongest single predictor of round outcome.</span>
+                <p className="pl-6 text-white/70">The feature that predicted the round winner best was the economic difference between teams. A team with a stronger buy has a clear statistical advantage.</p>
+              </li>
             </ul>
           </CardContent>
         </Card>
@@ -55,9 +67,20 @@ export function ConclusionTab() {
             <CardTitle className="text-2xl text-white">Real-World Impact</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-white/80 leading-relaxed ml-16">
-              These results can have a significant impact on the esports community. Professional teams can use these insights to refine strategies and scout players with specific profiles. Analysts and broadcast commentators can provide deeper, data-driven narratives during live matches. For the wider gaming community, our work provides a clearer understanding of what it takes to win at a high level.
-            </p>
+             <ul className="space-y-4 list-disc list-inside text-white/80 ml-16">
+                <li>
+                  <span className="font-semibold text-white">Better practice planning for esports teams.</span>
+                  <p className="pl-6 text-white/70">Coaches can design drills targeting CT aim consistency, T-side positioning, and role-specific training based on player tendencies.</p>
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Deeper understanding of maps and game economics.</span>
+                  <p className="pl-6 text-white/70">Our results highlight which situations are most favorable on a map and how much economic advantage is “enough” to expect a win.</p>
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Smarter buy/save decisions.</span>
+                  <p className="pl-6 text-white/70">Teams can estimate their disadvantage in a given round and use that signal to decide whether to full buy, half buy, or save for a stronger future round.</p>
+                </li>
+              </ul>
           </CardContent>
         </Card>
 
@@ -66,15 +89,29 @@ export function ConclusionTab() {
             <div className="flex-shrink-0 bg-orange-400/10 p-3 rounded-full">
               <AlertTriangle className="h-8 w-8 text-orange-400" />
             </div>
-            <CardTitle className="text-2xl text-white">Limitations & Future Work</CardTitle>
+            <CardTitle className="text-2xl text-white">Future Work</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-white/80 leading-relaxed ml-16">
-              Our analysis was based on a specific set of professional matches, so the models may need to be validated on a larger, more diverse dataset. The perfect scores from some models suggest potential data leakage or the need for more complex, out-of-sample testing.
-            </p>
-            <p className="text-white/80 leading-relaxed mt-4 ml-16">
-              Future work could involve incorporating real-time data for live predictions, analyzing communication patterns, and expanding the models to include a wider range of competitive tiers to see how strategies differ.
-            </p>
+            <ul className="space-y-4 list-disc list-inside text-white/80 ml-16">
+              <li>
+                <span className="font-semibold text-white">Apply the approach to other esports</span> like Valorant, League of Legends, Dota 2, and StarCraft II.
+              </li>
+              <li>
+                <span className="font-semibold text-white">Incorporate richer feature sets</span> (utility usage, heatmaps, communication) to improve prediction accuracy.
+              </li>
+              <li>
+                <span className="font-semibold text-white">Develop real-time prediction models</span> for live coaching and automated tournament analysis.
+              </li>
+               <li>
+                <span className="font-semibold text-white">Explore reinforcement learning</span> to capture micro and macro decision-making processes.
+              </li>
+              <li>
+                <span className="font-semibold text-white">Investigate cross-domain strategy transfer</span> to apply learnings to other games or even non-gaming domains.
+              </li>
+               <li>
+                <span className="font-semibold text-white">Improve long-horizon memory and retrieval</span> for games requiring long sequences of decisions.
+              </li>
+            </ul>
           </CardContent>
         </Card>
       </div>
